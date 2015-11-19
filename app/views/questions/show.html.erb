@@ -1,0 +1,25 @@
+
+<p>вопрос:</p>
+
+
+<h3>тема:</h3>
+<p><%= @question.title %></p>
+<h3>текст вопроса:</h3>
+<p><%= @question.body %></p>
+
+<% if @question.answers && @question.answers.any? %>
+<h3>ответы:</h3>
+<% @question.answers.each do |answer| %>
+    <ul>
+      <li ><%= answer.question.title %></li>
+      <li><%= answer.body %></li>
+    </ul>
+<% end %>
+<% else %>
+       ещё нет ответов
+
+<% end %>
+
+
+<p><%= render 'answers/form', question: @question, answer: Answer.new %></p>
+
