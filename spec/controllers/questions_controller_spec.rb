@@ -33,7 +33,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #new' do
-
+    sign_in_user
     before { get :new }
 
     it 'assigns a new Question to @question' do
@@ -46,7 +46,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #edit' do
-
+    sign_in_user
     before { get :edit, id: question }
 
     it 'assigns the requested question to @question' do
@@ -59,6 +59,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'save new question in database' do
         # old_count = Question.count
@@ -88,6 +89,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    sign_in_user
     context 'valid attributes' do
       it 'assigns the requested question to @question' do
         patch :update, id: question, question: attributes_for(:question)
@@ -106,21 +108,22 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response).to redirect_to question
       end
     end
-  end
 
-  context 'invalid attrebutes' do
-    before { patch :update, id: question, question: {title: 'new title', body: nil} }
-    it 'does not change question attributes' do
-      expect(question.title).to eq 'MyString'
-      expect(question.body).to eq 'MyText'
+
+    context 'invalid attributes' do
+      before { patch :update, id: question, question: {title: 'new title', body: nil} }
+      it 'does not change question attributes' do
+        expect(question.title).to eq 'MyString'
+        expect(question.body).to eq 'MyText'
+      end
+
+      it 're-renders edit view' do
+        expect(response).to render_template :edit
+      end
     end
-
-    it 're-renders edit view' do
-      expect(response).to render_template :edit
-    end
   end
-
   describe 'DELETE # destroy' do
+    sign_in_user
     before { question }
     it 'deletes question' do
       expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
