@@ -1,19 +1,18 @@
 <%= form_for [question, answer] do |f| %>
-<h3>добавить ответ:</h3>
 
     <div class="field">
-      <%= f.label :title, 'тема' %> <br/>
+      <%= f.label :title, 'topic' %> <br/>
       <%= f.text_field :title, value: @question.title %>
     </div> <br/>
 
     <div class="field">
-
-      <%= f.text_area :body , placeholder: 'напишите ответ'%>
+      <%= f.label :body %> <br/>
+      <%= f.text_area :body , placeholder: 'write answer'%>
     </div>
 
 
 
     <div class="actions">
-      <%= f.submit  'опубликовать' %>
+      <%= f.submit  'Create' %>
     </div>
 <% end %>

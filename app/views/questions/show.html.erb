@@ -1,14 +1,14 @@
 
-<p>вопрос:</p>
+<p>Question:</p>
 
 
-<h3>тема:</h3>
+<h3>topic:</h3>
 <p><%= @question.title %></p>
-<h3>текст вопроса:</h3>
+<h3>text of the question:</h3>
 <p><%= @question.body %></p>
 
 <% if @question.answers && @question.answers.any? %>
-<h3>ответы:</h3>
+<h3>Answers:</h3>
 <% @question.answers.each do |answer| %>
     <ul>
       <li ><%= answer.question.title %></li>
@@ -16,7 +16,7 @@
     </ul>
 <% end %>
 <% else %>
-       ещё нет ответов
+       No answers
 
 <% end %>
 
