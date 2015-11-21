@@ -4,13 +4,10 @@ require 'rails_helper'
 feature 'Create Question', %q{
 In order to get answer as an authenticate user
 I want to be able to ask questions } do
+  given(:user) {create(:user)}
+  scenario 'Authenticate User is trying ask a question' do
 
-  scenario 'Authenticate User is trayng ask a question' do
-    User.create!(email: 'user@test.com', password: '12345678')
-    visit new_user_session_path
-    fill_in 'Email', with: 'user@test.com'
-    fill_in 'Password', with: '12345678'
-    click_on 'Log in'
+   sign_in(user)
 
     visit questions_path
     click_on 'Ask question'
@@ -21,7 +18,7 @@ I want to be able to ask questions } do
     expect(page).to have_content 'Test question body'
   end
 
-  scenario 'Un-authenticate User is trayng ask a question' do
+  scenario 'Un-authenticate User is trying ask a question' do
     visit questions_path
     click_on 'Ask question'
     # save_and_open_page
