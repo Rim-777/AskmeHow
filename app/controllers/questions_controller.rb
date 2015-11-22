@@ -38,8 +38,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+      @question.destroy if current_user == @question.user
+      redirect_to questions_path
   end
 
   private
@@ -48,6 +48,6 @@ class QuestionsController < ApplicationController
   end
 
   def questions_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :user_id)
   end
 end

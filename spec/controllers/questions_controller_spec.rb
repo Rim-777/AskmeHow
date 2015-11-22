@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) } #  метод модуля FactoryGirl  - создает и возвращает
-  # инстансную переменную (в данном случае @question)
+  let(:question) { create(:question, user: @user) }
+  let(:another_user) { create(:user) }
+  let(:question_of_another_user) { create(:question, user: another_user) }
+
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2) } #  метод модуля FactoryGirl  - создает и возвращает
-    # инстансную переменную, у которой значение  - это массив объектов модели (в данном случае @questions)
+    let(:questions) { create_list(:question, 2) }
 
     before { get :index }
 
@@ -62,10 +63,9 @@ RSpec.describe QuestionsController, type: :controller do
     sign_in_user
     context 'with valid attributes' do
       it 'save new question in database' do
-        # old_count = Question.count
+
         expect { post :create, question: attributes_for(:question)
         }.to change(Question, :count).by(1)
-        # expect(Question.count).to eq old_count + 1
 
       end
 
@@ -122,16 +122,30 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
   describe 'DELETE # destroy' do
     sign_in_user
-    before { question }
-    it 'deletes question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+
+
+    context 'User is trying to delete his own question' do
+      before { question }
+      it 'remove a question' do
+        expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+      end
+    end
+
+    context 'User is trying to delete no his question' do
+      # let(:question_of_another_user) { create(:question, user: another_user) }
+      before { question_of_another_user }
+      it 'Does not remove a question' do
+        expect { delete :destroy, id: question_of_another_user }.to_not change(Question, :count)
+      end
     end
 
     it 'redirect to  index view' do
       delete :destroy, id: question
       expect(response).to redirect_to questions_path
     end
+
   end
 end
