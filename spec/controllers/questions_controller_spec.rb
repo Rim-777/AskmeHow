@@ -6,7 +6,6 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question, user: user, title: 'OldTitleText', body: 'OldBodyText') }
   let(:another_user) { create(:user) }
 
-  before { user }
   before { sign_in(user) }
 
   describe 'GET #index' do
@@ -37,7 +36,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #new' do
-    sign_in_user
     before { get :new }
 
     it 'assigns a new Question to @question' do
@@ -125,12 +123,12 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE # destroy' do
-    before { another_user }
-    before { question }
+
+     before {question}
 
     context 'User is trying to delete his own question' do
       it 'remove a question' do
-        expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+        expect { delete :destroy, id: question }.to change(user.questions, :count).by(-1)
       end
     end
 
