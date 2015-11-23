@@ -64,7 +64,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'save new question in database' do
 
         expect { post :create, question: attributes_for(:question)
-        }.to change(Question, :count).by(1)
+        }.to change(user.questions, :count).by(1)
 
       end
 
