@@ -7,8 +7,11 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
 
-  before { user }
-  before {sign_in(user)}
+
+  before do
+    sign_in(user)
+    answer
+  end
 
   describe 'POST #create' do
 
@@ -40,8 +43,6 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE # destroy' do
-    before { another_user }
-    before { answer }
 
 
     context 'User is trying to remove his own answer ' do
@@ -61,7 +62,6 @@ RSpec.describe AnswersController, type: :controller do
       delete :destroy, question_id: question, id: answer
       expect(response).to redirect_to question_path(question)
     end
-
 
   end
 

@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
 
   sequence :body do |n|
-    "questionBody#{n}"
+    "textEntityBody#{n}"
   end
 
   factory :question do
