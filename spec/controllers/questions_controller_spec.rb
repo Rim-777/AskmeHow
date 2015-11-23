@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
+  sign_in_user
   let(:question) { create(:question, user: @user) }
   let(:another_user) { create(:user) }
   let(:question_of_another_user) { create(:question, user: another_user) }

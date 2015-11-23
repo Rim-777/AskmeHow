@@ -1,5 +1,5 @@
 class AddBelongsToUserToQuestions < ActiveRecord::Migration
   def change
-    add_belongs_to :questions, :user
+    add_belongs_to :questions, :user, index: true
   end
 end
