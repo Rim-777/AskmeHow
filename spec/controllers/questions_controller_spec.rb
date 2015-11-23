@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  sign_in_user
 
-  let(:question) { create(:question, user: @user,  title: 'OldTitleText', body: 'OldBodyText') }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user, title: 'OldTitleText', body: 'OldBodyText') }
   let(:another_user) { create(:user) }
-  let(:question_of_another_user) { create(:question, user: another_user) }
 
+  before { user }
+  before { sign_in(user) }
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2, user: @user) }
+    let(:questions) { create_list(:question, 2, user: user) }
 
     before { get :index }
 
@@ -49,7 +50,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    sign_in_user
     before { get :edit, id: question }
 
     it 'assigns the requested question to @question' do
@@ -62,7 +62,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
-    sign_in_user
     context 'with valid attributes' do
       it 'save new question in database' do
 
@@ -91,7 +90,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    sign_in_user
     context 'valid attributes' do
       it 'assigns the requested question to @question' do
         patch :update, id: question, question: attributes_for(:question)
@@ -127,21 +125,19 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE # destroy' do
-    sign_in_user
-
+    before { another_user }
+    before { question }
 
     context 'User is trying to delete his own question' do
-      before { question }
       it 'remove a question' do
         expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
       end
     end
 
     context 'User is trying to delete no his question' do
-      # let(:question_of_another_user) { create(:question, user: another_user) }
-      before { question_of_another_user }
       it 'Does not remove a question' do
-        expect { delete :destroy, id: question_of_another_user }.to_not change(Question, :count)
+        sign_in(another_user)
+        expect { delete :destroy, id: question }.to_not change(Question, :count)
       end
     end
 
@@ -149,6 +145,5 @@ RSpec.describe QuestionsController, type: :controller do
       delete :destroy, id: question
       expect(response).to redirect_to questions_path
     end
-
   end
 end
