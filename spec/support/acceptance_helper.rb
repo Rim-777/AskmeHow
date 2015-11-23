@@ -15,9 +15,7 @@ module AcceptanceHelper
     expect(page).to have_content question.title
     expect(page).to have_content question.body
     if with_answers
-      expect(page).to have_content question.answers.first.title
       expect(page).to have_content question.answers.first.body
-      expect(page).to have_content question.answers.second.title
       expect(page).to have_content question.answers.second.body
     end
   end

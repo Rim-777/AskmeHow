@@ -4,14 +4,16 @@ feature 'Create Answer', %q{
 In order to help users to find correct answer as an authenticate user
 I want to be able to create answers } do
   given(:user) {create(:user)}
-  given(:question) { create(:question) }
+  given(:question) { create(:question, user: user) }
 
   scenario 'Authenticate User is trying write Answer' do
     sign_in(user)
     can_see_question
-    fill_in 'Body', with: 'Test question body'
+    fill_in 'You Answer', with: 'Test question body'
     click_on 'Create'
     expect(page).to have_content question.title
+    # save_and_open_page
+
     expect(page).to have_content 'Test question body'
   end
 

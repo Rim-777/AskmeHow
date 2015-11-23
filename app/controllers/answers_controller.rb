@@ -5,22 +5,23 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answers_params)
-    @answer.save
+    @answer.user = current_user
+   if @answer.save
     redirect_to @question
-    # else#todo
-    #   render 'questions/show'
-    # end
+    else#todo
+      render 'questions/show'
+    end
   end
 
   def destroy
     @answer = @question.answers.find(params[:id])
-    @answer.destroy if @answer.user == current_user || @question.user == current_user
+    @answer.destroy if @answer.user_id == current_user.id || @question.user_id == current_user.id
     redirect_to @question
   end
 
   private
   def answers_params
-    params.require(:answer).permit(:title, :body, :question_id, :user_id)
+    params.require(:answer).permit(:body, :question_id)
   end
 
   def set_question

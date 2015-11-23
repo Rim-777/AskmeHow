@@ -4,7 +4,7 @@ RSpec.describe AnswersController, type: :controller do
   let(:another_user) { create(:user) }
   let(:question) { create(:question, user: @user) }
   let(:answer) { create(:answer, question: question, user: another_user) }
-  let(:another_user_question) { create(:question, user: another_user) }
+  let(:question_of_another_user) { create(:question, user: another_user) }
 
   describe 'POST #create' do
     sign_in_user
@@ -27,9 +27,9 @@ RSpec.describe AnswersController, type: :controller do
         }.to_not change(Answer, :count)
       end
 
-      it 're-render new view' do
+      it 're-render Question::show view' do
         post :create, question_id: question, answer: attributes_for(:invalid_answer)
-        expect(response).to redirect_to question_path(assigns(:question))
+        expect(response).to render_template 'questions/show'
 
       end
     end
@@ -49,19 +49,19 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'User is trying to remove his own answer ' do
 
-      let(:answer) { create(:answer, question: another_user_question, user: @user) }
+      let(:answer) { create(:answer, question: question_of_another_user, user: @user) }
 
       before { answer }
       it "remove an user's answer" do
-        expect { delete :destroy, question_id: another_user_question, id: answer }.to change(@user.answers, :count).by(-1)
+        expect { delete :destroy, question_id: question_of_another_user, id: answer }.to change(@user.answers, :count).by(-1)
       end
     end
 
     context "User is trying to remove his not answer, or answer on his not question" do
-      let(:another_answer) { create(:answer, question: another_user_question) }
+      let(:another_answer) { create(:answer, question: question_of_another_user, user: another_user) }
       before { another_answer }
       it 'Does not remove a question' do
-        expect { delete :destroy, question_id: another_user_question, id: another_answer }.to_not change(Answer, :count)
+        expect { delete :destroy, question_id: question_of_another_user, id: another_answer }.to_not change(Answer, :count)
       end
 
     end
