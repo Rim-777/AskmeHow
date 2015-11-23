@@ -8,14 +8,20 @@
 
 <% if @question.answers && @question.answers.any? %>
     <h3>Answers:</h3>
-    <% @question.answers.each do |answer| %>
-        <% if answer.body.present? %>
-            <ul>
-              <li><%= answer.user.email %></li>
-              <li><%= answer.body %></li>
-            </ul>
-        <% end %>
-    <% end %>
+      <% @question.answers.each do |answer| %>
+          <% if answer.body.present? %>
+    <table class="table">
+              <tr>
+                <%= answer.body %> <br/>
+                <%= answer.user.email %>
+
+                <%= link_to 'remove', [@question, answer],  method: :delete,
+                            data: {confirm: 'Хотите удалить ответ?'} if answer.user == current_user %>
+
+              </tr>
+    </table>
+          <% end %>
+      <% end %>
 <% else %>
     No answers
 

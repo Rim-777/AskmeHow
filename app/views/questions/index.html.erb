@@ -1,8 +1,14 @@
-<p><%= link_to 'Ask question', new_question_path  %></p>
+<p><%= link_to 'Ask question', new_question_path %></p>
 
 
 <% @questions.each do |question| %>
-    <ul>
-      <li><%= link_to "#{question.title}",  question %></li>
-    </ul>
-<%end%>
+    <table>
+      <tr>
+        <td> <%= link_to "#{question.title}", question %></td>
+        <td> <%= link_to  'remove', question, method: :delete,
+                          data: {confirm: 'Хотите удалить вопрос?'} if question.user == current_user %></td>
+      </tr>
+
+
+    </table>
+<% end %>
