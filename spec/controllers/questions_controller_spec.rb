@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   sign_in_user
-  let(:question) { create(:question, user: @user) }
+  let(:question) { create(:question, user: @user,  title: 'OldTitleText', body: 'OldBodyText') }
   let(:another_user) { create(:user) }
   let(:question_of_another_user) { create(:question, user: another_user) }
 
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2) }
+    let(:questions) { create_list(:question, 2, user: @user) }
 
     before { get :index }
 
@@ -112,10 +112,11 @@ RSpec.describe QuestionsController, type: :controller do
 
 
     context 'invalid attributes' do
+
       before { patch :update, id: question, question: {title: 'new title', body: nil} }
       it 'does not change question attributes' do
-        expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.title).to eq 'OldTitleText'
+        expect(question.body).to eq 'OldBodyText'
       end
 
       it 're-renders edit view' do

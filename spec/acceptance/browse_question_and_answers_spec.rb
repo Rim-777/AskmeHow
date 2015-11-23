@@ -5,7 +5,7 @@ I want to be able to  browse the question and it's answers
 } do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question, :has_answers, user: user) }
+  given(:question) { create(:question, :with_answers, user: user) }
 
 
   scenario 'Authenticate User is trying to see a question and answers' do

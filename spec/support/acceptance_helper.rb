@@ -15,9 +15,16 @@ module AcceptanceHelper
     expect(page).to have_content question.title
     expect(page).to have_content question.body
     if with_answers
-      expect(page).to have_content question.answers.first.body
-      expect(page).to have_content question.answers.second.body
+      question.answers.each { |answer| expect(page).to have_content answer.body }
     end
   end
+
+  def can_see_full_question_list
+    visit questions_path
+    questions.each do |question|
+      expect(page).to have_content question.title
+    end
+  end
+
 end
 

@@ -1,16 +1,25 @@
 FactoryGirl.define do
+
+  sequence :title do |n|
+    "questionTitle#{n}"
+  end
+
+  sequence :body do |n|
+    "questionBody#{n}"
+  end
+
   factory :question do
-    title "MyString"
-    body "MyText"
-    user
+    title
+    body
   end
 
   factory :invalid_question, class: 'Question' do
     title nil
     body nil
+    user nil
   end
 
-  trait :has_answers do
+  trait :with_answers do
     after(:create) do |question|
       create_list(:answer, 2, question: question, user_id: create(:user).id)
     end
