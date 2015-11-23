@@ -15,7 +15,7 @@
                 <%= answer.body %> <br/>
                 <%= answer.user.email %>
 
-                <%= link_to 'remove', [@question, answer],  method: :delete,
+                <%= link_to 'remove', answer,  method: :delete,
                             data: {confirm: 'Хотите удалить ответ?'} if answer.user == current_user %>
 
               </tr>

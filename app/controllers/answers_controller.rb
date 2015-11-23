@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_question
+  before_action :set_question, only: :create
 
 
   def create
@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer = Answer.find(params[:id])
     @answer.destroy if @answer.user_id == current_user.id
-    redirect_to @question
+    redirect_to @answer.question
   end
 
   private
