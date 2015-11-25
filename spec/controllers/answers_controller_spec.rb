@@ -17,9 +17,14 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid attributes' do
 
-      it 'save new answer in database' do
+      it 'save new answer in database depending with question ' do
         expect { post :create, question_id: question, answer: attributes_for(:answer)
         }.to change(question.answers, :count).by(1)
+      end
+
+      it 'save new answer in database depending with user' do
+        expect { post :create, question_id: question, answer: attributes_for(:answer)
+        }.to change(user.answers, :count).by(1)
       end
 
       it 'redirect_to show view' do
