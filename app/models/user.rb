@@ -6,8 +6,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def author_of?(text_entity)
-    self.id == text_entity.user_id
+  def author_of?(entity)
+    self.id == entity.user_id
+  end
+
+  def is_author_of!(entity)
+    entity.user_id = self.id
+
   end
 
 end

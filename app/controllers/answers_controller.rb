@@ -5,17 +5,18 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answers_params)
-    @answer.user = current_user
-   if @answer.save
+    current_user.is_author_of!(@answer)
+
+    if @answer.save
     redirect_to @question
-    else#todo
+    else
       render 'questions/show'
     end
   end
 
   def destroy
     @answer = Answer.find(params[:id])
-    @answer.destroy if @answer.user_id == current_user.id
+    @answer.destroy if  current_user.author_of?(@answer)
     redirect_to @answer.question
   end
 
