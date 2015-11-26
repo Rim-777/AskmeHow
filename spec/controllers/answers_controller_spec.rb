@@ -15,33 +15,33 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'POST #create' do
 
-    context 'with valid attributes' do
+    context 'with valid attributes'  do
 
-      it 'save new answer in database depending with question ' do
-        expect { post :create, question_id: question, answer: attributes_for(:answer)
+      it 'save new answer in database depending with question'  do
+        expect { post :create, question_id: question, answer: attributes_for(:answer), format: :js
         }.to change(question.answers, :count).by(1)
       end
 
       it 'save new answer in database depending with user' do
-        expect { post :create, question_id: question, answer: attributes_for(:answer)
+        expect { post :create, question_id: question, answer: attributes_for(:answer), format: :js
         }.to change(user.answers, :count).by(1)
       end
 
-      it 'redirect_to show view' do
-        post :create, question_id: question, answer: attributes_for(:answer)
-        expect(response).to redirect_to question_path(assigns(:question))
+      it 'render template Answers/create.js view' do
+        post :create, question_id: question, answer: attributes_for(:answer), format: :js
+        expect(response).to render_template :create
       end
     end
 
     context 'with invalid attributes' do
       it 'does not save the answer' do
-        expect { post :create, question_id: question, answer: attributes_for(:invalid_answer)
+        expect { post :create, question_id: question, answer: attributes_for(:invalid_answer), format: :js
         }.to_not change(Answer, :count)
       end
 
-      it 're-render Question/show view' do
-        post :create, question_id: question, answer: attributes_for(:invalid_answer)
-        expect(response).to render_template 'questions/show'
+      it 'render template Answers/create.js view' do
+        post :create, question_id: question, answer: attributes_for(:invalid_answer), format: :js
+        expect(response).to render_template :create
 
       end
     end

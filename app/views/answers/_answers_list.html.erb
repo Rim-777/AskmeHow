@@ -1,0 +1,20 @@
+  <% if @question.answers && @question.answers.any? %>
+      <h3>Answers:</h3>
+      <% @question.answers.each do |answer| %>
+          <% if answer.persisted? %>
+              <table class="table">
+                <tr>
+                  <%= answer.body %> <br/>
+                  <%= answer.user.email %>
+                  <% if current_user && current_user.author_of?(answer) %>
+                      <%= link_to 'Remove', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
+                  <% end %>
+                </tr>
+              </table>
+
+          <% end %>
+      <% end %>
+  <% else %>
+      No answers
+
+  <% end %>

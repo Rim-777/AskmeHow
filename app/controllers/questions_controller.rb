@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-
+    @answer = @question.answers.new
   end
 
   def new
@@ -39,8 +39,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-      @question.destroy if  current_user.author_of?(@question)
-      redirect_to questions_path
+    @question.destroy if current_user.author_of?(@question)
+    redirect_to questions_path
   end
 
   private

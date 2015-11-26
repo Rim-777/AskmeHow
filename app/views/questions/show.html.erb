@@ -6,26 +6,10 @@
 <h3>text of the question:</h3>
 <p><%= @question.body %></p>
 
-<% if @question.answers && @question.answers.any? %>
-    <h3>Answers:</h3>
-    <% @question.answers.each do |answer| %>
-        <% if answer.persisted? %>
-            <table class="table">
-              <tr>
-                <%= answer.body %> <br/>
-                <%= answer.user.email %>
-                <% if current_user && current_user.author_of?(answer) %>
-                    <%= link_to 'remove', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
-                <% end %>
-              </tr>
-            </table>
-        <% end %>
-    <% end %>
-<% else %>
-    No answers
-
-<% end %>
+<div class="answers">
+<%= render 'answers/answers_list'%>
+</div>
 
 
-<p><%= render 'answers/form', question: @question, answer: Answer.new %></p>
+<p><%= render 'answers/form', question: @question, answer: @answer %></p>
 
