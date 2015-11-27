@@ -16,7 +16,7 @@ I want to be able to create answers } do
     # expect(page).to have_content question.title
     # expect(page).to have_content question.body
     # save_and_open_page
-    within '.answers' do
+    within '.answer' do
       expect(page).to have_content 'Test answer body'
     end
 
