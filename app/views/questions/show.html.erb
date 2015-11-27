@@ -7,12 +7,25 @@
 <p><%= @question.body %></p>
 
 <div class="answers">
-<%= render 'answers/answers_list'%>
+  <% if @question.answers && @question.answers.any? %>
+      <h3>Answers:</h3>
+      <% @question.answers.each do |answer| %>
+          <% if answer.persisted? %>
+              <%= render 'answers/answer', answer: answer %>
+          <% end %>
+      <% end %>
+  <% else %>
+      No answers
+
+  <% end %>
 </div>
 
-<div class="answer">
-</div>
 
+<% if current_user %>
+    <p><%= render 'answers/form', question: @question, answer: @answer %></p>
+<% else %>
+    <p> Please <%= link_to 'log in',   new_user_session_path %> If You want to add a new Answer. </p>
 
-<p><%= render 'answers/form', question: @question, answer: @answer %></p>
+<% end %>
+
 

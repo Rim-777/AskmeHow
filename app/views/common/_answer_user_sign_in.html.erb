@@ -1,3 +1,0 @@
-<% if current_user && current_user.author_of?(answer) %>
-    <%= link_to 'Remove', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
-<% end %>

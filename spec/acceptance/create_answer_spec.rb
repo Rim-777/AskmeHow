@@ -16,7 +16,7 @@ I want to be able to create answers } do
     # expect(page).to have_content question.title
     # expect(page).to have_content question.body
     # save_and_open_page
-    within '.answer' do
+    within '.answers' do
       expect(page).to have_content 'Test answer body'
     end
 
@@ -24,8 +24,8 @@ I want to be able to create answers } do
 
   scenario 'Un-authenticate User is trying write Answer' do
     can_see_question
-    click_on 'Create'
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    # click_on 'Create'
+    expect(page).to have_content 'Please log in If You want to add a new Answer.'
   end
 
 end
