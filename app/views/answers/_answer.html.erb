@@ -1,0 +1,8 @@
+<table class="table">
+  <tr>
+    <%= @answer.body %> <br/>
+    <%= @answer.user.email %>
+    <%= render 'common/answer_user_sign_in', answer: @answer %>
+  </tr>
+</table>
+
