@@ -1,4 +1,5 @@
-require 'rails_helper'
+require_relative 'acceptance_helper'
+
 
 feature 'Sign_up', %q{ To ask question and write answers
 I wont to be able to sign up} do

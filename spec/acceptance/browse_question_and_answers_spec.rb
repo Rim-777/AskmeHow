@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'acceptance_helper'
 
 feature "Browse question and it's answers", %q{To find the answer or answer the question,
 I want to be able to  browse the question and it's answers
