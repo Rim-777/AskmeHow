@@ -1,5 +1,5 @@
 <%= form_for [question, answer], remote: true do |f| %>
-
+    <div id="answer_errors"></div>
     <div class="field">
       <%= f.label :body, 'You Answer:' %> <br/>
       <%= f.text_area :body , placeholder: 'write answer'%>
