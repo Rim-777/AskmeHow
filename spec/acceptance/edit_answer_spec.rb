@@ -8,9 +8,9 @@ I want to be able to edit my answers} do
   given!(:another_authenticated_user) { create(:user) }
 
   given(:question) { create(:question, user: author_of_question) }
-  given(:answer) { create(:answer, question: question, user: author_of_answer) }
+  given!(:answer) { create(:answer, question: question, user: author_of_answer) }
 
-  before { answer }
+
   scenario 'Un-Authenticate User is trying edit an Answer' do
     visit question_path(question)
     expect(page).to_not have_link 'Edit'

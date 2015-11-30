@@ -23,7 +23,6 @@ I want to be able to create answers } do
 
   scenario 'Un-authenticate User is trying write Answer' do
     can_see_question
-    # click_on 'Create'
     expect(page).to have_content 'Please log in If You want to add a new Answer.'
   end
 
