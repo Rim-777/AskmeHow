@@ -11,6 +11,9 @@
       <h3>Answers:</h3>
       <% @question.answers.each do |answer| %>
           <% if answer.persisted? %>
+              <div>
+
+              </div>
               <%= render  answer %>
           <% end %>
       <% end %>

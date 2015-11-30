@@ -3,4 +3,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
 
   validates :title, :body, :user_id, presence: true
+
+  def to_s
+    "#{self.class}"
+  end
 end

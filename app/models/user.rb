@@ -14,5 +14,7 @@ class User < ActiveRecord::Base
     entity.user_id = self.id
 
   end
-
+  def to_s
+    "#{self.class}"
+  end
 end

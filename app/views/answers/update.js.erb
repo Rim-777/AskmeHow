@@ -1,0 +1,16 @@
+<% if @answer.errors.present? %>
+
+<% @answer.errors.full_messages.each do |message| %>
+$('#answer_errors').html('<%= j message %>');
+<% end %>
+
+
+
+<% else %>
+var answerId = '<%= @answer.id %>';
+$('#existed_answer_body_' + answerId).html("<%= j @answer.body %>");
+$('#existed_answer_body_' + answerId).toggle();
+$('#edit_answer_' + answerId).toggle();
+$('#answer_crud_link_' + answerId).toggle();
+
+<% end %>

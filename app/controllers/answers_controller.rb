@@ -1,12 +1,19 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
-  before_action :set_question, only: :create
+  before_action :authenticate_user!, only: [:create, :edit,  :destroy]
+  before_action :set_question, only: [:create]
 
 
   def create
     @answer = @question.answers.new(answers_params)
     current_user.is_author_of!(@answer)
     @answer.save
+
+  end
+
+  def update
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @answer.update(answers_params)
 
   end
 

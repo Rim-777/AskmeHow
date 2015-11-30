@@ -1,10 +1,35 @@
-<p>
-  <%= answer.body %> <br/>
-  <%= answer.user.email %>
-  <% if current_user && current_user.author_of?(answer) %>
-      <%= link_to 'remove', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
+<div>
+
+  <div class="existed_answer_body" id="existed_answer_body_<%= answer.id %>">
+    <%= answer.body %>
+  </div>
+
+
+  <%= form_for answer, remote: true, html: {id: "edit_answer_#{answer.id}"} do |f| %>
+      <div id="answer_errors"></div>
+
+      <div class="field">
+        <%= f.text_area :body, id: "edit_answer_body_#{answer.id}" %>
+      </div>
+
+
+      <div class="actions">
+        <%= f.submit 'Save' %>
+      </div>
+
   <% end %>
-</p>
 
+</div>
 
+<div>
+
+<span id="answer_crud_link_<%= answer.id %>">
+<%= answer.user.email %>
+<% if current_user && current_user.author_of?(answer) %>
+    <%= link_to 'edit', '', class: 'edit_answer', data: {answer_id: answer.id} %>
+      <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
+<% end %>
+</span>
+
+</div> <br/>
 

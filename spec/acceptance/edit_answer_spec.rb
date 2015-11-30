@@ -1,0 +1,45 @@
+require_relative 'acceptance_helper'
+
+feature 'Edit Answer', %q{
+In order to correct mistakes in my answer
+I want to be able to edit my answers} do
+  given(:author_of_question) { create(:user) }
+  given(:author_of_answer) { create(:user) }
+  given(:another_authenticated_user) { create(:user) }
+
+  given(:question) { create(:question, user: author_of_question) }
+  given(:answer) { create(:answer, question: question, user: author_of_answer) }
+
+  before { answer }
+  scenario 'Un-Authenticate User is trying edit an Answer' do
+    visit question_path(question)
+    expect(page).to_not have_link 'Edit'
+  end
+
+  scenario 'Author of Answer can see link Edit' do
+    sign_in(author_of_answer)
+    can_see_question(with_answers: true)
+    within '.answers' do
+      expect(page).to have_link 'Edit'
+    end
+  end
+
+  scenario 'Author of Answer is trying edit his Answer' do
+    sign_in(author_of_answer)
+    visit question_path(question)
+      # click_on 'Edit'
+    # within '.answers' do
+    # expect(page).to_not have_link 'Save'
+    # end
+
+
+  end
+
+  scenario 'Authenticate User is trying edit his not Answer' do
+    sign_in(another_authenticated_user)
+    visit question_path(question)
+    within '.answers' do
+    expect(page).to_not have_link 'Edit'
+    end
+  end
+end

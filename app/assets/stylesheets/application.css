@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+a, a:visited {
+    text-decoration: none;
+    color: #6f9a91;
+}
+
+a:hover {
+    box-shadow: 0 0 1px;
+    color: #49655c;
+
+}
+
+.existed_answer_body, form textarea {
+    width: 250px;
+    min-height: 50px;
+    border: solid rgba(18, 26, 225, 0.35) 1px;
+    border-radius: 10px;
+    resize: none;
+}
