@@ -11,6 +11,6 @@ var answerId = '<%= @answer.id %>';
 $('#existed_answer_body_' + answerId).html("<%= j @answer.body %>");
 $('#existed_answer_body_' + answerId).toggle();
 $('#edit_answer_' + answerId).toggle();
-$('#answer_crud_link_' + answerId).toggle();
+$('#answer_crud_link_' + answerId).toggle(200);
 
 <% end %>

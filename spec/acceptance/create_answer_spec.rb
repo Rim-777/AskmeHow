@@ -4,19 +4,17 @@ require_relative 'acceptance_helper'
 feature 'Create Answer', %q{
 In order to help users to find correct answer as an authenticate user
 I want to be able to create answers } do
-  given(:user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  given!(:user) { create(:user) }
+  given!(:question) { create(:question, user: user) }
+
 
   scenario 'Authenticate User is trying write Answer', js: true  do
 
 
     sign_in(user)
-    can_see_question
-    fill_in 'You Answer', with: 'Test answer body'
+    visit question_path(question)
+    fill_in 'You Answer:', with: 'Test answer body'
     click_on 'Create'
-    # expect(page).to have_content question.title
-    # expect(page).to have_content question.body
-    # save_and_open_page
     within '.answers' do
       expect(page).to have_content 'Test answer body'
     end

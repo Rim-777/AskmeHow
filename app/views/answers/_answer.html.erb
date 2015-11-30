@@ -19,16 +19,14 @@
 
   <% end %>
 
-</div>
 
-<div>
 
-<span id="answer_crud_link_<%= answer.id %>">
-<%= answer.user.email %>
-<% if current_user && current_user.author_of?(answer) %>
+  <span id="answer_crud_link_<%= answer.id %>">
+  <%= answer.user.email %>
+    <% if user_signed_in? && current_user.author_of?(answer) %>
     <%= link_to 'edit', '', class: 'edit_answer', data: {answer_id: answer.id} %>
-      <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
-<% end %>
+        <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
+    <% end %>
 </span>
 
 </div> <br/>
