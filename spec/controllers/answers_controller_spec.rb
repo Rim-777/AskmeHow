@@ -4,7 +4,7 @@ RSpec.describe AnswersController, type: :controller do
 
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
-  let(:question) { create(:question, user: user) }
+  let!(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
 
 
@@ -15,9 +15,9 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'POST #create' do
 
-    context 'with valid attributes'  do
+    context 'with valid attributes' do
 
-      it 'save new answer in database depending with question'  do
+      it 'save new answer in database depending with question' do
         expect { post :create, question_id: question, answer: attributes_for(:answer), format: :js
         }.to change(question.answers, :count).by(1)
       end
@@ -47,7 +47,27 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  describe 'DELETE # destroy' do
+
+  # describe 'PATCH #update' do
+  #   context 'User is trying to update his Answer' do
+  #
+  #     it 'assigns the requested answer to @answer' do
+  #       patch :update, id: answer, answer: attributes_for(:answer)
+  #       expect(assigns(:answer)).to eq answer
+  #     end
+  #
+  #     it 'change answer body' do
+  #       patch :update, id: answer, answer: {body: 'new body'}
+  #       answer.reload
+  #
+  #       expect(answer.body).to eq 'new body'
+  #
+  #     end
+  #   end
+  #
+  # end
+
+  describe 'DELETE #destroy' do
 
 
     context 'User is trying to remove his own answer ' do
