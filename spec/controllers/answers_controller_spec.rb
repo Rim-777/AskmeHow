@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
 
-  let(:user) { create(:user) }
-  let(:another_user) { create(:user) }
+  let!(:user) { create(:user) }
+  let!(:another_user) { create(:user) }
   let!(:question) { create(:question, user: user) }
-  let(:answer) { create(:answer, question: question, user: user) }
+  let!(:answer) { create(:answer, question: question, user: user) }
+  let(:answer_of_another_user) { create(:answer, question: question, user: another_user, body: "Another Users' Answer Body") }
 
 
   before do
@@ -48,24 +49,41 @@ RSpec.describe AnswersController, type: :controller do
   end
 
 
-  # describe 'PATCH #update' do
-  #   context 'User is trying to update his Answer' do
-  #
-  #     it 'assigns the requested answer to @answer' do
-  #       patch :update, id: answer, answer: attributes_for(:answer)
-  #       expect(assigns(:answer)).to eq answer
-  #     end
-  #
-  #     it 'change answer body' do
-  #       patch :update, id: answer, answer: {body: 'new body'}
-  #       answer.reload
-  #
-  #       expect(answer.body).to eq 'new body'
-  #
-  #     end
-  #   end
-  #
-  # end
+  describe 'PATCH #update' do
+
+    context 'User is trying to update his own Answer' do
+
+      it 'assigns the requested answer to @answer' do
+        patch :update, question_id: question, id: answer, answer: attributes_for(:answer), format: :js
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'change answer body' do
+        patch :update, question_id: question, id: answer, answer: {body: 'new body'}, format: :js
+        answer.reload
+        expect(answer.body).to eq 'new body'
+      end
+
+    end
+
+    context 'User is trying to update his not Answer' do
+
+      it 'does not change answer attributes' do
+        patch :update, question_id: question, id: answer_of_another_user, answer: {body: 'new body'}, format: :js
+        answer_of_another_user.reload
+        expect(answer_of_another_user.body).to eq "Another Users' Answer Body"
+      end
+
+    end
+
+    it 'render template Answers/update.js view' do
+      patch :update, question_id: question, id: answer, answer: attributes_for(:answer), format: :js
+      expect(response).to render_template :update
+
+    end
+
+
+  end
 
   describe 'DELETE #destroy' do
 

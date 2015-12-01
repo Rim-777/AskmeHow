@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :edit,  :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :set_question, only: [:create]
 
 
@@ -12,8 +12,10 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
-    @question = @answer.question
-    @answer.update(answers_params)
+    # if current_user.author_of?(@answer)
+      # @question = @answer.question
+      @answer.update(answers_params) if current_user.author_of?(@answer)
+    # end
 
   end
 
