@@ -12,3 +12,14 @@ function setAnswerEditClick() {
         toggleEditAnswer(answerId);
     })
 }
+
+
+
+function setQuestionEditClick(){
+
+    $('a.question_edit_link').click(function (e) {
+        e.preventDefault();
+        var questionId = $(this).data('questionId');
+        $('#question_edit_' + questionId).show('slow')
+    })
+}

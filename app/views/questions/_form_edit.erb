@@ -1,7 +1,7 @@
-<div class="question_form_new">
+<div class="question_form_edit" id="question_edit_<%= question.id %>">
 
 
-  <%= form_for (question), remote: true, html: {id: "question_form_new_#{question.id}"} do |f| %>
+  <%= form_for (question), remote: true, html: {id: "question_form_edit_#{question.id}"} do |f| %>
 
 
       <div class="field">

@@ -1,15 +1,18 @@
 <p><%= link_to 'Ask question', new_question_path %></p>
 
+<div class="question_list">
+  <% if @questions.any? %>
 
-<% if @questions.any? %>
-    <% @questions.each do |question| %>
-        <table>
-          <tr>
-            <td> <%= link_to "#{question.title}", question %></td>
-            <% if current_user && current_user.author_of?(question) %>
-                <td> <%= link_to 'remove', question, method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %></td>
-            <% end %>
-          </tr>
-        </table>
-    <% end %>
-<% end %>
+      <% @questions.each do |question| %>
+
+          <%= link_to "#{question.title}", question %>
+          <% if user_signed_in? && current_user.author_of?(question) %>
+              <%= link_to 'edit','', class: 'question_edit_link', data: {question_id: question.id}  %></td>
+              <%= link_to 'remove', question, method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %>
+          <% end %>
+          <%= render 'form_edit', question: question %>
+
+      <% end %>
+  <% end %>
+
+</div>
