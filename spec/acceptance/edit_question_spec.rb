@@ -4,7 +4,6 @@ feature 'Edit Question', %q{
 In order to correct mistakes in my question
 I want to be able to edit my question} do
   given(:author_of_question) { create(:user) }
-  given(:not_author_of_question) { create(:user) } #todo ?
   given(:another_authenticated_user) { create(:user) }
 
   given!(:question) { create(:question, user: author_of_question) }
@@ -40,14 +39,14 @@ I want to be able to edit my question} do
     end
 
   end
-  #
-  # scenario 'Authenticate User is trying edit his not Answer' do
-  #   sign_in(another_authenticated_user)
-  #   visit question_path(question)
-  #   within '.answers' do
-  #     expect(page).to_not have_link 'Edit'
-  #   end
-  # end
+
+  scenario 'Authenticate User is trying edit his not Question' do
+    sign_in(another_authenticated_user)
+    visit question_path(question)
+    within '.question_existed_area' do
+      expect(page).to_not have_link 'Edit'
+    end
+  end
 
   scenario 'Un-Authenticate User is trying edit an Question' do
     visit questions_path
