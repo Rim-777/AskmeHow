@@ -1,11 +1,16 @@
-<p>Question:</p>
+<h4>Question of:</h4>
 
 <div class="question_existed_area" id="question_existed_area_<%= @question.id %>">
+
+  <div class="question_user_existed", id="question_user_existed_<%= @question.id %>">
+    <%= @question.user.email %>
+  </div>
+  <br/>
 
   <div class="question_title_existed" id="question_title_existed_<%= @question.id %>">
     <%= @question.title %>
   </div>
-
+  <br/>
   <div class="question_body_existed" id="question_body_existed_<%= @question.id %>">
     <%= @question.body %>
   </div>

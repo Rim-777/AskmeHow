@@ -24,14 +24,14 @@ a:hover {
 
 }
 
-form input[type='text']{
+form input[type='text'], .question_title_existed{
     width: 350px;
     min-height: 20px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
     border-radius: 10px;
 }
 
-.existed_answer_body, form textarea {
+.existed_answer_body, form textarea, .question_body_existed {
     width: 350px;
     min-height: 50px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
@@ -39,3 +39,11 @@ form input[type='text']{
     resize: none;
 }
 
+.question_user_existed{
+    width: 177px;
+    height: 20px;
+    border-radius: 10%;
+    border: solid rgba(205, 67, 33, 0.35) 1px;
+    display: block;
+    align-content: center;
+}
