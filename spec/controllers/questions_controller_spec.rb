@@ -51,18 +51,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  # describe 'GET #edit' do
-  #   before { get :edit, id: question }
-  #
-  #   it 'assigns the requested question to @question' do
-  #     expect(assigns(:question)).to eq question
-  #   end
-  #
-  #   it 'render show view' do
-  #     expect(response).to render_template :edit
-  #   end
-  # end
-
   describe 'POST #create' do
     context 'with valid attributes' do
 
@@ -98,14 +86,16 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'valid attributes' do
+
+    context 'User is trying update his question' do
+
       it 'assigns the requested question to @question' do
         patch :update, id: question, question: attributes_for(:question), format: :js
         expect(assigns(:question)).to eq question
       end
 
       it 'changes question attributes' do
-        patch :update, id: question, question: {title: 'new title', body: 'new body'} , format: :js
+        patch :update, id: question, question: {title: 'new title', body: 'new body'}, format: :js
         question.reload
         expect(question.title).to eq 'new title'
         expect(question.body).to eq 'new body'
@@ -118,10 +108,23 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
 
-    context 'invalid attributes' do
+    context 'User is trying update his question with invalid attributes' do
 
-      before { patch :update, id: question, question: {title: 'new title', body: nil}, format: :js}
       it 'does not change question attributes' do
+        patch :update, id: question, question: {title: 'new title', body: nil}, format: :js
+        question.reload
+        expect(question.title).to eq 'OldTitleText'
+        expect(question.body).to eq 'OldBodyText'
+      end
+    end
+
+
+    context 'User is trying update his not question' do
+
+      it 'does not change question attributes' do
+        sign_in(another_user)
+        patch :update, id: question, question: {title: 'new title', body: 'new body'}, format: :js
+        question.reload
         expect(question.title).to eq 'OldTitleText'
         expect(question.body).to eq 'OldBodyText'
       end
@@ -130,9 +133,10 @@ RSpec.describe QuestionsController, type: :controller do
 
   end
 
+
   describe 'DELETE # destroy' do
 
-     before {question}
+    before { question }
 
     context 'User is trying to delete his own question' do
       it 'remove a question' do

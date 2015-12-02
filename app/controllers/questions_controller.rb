@@ -15,9 +15,6 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
-  # def edit
-  #
-  # end
 
   def create
     @question = Question.new(questions_params)
@@ -27,12 +24,10 @@ class QuestionsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def update
-     @question.update(questions_params)
-
+     @question.update(questions_params) if current_user.author_of?(@question)
   end
 
   def destroy
