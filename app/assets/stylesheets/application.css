@@ -24,8 +24,15 @@ a:hover {
 
 }
 
+form input[type='text']{
+    width: 350px;
+    min-height: 20px;
+    border: solid rgba(18, 26, 225, 0.35) 1px;
+    border-radius: 10px;
+}
+
 .existed_answer_body, form textarea {
-    width: 250px;
+    width: 350px;
     min-height: 50px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
     border-radius: 10px;

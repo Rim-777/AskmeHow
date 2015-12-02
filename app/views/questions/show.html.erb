@@ -1,17 +1,28 @@
 <p>Question:</p>
 
+<div class="question_existed_area" id="question_existed_area_<%= @question.id %>">
 
-<h3>topic:</h3>
-<p><%= @question.title %></p>
-<h3>text of the question:</h3>
-<p><%= @question.body %></p>
+  <div class="question_title_existed" id="question_title_existed_<%= @question.id %>">
+    <%= @question.title %>
+  </div>
+
+  <div class="question_body_existed" id="question_body_existed_<%= @question.id %>">
+    <%= @question.body %>
+  </div>
+
+    <%= render 'form_edit', question: @question %>
+
+  <div id="question_crud_link_<%= @question.id %>">
+    <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{@question.id}",  data: {question_id: @question.id} %>
+  </div>
+</div>
 
 <div class="answers">
   <% if @question.answers && @question.answers.any? %>
       <h3>Answers:</h3>
       <% @question.answers.each do |answer| %>
           <% if answer.persisted? %>
-              <%= render  answer %>
+              <%= render answer %>
           <% end %>
       <% end %>
   <% else %>
@@ -24,7 +35,7 @@
 <% if current_user %>
     <p><%= render 'answers/form', question: @question, answer: @answer %></p>
 <% else %>
-    <p> Please <%= link_to 'log in',   new_user_session_path %> If You want to add a new Answer. </p>
+    <p> Please <%= link_to 'log in', new_user_session_path %> If You want to add a new Answer. </p>
 
 <% end %>
 

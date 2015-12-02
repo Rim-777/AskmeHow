@@ -7,11 +7,8 @@
 
           <%= link_to "#{question.title}", question %>
           <% if user_signed_in? && current_user.author_of?(question) %>
-              <%= link_to 'edit','', class: 'question_edit_link', data: {question_id: question.id}  %></td>
               <%= link_to 'remove', question, method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %>
           <% end %>
-          <%= render 'form_edit', question: question %>
-
       <% end %>
   <% end %>
 

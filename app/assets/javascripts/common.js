@@ -4,6 +4,13 @@ function toggleEditAnswer(answerId, time) {
     $('#edit_answer_' + answerId).toggle();
 }
 
+function toggleEditQuestion(questionId, time) {
+    $('#question_crud_link_' + questionId).toggle(time);
+    $('#question_title_existed_'+ questionId).toggle();
+    $('#question_body_existed_' + questionId).toggle();
+    $('#question_form_edit_' + questionId).toggle()
+
+}
 
 function setAnswerEditClick() {
     $('a.edit_answer').click(function (e) {
@@ -14,12 +21,10 @@ function setAnswerEditClick() {
 }
 
 
-
 function setQuestionEditClick(){
-
     $('a.question_edit_link').click(function (e) {
         e.preventDefault();
         var questionId = $(this).data('questionId');
-        $('#question_edit_' + questionId).show('slow')
+       toggleEditQuestion(questionId)
     })
 }

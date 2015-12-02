@@ -1,0 +1,13 @@
+<% if @question.errors.present? %>
+
+    <% @question.errors.full_messages.each do |message| %>
+        $('#question_errors').html('<%= j message %>');
+    <% end %>
+
+<% else %>
+
+    var questionId = '<%= @question.id %>';
+    $('#question_title_existed_' + questionId).html('<%= j @question.title   %>');
+    $('#question_body_existed_' + questionId).html('<%= j @question.body   %>');
+    toggleEditQuestion(questionId);
+<% end %>
