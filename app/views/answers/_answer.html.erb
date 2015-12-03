@@ -1,4 +1,4 @@
-<div>
+<div id="answer_<%= answer.id %>">
 
   <div class="answer_body_existed" id="answer_body_existed_<%= answer.id %>">
     <%= answer.body %>
@@ -25,12 +25,13 @@
   <%= answer.user.email %>
     <% if user_signed_in? && current_user.author_of?(answer) %>
       <%= link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer.id}, id: "answer_edit_link_#{answer.id}" %>
-        <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
+        <%= link_to 'delete', answer, remote: true, method: :delete, data: {confirm: 'Do you want to remove the answer'} %>
     <% end %>
 </span>
+  <br/>
 </div>
 
-<br/>
+
 
 <script defer>
     setToggleOnAnswerEditLink('<%=answer.id%>');

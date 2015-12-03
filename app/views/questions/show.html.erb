@@ -2,7 +2,7 @@
 
 <div class="question_existed_area" id="question_existed_area_<%= @question.id %>">
 
-  <div class="question_user_existed", id="question_user_existed_<%= @question.id %>">
+  <div class="question_user_existed" , id="question_user_existed_<%= @question.id %>">
     <%= @question.user.email %>
   </div>
   <br/>
@@ -11,15 +11,17 @@
     <%= @question.title %>
   </div>
   <br/>
+
   <div class="question_body_existed" id="question_body_existed_<%= @question.id %>">
     <%= @question.body %>
   </div>
 
-    <%= render 'form_edit', question: @question %>
-
-  <div id="question_crud_link_<%= @question.id %>">
-    <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{@question.id}",  data: {question_id: @question.id} %>
-  </div>
+  <%= render 'form_edit', question: @question %>
+  <% if user_signed_in? && current_user.author_of?(@question) %>
+      <div id="question_crud_link_<%= @question.id %>">
+        <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{@question.id}", data: {question_id: @question.id} %>
+      </div>
+  <% end %>
 </div>
 
 <div class="answers">

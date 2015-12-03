@@ -1,0 +1,11 @@
+<% if @answer.errors.present? %>
+
+<% @answer.errors.full_messages.each do |message| %>
+$('#answer_errors').html('<%= j message %>');
+<% end %>
+
+<% else %>
+var answer = $('#answer_<%= @answer.id %>');
+answer.hide();
+answer.remove();
+<% end %>
