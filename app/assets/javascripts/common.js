@@ -29,3 +29,11 @@ function setQuestionEditClick(){
     })
 }
 
+function setToggleOnAnswerEditLink(answerId){
+    $('#answer_edit_link_'+ answerId ).click(function (e) {
+        e.preventDefault();
+        toggleEditAnswer(answerId);
+    });
+
+}
+

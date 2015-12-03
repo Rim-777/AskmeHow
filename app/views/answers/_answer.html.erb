@@ -33,9 +33,6 @@
 <br/>
 
 <script defer>
-    $('#answer_edit_link_<%=answer.id%>').click(function (e) {
-        e.preventDefault();
-        toggleEditAnswer('<%=answer.id%>');
-    });
+    setToggleOnAnswerEditLink('<%=answer.id%>');
 </script>
 
