@@ -11,7 +11,7 @@ function setAnswerEditClick() {
         var answerId = $(this).data('answerId');
         toggleEditAnswer(answerId);
     })
-}
+}// todo perhaps this function should be deleted
 
 function toggleEditQuestion(questionId, time) {
     $('#question_crud_link_' + questionId).toggle(time);

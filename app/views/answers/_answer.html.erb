@@ -10,7 +10,7 @@
 
       <div class="field">
         <%= f.label "body_edit_#{answer.id}", 'editing' %> <br/>
-        <%= f.text_area :body, id: "answer_body_edit_#{answer.id}"  %>
+        <%= f.text_area :body, id: "answer_body_edit_#{answer.id}" %>
       </div>
 
 
@@ -21,14 +21,21 @@
   <% end %>
 
 
-<span id="answer_crud_link_<%= answer.id %>">
+  <span id="answer_crud_link_<%= answer.id %>">
   <%= answer.user.email %>
     <% if user_signed_in? && current_user.author_of?(answer) %>
-        <a href=""  class="answer_edit_link" data-answer-id="<%= answer.id %>" id="answer_edit_link_<%= answer.id %>">edit</a>
+      <%= link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer.id}, id: "answer_edit_link_#{answer.id}" %>
         <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
     <% end %>
 </span>
 </div>
 
 <br/>
+
+<script defer>
+    $('#answer_edit_link_<%=answer.id%>').click(function (e) {
+        e.preventDefault();
+        toggleEditAnswer('<%=answer.id%>');
+    });
+</script>
 
