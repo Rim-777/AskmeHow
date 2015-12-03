@@ -1,11 +1,11 @@
 <div>
 
-  <div class="existed_answer_body" id="existed_answer_body_<%= answer.id %>">
+  <div class="answer_body_existed" id="answer_body_existed_<%= answer.id %>">
     <%= answer.body %>
   </div>
 
 
-  <%= form_for answer, remote: true, html: {id: "edit_answer_#{answer.id}"} do |f| %>
+  <%= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer.id}"} do |f| %>
       <div id="answer_errors"></div>
 
       <div class="field">
@@ -21,14 +21,14 @@
   <% end %>
 
 
-
-  <span id="answer_crud_link_<%= answer.id %>">
+<span id="answer_crud_link_<%= answer.id %>">
   <%= answer.user.email %>
     <% if user_signed_in? && current_user.author_of?(answer) %>
-    <%= link_to 'edit', '', class: 'edit_answer', data: {answer_id: answer.id} %>
+        <a href=""  class="answer_edit_link" data-answer-id="<%= answer.id %>" id="answer_edit_link_<%= answer.id %>">edit</a>
         <%= link_to 'delete', answer, method: :delete, data: {confirm: 'Хотите удалить ответ?'} %>
     <% end %>
 </span>
+</div>
 
-</div> <br/>
+<br/>
 

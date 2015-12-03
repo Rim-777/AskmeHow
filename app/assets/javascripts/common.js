@@ -1,7 +1,16 @@
 function toggleEditAnswer(answerId, time) {
     $('#answer_crud_link_' + answerId).toggle(time);
-    $('#existed_answer_body_' + answerId).toggle();
-    $('#edit_answer_' + answerId).toggle();
+    $('#answer_body_existed_' + answerId).toggle();
+    $('#answer_edit_form_' + answerId).toggle();
+}
+
+
+function setAnswerEditClick() {
+    $('.answer_edit_link').click(function (e) {
+        e.preventDefault();
+        var answerId = $(this).data('answerId');
+        toggleEditAnswer(answerId);
+    })
 }
 
 function toggleEditQuestion(questionId, time) {
@@ -12,15 +21,6 @@ function toggleEditQuestion(questionId, time) {
 
 }
 
-function setAnswerEditClick() {
-    $('a.edit_answer').click(function (e) {
-        e.preventDefault();
-        var answerId = $(this).data('answerId');
-        toggleEditAnswer(answerId);
-    })
-}
-
-
 function setQuestionEditClick(){
     $('a.question_edit_link').click(function (e) {
         e.preventDefault();
@@ -28,3 +28,4 @@ function setQuestionEditClick(){
        toggleEditQuestion(questionId)
     })
 }
+

@@ -8,7 +8,7 @@ $('#answer_errors').html('<%= j message %>');
 
 <% else %>
 var answerId = '<%= @answer.id %>';
-$('#existed_answer_body_' + answerId).html("<%= j @answer.body %>");
+$('#answer_body_existed_' + answerId).html("<%= j @answer.body %>");
 toggleEditAnswer(answerId, 200);
 <% end %>
 

@@ -31,7 +31,7 @@ form input[type='text'], .question_title_existed{
     border-radius: 10px;
 }
 
-.existed_answer_body, form textarea, .question_body_existed {
+.answer_body_existed, form textarea, .question_body_existed {
     width: 350px;
     min-height: 50px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
