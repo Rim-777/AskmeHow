@@ -3,12 +3,13 @@
 <div class="question_list">
   <% if @questions.any? %>
 
+<p>
       <% @questions.each do |question| %>
-
           <%= link_to "#{question.title}", question %>
           <% if user_signed_in? && current_user.author_of?(question) %>
               <%= link_to 'remove', question, method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %>
           <% end %>
+      </p>
       <% end %>
   <% end %>
 

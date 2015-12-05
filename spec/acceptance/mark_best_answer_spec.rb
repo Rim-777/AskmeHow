@@ -16,16 +16,16 @@ be able to mark answer} do
     visit question_path(question)
     within "#answer_#{answer.id}" do
       expect(page).to have_content answer.body
-      expect(page).to have_link 'the best!'
+      expect(page).to have_link 'best?'
     end
 
-    click_on 'the best!'
+    click_on 'best?'
     within ".best_answer" do
       expect(page).to have_selector "#answer_#{answer.id}"
       expect(page).to have_content answer.body
     end
 
-    within ".answers" do
+    within ".others_answers" do
       expect(page).to_not have_selector "#answer_#{answer.id}"
       expect(page).to_not have_content answer.body
     end

@@ -8,12 +8,12 @@ I want to be able to  browse the question and it's answers
   given(:question) { create(:question, :with_answers, user: user) }
 
 
-  scenario 'Authenticate User is trying to see a question and answers' do
+  scenario 'Authenticate User is trying to see a question and answers' , js: true do
     sign_in(user)
     can_see_question(with_answers: true)
   end
 
-  scenario 'Un-Authenticate User is trying to see a question and answers' do
+  scenario 'Un-Authenticate User is trying to see a question and answers'  , js: true do
     can_see_question(with_answers: true)
 
   end
