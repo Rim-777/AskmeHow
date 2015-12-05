@@ -1,6 +1,7 @@
 $(document).ready ->
   setQuestionEditClick()
 
+
 #$(document).on page: change, ->
 #  setQuestionEditClick()
 

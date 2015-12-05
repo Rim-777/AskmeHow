@@ -27,14 +27,29 @@
 <div class="answers">
   <% if @question.answers && @question.answers.any? %>
       <h3>Answers:</h3>
+
+      <div class="best_answer" id="best_answer_for_question_<%= @question.id %>"></div>
+      <div class="others_answers"></div>
       <% @question.answers.each do |answer| %>
           <% if answer.persisted? %>
-              <%= render answer %>
+
+              <% if answer.is_best? %>
+                  <%= javascript_tag do %>
+                      $('.best_answer').html("<%= j render answer %>");
+                  <% end %>
+
+              <% else %>
+                  <%= javascript_tag do %>
+                      $('.others_answers').append("<%= j render answer %>");
+                  <% end %>
+
+              <% end %>
+
           <% end %>
       <% end %>
+
   <% else %>
       No answers
-
   <% end %>
 </div>
 

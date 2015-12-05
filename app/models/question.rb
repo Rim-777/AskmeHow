@@ -4,7 +4,4 @@ class Question < ActiveRecord::Base
 
   validates :title, :body, :user_id, presence: true
 
-  def to_s
-    "#{self.class}"
-  end
 end
