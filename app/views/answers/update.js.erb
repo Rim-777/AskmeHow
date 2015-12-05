@@ -4,8 +4,6 @@
 $('#answer_errors').html('<%= j message %>');
 <% end %>
 
-
-
 <% else %>
 var answerId = '<%= @answer.id %>';
 $('#answer_body_existed_' + answerId).html("<%= j @answer.body %>");
