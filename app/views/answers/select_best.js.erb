@@ -1,7 +1,7 @@
+var newBestAnswerId = '<%= @answer.id%>';
 <% if @answer.errors.present? %>
-
 <% @answer.errors.full_messages.each do |message| %>
-$('#answer_errors').html('<%= j message %>');
+$('#answer_' + newBestAnswerId + '_errors').html('<%= j message %>');
 <% end %>
 
 <% else %>
@@ -9,12 +9,12 @@ $('#answer_errors').html('<%= j message %>');
 var newBestAnswer = '<%= j render @answer %>';
 var oldBestAnswer = $('.best_answer').html();
 var oldBestAnswerLinkId = $('.best_answer .answer').data('answerId');
-var newBestAnswerId = '<%= @answer.id%>';
+
 
 $('.best_answer').html(newBestAnswer);
 $('.others_answers #answer_' + newBestAnswerId).remove();
 if (oldBestAnswer) {$('.others_answers').append(oldBestAnswer)}
-$('#answer_best_link_' + newBestAnswerId ).hide();
+$('#answer_best_link_' + newBestAnswerId).hide();
 $('#answer_best_link_' + oldBestAnswerLinkId).show();
 
 <% end %>

@@ -6,7 +6,7 @@
 
 
   <%= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer_id}"} do |f| %>
-      <div id="answer_errors"></div>
+      <div id="answer_<%= answer_id %>_errors"></div>
 
       <div class="field">
         <%= f.label "body_edit_#{answer_id}", 'editing' %> <br/>

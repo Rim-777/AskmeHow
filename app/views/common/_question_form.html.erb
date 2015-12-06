@@ -1,0 +1,22 @@
+<%= render 'common/errors', resource: question %>
+<div class="field">
+  <%= f.label :title %> <br/>
+  <%= f.text_field :title %>
+</div>
+<br/>
+
+<div class="field">
+  <% if question.new_record? %>
+      <%= f.label :body %><br/>
+      <%= f.text_area :body %>
+  <% else %>
+      <%= f.label "body_edit_#{question.id}", 'question editing' %> <br/>
+      <%= f.text_area :body, id: "question_body_edit_#{question.id}" %>
+  <% end %>
+
+</div>
+
+
+<div class="actions">
+  <%= f.submit "#{question.new_record? ? 'Create' : 'Save'}" %>
+</div>

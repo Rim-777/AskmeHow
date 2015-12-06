@@ -4,4 +4,8 @@ class Question < ActiveRecord::Base
 
   validates :title, :body, :user_id, presence: true
 
+  def best_answer
+    answers.where(is_best: true).first
+  end
+
 end

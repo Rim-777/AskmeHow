@@ -1,25 +1,27 @@
 <h4>Question of:</h4>
+<% question_id = @question.id %>
+<%= render 'common/errors', resource: @question %>
 
-<div class="question_existed_area" id="question_existed_area_<%= @question.id %>">
+<div class="question_existed_area" id="question_existed_area_<%= question_id %>">
 
-  <div class="question_user_existed" , id="question_user_existed_<%= @question.id %>">
+  <div class="question_user_existed" , id="question_user_existed_<%= question_id %>">
     <%= @question.user.email %>
   </div>
   <br/>
 
-  <div class="question_title_existed" id="question_title_existed_<%= @question.id %>">
+  <div class="question_title_existed" id="question_title_existed_<%= question_id %>">
     <%= @question.title %>
   </div>
   <br/>
 
-  <div class="question_body_existed" id="question_body_existed_<%= @question.id %>">
+  <div class="question_body_existed" id="question_body_existed_<%= question_id %>">
     <%= @question.body %>
   </div>
-
+  <div class="question_errors"></div>
   <%= render 'form_edit', question: @question %>
   <% if user_signed_in? && current_user.author_of?(@question) %>
-      <div id="question_crud_link_<%= @question.id %>">
-        <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{@question.id}", data: {question_id: @question.id} %>
+      <div id="question_crud_link_<%= question_id %>">
+        <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{question_id}", data: {question_id: question_id} %>
       </div>
   <% end %>
 </div>
@@ -28,25 +30,19 @@
   <% if @question.answers && @question.answers.any? %>
       <h3>Answers:</h3>
 
-      <div class="best_answer" id="best_answer_for_question_<%= @question.id %>"></div>
-      <div class="others_answers"></div>
-      <% @question.answers.each do |answer| %>
-          <% if answer.persisted? %>
+      <div class="best_answer" id="best_answer_for_question_<%= question_id %>">
+        <% best_cuestion = @question.best_answer %>
+        <%= render best_cuestion if  best_cuestion.present? %>
+      </div>
+      <div class="others_answers">
+        <% @question.answers.each do |answer| %>
+            <% if answer.persisted? %>
 
-              <% if answer.is_best? %>
-                  <%= javascript_tag do %>
-                      $('.best_answer').html("<%= j render answer %>");
-                  <% end %>
+                <%= render answer unless answer.is_best? %>
 
-              <% else %>
-                  <%= javascript_tag do %>
-                      $('.others_answers').append("<%= j render answer %>");
-                  <% end %>
-
-              <% end %>
-
-          <% end %>
-      <% end %>
+            <% end %>
+        <% end %>
+      </div>
 
   <% else %>
       No answers
