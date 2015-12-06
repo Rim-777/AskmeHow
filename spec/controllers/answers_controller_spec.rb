@@ -7,7 +7,7 @@ RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question, user: user) }
   let!(:answer) { create(:answer, question: question, user: user) }
   let!(:second_answer) { create(:answer, question: question, user: user) }
-  let!(:third_answer) { create(:answer, question: question, user: user) }
+  let!(:one_more_answer) { create(:answer, question: question, user: user, is_best: false) }
   let(:answer_of_another_user) { create(:answer, question: question, user: another_user, body: "Another Users' Answer Body") }
 
 
@@ -90,6 +90,7 @@ RSpec.describe AnswersController, type: :controller do
   describe 'PATCH #select_best' do
 
     context "Author of question is trying to mark 'is_best' an answer on his question " do
+
       it 'assigns the requested answer to @answer and answer.question to @question' do
         patch :select_best, id: answer, question_id: answer.question, answer: attributes_for(:answer), format: :js
         expect(assigns(:answer)).to eq answer
@@ -97,8 +98,7 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it "change answer's field 'is_best' " do
-        second_answer
-        third_answer
+
         patch :select_best, id: second_answer, question_id: answer.question, answer: {is_best: true}, format: :js
         second_answer.reload
         expect(second_answer.is_best?).to eq true
@@ -113,12 +113,25 @@ RSpec.describe AnswersController, type: :controller do
           expect(the_answer.is_best?).to eq false
           end
         end
-
-
       end
 
+      it 'render template Answers/select_best.js view' do
+        patch :select_best, id: answer, question_id: answer.question, answer: attributes_for(:answer), format: :js
+        expect(response).to render_template :select_best
+      end
 
     end
+
+    context "Other authenticate user is trying to mark 'is_best' an answer on his not question" do
+      it "do not change answer's field 'is_best' " do
+      sign_in(another_user)
+
+      patch :select_best, id: one_more_answer, question_id: one_more_answer.question, answer: {is_best: true}, format: :js
+      one_more_answer.reload
+      expect(one_more_answer.is_best?).to eq false
+      end
+    end
+
 
   end
 

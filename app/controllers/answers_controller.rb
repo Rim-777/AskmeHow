@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :set_question, only: [:create]
-  before_action :set_answer, except:  [:create]
+  before_action :set_answer, except: [:create]
 
 
   def create
@@ -23,8 +23,10 @@ class AnswersController < ApplicationController
   end
 
   def select_best
-    @question = @answer.question
-    @answer.set_is_best
+    if current_user.author_of?(@answer.question)
+      @question = @answer.question
+      @answer.set_is_best
+    end
   end
 
   private
