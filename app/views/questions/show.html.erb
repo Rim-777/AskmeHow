@@ -57,7 +57,7 @@
 
 
 <% if current_user %>
-    <p><%= render 'answers/form', question: @question, answer: @answer %></p>
+    <p><%= render 'answer_new_form', question: @question, answer: @answer %></p>
 <% else %>
     <p> Please <%= link_to 'log in', new_user_session_path %> If You want to add a new Answer. </p>
 

@@ -1,0 +1,15 @@
+<%= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer_id}"} do |f| %>
+
+    <div id="answer_<%= answer_id %>errors"></div>
+
+    <div class="field">
+      <%= f.label "body_edit_#{answer_id}", 'editing' %> <br/>
+      <%= f.text_area :body, id: "answer_body_edit_#{answer_id}" %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit 'Save' %>
+    </div>
+
+<% end %>
