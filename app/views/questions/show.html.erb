@@ -18,10 +18,16 @@
     <%= @question.body %>
   </div>
   <div class="question_errors"></div>
-  <%= render 'form_edit', question: @question %>
+
+
+  <%= form_for @question, remote: true, html: {id: "question_form_edit_#{question_id}"} do |f| %>
+      <%= render 'question_form', question: @question, f: f %>
+  <% end %>
+
   <% if user_signed_in? && current_user.author_of?(@question) %>
       <div id="question_crud_link_<%= question_id %>">
-        <%= link_to 'edit', '', class: 'question_edit_link', id: "question_edit_link_#{question_id}", data: {question_id: question_id} %>
+        <%= link_to 'edit', '', class: 'question_edit_link',
+                    id: "question_edit_link_#{question_id}", data: {question_id: question_id} %>
       </div>
   <% end %>
 </div>
@@ -32,7 +38,7 @@
 
       <div class="best_answer" id="best_answer_for_question_<%= question_id %>">
         <% best_cuestion = @question.best_answer %>
-        <%= render best_cuestion if  best_cuestion.present? %>
+        <%= render best_cuestion if best_cuestion.present? %>
       </div>
       <div class="others_answers">
         <% @question.answers.each do |answer| %>

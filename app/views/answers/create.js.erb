@@ -7,7 +7,7 @@ $('.new_answer_errors').html('<%= j message %>');
 
 
 <% else %>
-$('.answers').append("<%= j render  @answer %>");
+$('.others_answers').append("<%= j render  @answer %>");
 $('#answer_body_new').val('');
 <% end %>
 

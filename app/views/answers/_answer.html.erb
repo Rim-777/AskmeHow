@@ -6,7 +6,7 @@
 
 
   <%= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer_id}"} do |f| %>
-      <div id="answer_<%= answer_id %>_errors"></div>
+      <div id="answer_<%= answer_id %>errors"></div>
 
       <div class="field">
         <%= f.label "body_edit_#{answer_id}", 'editing' %> <br/>
@@ -28,13 +28,11 @@
         <% if current_user.author_of?(answer) %>
       <%= link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer_id},
                   id: "answer_edit_link_#{answer_id}" %>
-            <%= link_to 'delete', answer, remote: true, method: :delete,
-                        data: {confirm: 'Do you want to remove the answer'} %>
+            <%= link_to 'delete', answer, remote: true, method: :delete, data: {confirm: 'Do you want to remove the answer'} %>
     <% end %>
 
         <% if current_user.author_of?(@question) %>
-            <%= link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link',
-                        id: "answer_best_link_#{answer_id}", remote: true, method: :patch %>
+            <%= link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link', id: "answer_best_link_#{answer_id}", remote: true, method: :patch %>
 
             <% if answer.is_best? %>
             <%= javascript_tag do %>
