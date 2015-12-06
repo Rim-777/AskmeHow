@@ -6,6 +6,8 @@ RSpec.describe AnswersController, type: :controller do
   let!(:another_user) { create(:user) }
   let!(:question) { create(:question, user: user) }
   let!(:answer) { create(:answer, question: question, user: user) }
+  let!(:second_answer) { create(:answer, question: question, user: user) }
+  let!(:third_answer) { create(:answer, question: question, user: user) }
   let(:answer_of_another_user) { create(:answer, question: question, user: another_user, body: "Another Users' Answer Body") }
 
 
@@ -85,6 +87,41 @@ RSpec.describe AnswersController, type: :controller do
 
   end
 
+  describe 'PATCH #select_best' do
+
+    context "Author of question is trying to mark 'is_best' an answer on his question " do
+      it 'assigns the requested answer to @answer and answer.question to @question' do
+        patch :select_best, id: answer, question_id: answer.question, answer: attributes_for(:answer), format: :js
+        expect(assigns(:answer)).to eq answer
+        expect(assigns(:question)).to eq answer.question
+      end
+
+      it "change answer's field 'is_best' " do
+        second_answer
+        third_answer
+        patch :select_best, id: second_answer, question_id: answer.question, answer: {is_best: true}, format: :js
+        second_answer.reload
+        expect(second_answer.is_best?).to eq true
+
+        patch :select_best, id: answer, question_id: answer.question, answer: {is_best: true}, format: :js
+
+        answer.question.answers.each do |the_answer|
+          the_answer.reload
+          if the_answer == answer
+            expect(the_answer.is_best?).to eq true
+          else
+          expect(the_answer.is_best?).to eq false
+          end
+        end
+
+
+      end
+
+
+    end
+
+  end
+
   describe 'DELETE #destroy' do
 
 
@@ -97,7 +134,7 @@ RSpec.describe AnswersController, type: :controller do
     context "User is trying to remove his not answer" do
       it 'does not remove a question' do
         sign_in(another_user)
-        expect { delete :destroy, question_id: question, id: answer, format: :js  }.to_not change(Answer, :count)
+        expect { delete :destroy, question_id: question, id: answer, format: :js }.to_not change(Answer, :count)
       end
     end
 
