@@ -13,19 +13,18 @@ function setAnswerEditClick() {
     })
 }
 
-function toggleEditQuestion(questionId, time) {
-    $('#question_crud_link_' + questionId).toggle(time);
-    $('#question_title_existed_'+ questionId).toggle();
-    $('#question_body_existed_' + questionId).toggle();
-    $('#question_form_edit_' + questionId).toggle()
+function toggleEditQuestion() {
+    $('.question_edit_link').toggle();
+    $('.question_title_existed').toggle();
+    $('.question_body_existed').toggle();
+    $('form.edit_question').toggle()
 
 }
 
 function setQuestionEditClick(){
     $('a.question_edit_link').click(function (e) {
         e.preventDefault();
-        var questionId = $(this).data('questionId');
-       toggleEditQuestion(questionId)
+       toggleEditQuestion()
     })
 }
 

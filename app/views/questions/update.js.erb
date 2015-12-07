@@ -6,9 +6,8 @@ $('.question_errors').html('<%= j message %>');
 
 <% else %>
 
-var questionId = '<%= @question.id %>';
-$('#question_title_existed_' + questionId).html('<%= j @question.title   %>');
-$('#question_body_existed_' + questionId).html('<%= j @question.body   %>');
-toggleEditQuestion(questionId);
+$('.question_title_existed').html('<%= j @question.title   %>');
+$('.question_body_existed').html('<%= j @question.body   %>');
+toggleEditQuestion();
 
 <% end %>

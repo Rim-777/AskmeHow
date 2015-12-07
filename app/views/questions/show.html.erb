@@ -1,33 +1,33 @@
 <h4>Question of:</h4>
-<% question_id = @question.id %>
+
 <%= render 'common/errors', resource: @question %>
 
-<div class="question_existed_area" id="question_existed_area_<%= question_id %>">
+<div class="question_existed_area">
+  <div class="question_errors"></div>
 
-  <div class="question_user_existed" , id="question_user_existed_<%= question_id %>">
+  <div class="question_user_existed">
     <%= @question.user.email %>
   </div>
   <br/>
 
-  <div class="question_title_existed" id="question_title_existed_<%= question_id %>">
+  <div class="question_title_existed">
     <%= @question.title %>
   </div>
   <br/>
 
-  <div class="question_body_existed" id="question_body_existed_<%= question_id %>">
+  <div class="question_body_existed">
     <%= @question.body %>
   </div>
-  <div class="question_errors"></div>
 
 
-  <%= form_for @question, remote: true, html: {id: "question_form_edit_#{question_id}"} do |f| %>
+
+  <%= form_for @question, remote: true do |f| %>
       <%= render 'question_form', question: @question, f: f %>
   <% end %>
 
   <% if user_signed_in? && current_user.author_of?(@question) %>
-      <div id="question_crud_link_<%= question_id %>">
-        <%= link_to 'edit', '', class: 'question_edit_link',
-                    id: "question_edit_link_#{question_id}", data: {question_id: question_id} %>
+      <div class="question_crud_link">
+        <%= link_to 'edit', '', class: 'question_edit_link' %>
       </div>
   <% end %>
 </div>
@@ -36,7 +36,7 @@
   <% if @question.answers && @question.answers.any? %>
       <h3>Answers:</h3>
 
-      <div class="best_answer" id="best_answer_for_question_<%= question_id %>">
+      <div class="best_answer">
         <% best_answer = @question.best_answer %>
         <%= render best_answer if best_answer.present? %>
       </div>

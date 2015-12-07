@@ -25,9 +25,11 @@ a:hover {
 }
 
 a.remove_link{
-    color: rgba(221, 66, 33, 0.42);
+    color: rgba(240, 72, 34, 0.46);
 }
-
+a.answer_best_link{
+    color: #92ffd0;
+}
 form input[type='text'], .question_title_existed{
     width: 350px;
     min-height: 20px;
