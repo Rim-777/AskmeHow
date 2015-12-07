@@ -7,7 +7,8 @@
           <p>
             <%= link_to "#{question.title}", question %>
             <% if user_signed_in? && current_user.author_of?(question) %>
-                <%= link_to 'remove', question, method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %>
+                <%= link_to 'remove', question, class: 'remove_link',
+                            method: :delete, data: {confirm: 'Хотите удалить вопрос?'} %>
             <% end %>
           </p>
       <% end %>

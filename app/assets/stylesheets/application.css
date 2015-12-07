@@ -24,6 +24,10 @@ a:hover {
 
 }
 
+a.remove_link{
+    color: rgba(221, 66, 33, 0.42);
+}
+
 form input[type='text'], .question_title_existed{
     width: 350px;
     min-height: 20px;

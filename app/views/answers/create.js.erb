@@ -9,6 +9,8 @@ $('.new_answer_errors').html('<%= j message %>');
 <% else %>
 $('.others_answers').append("<%= j render  @answer %>");
 $('#answer_body_new').val('');
+var answerId = '<%= @answer.id %>';
+setToggleOnAnswerEditLink(answerId);
 <% end %>
 
 

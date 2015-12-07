@@ -16,7 +16,8 @@ $('.others_answers #answer_' + newBestAnswerId).remove();
 if (oldBestAnswer) {$('.others_answers').append(oldBestAnswer)}
 $('#answer_best_link_' + newBestAnswerId).hide();
 $('#answer_best_link_' + oldBestAnswerLinkId).show();
-
+setToggleOnAnswerEditLink(newBestAnswerId);
+setToggleOnAnswerEditLink(oldBestAnswerLinkId);
 <% end %>
 
 

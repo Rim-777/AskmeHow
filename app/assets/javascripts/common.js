@@ -6,12 +6,12 @@ function toggleEditAnswer(answerId, time) {
 
 
 function setAnswerEditClick() {
-    $('.answer_edit_link').click(function (e) {
+    $('a.answer_edit_link').click(function (e) {
         e.preventDefault();
         var answerId = $(this).data('answerId');
         toggleEditAnswer(answerId);
     })
-}// todo perhaps this function should be deleted
+}
 
 function toggleEditQuestion(questionId, time) {
     $('#question_crud_link_' + questionId).toggle(time);
@@ -36,4 +36,6 @@ function setToggleOnAnswerEditLink(answerId){
     });
 
 }
+
+
 
