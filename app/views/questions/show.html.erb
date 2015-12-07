@@ -37,8 +37,8 @@
       <h3>Answers:</h3>
 
       <div class="best_answer" id="best_answer_for_question_<%= question_id %>">
-        <% best_cuestion = @question.best_answer %>
-        <%= render best_cuestion if best_cuestion.present? %>
+        <% best_answer = @question.best_answer %>
+        <%= render best_answer if best_answer.present? %>
       </div>
       <div class="others_answers">
         <% @question.answers.each do |answer| %>
