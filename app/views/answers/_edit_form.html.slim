@@ -1,9 +1,9 @@
-= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer_id}"}, method: :patch do |f|
+= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer.id}"}, method: :patch do |f|
 
 
-  div id="answer_#{ answer_id }_errors"
+  div id="answer_#{ answer.id }_errors"
   div class="field"
-    = f.text_area :body, id: "answer_body_edit_#{answer_id}"
+    = f.text_area :body, id: "answer_body_edit_#{answer.id}"
 
 
   div class="actions"
