@@ -5,9 +5,7 @@ $('.new_answer_errors').html('<%= j message %>');
 <% end %>
 
 <% else %>
-
 $('.others_answers').append("<%= j render  @answer %>");
 $('#answer_body_new').val('');
 setToggleOnAnswerEditLink('<%= @answer.id %>');
-
 <% end %>
