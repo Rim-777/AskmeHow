@@ -10,21 +10,18 @@ RSpec.describe Answer, type: :model do
 
 
   describe 'method set_is_best' do
-    let(:user) { create(:user) }
-    let(:question) { create(:question, user: user) }
-    let!(:answer) { create(:answer, question: question, user: user) }
-    let!(:second_answer) { create(:answer, question: question, user: user) }
-    let!(:one_more_answer) { create(:answer, question: question, user: user, is_best: true) }
+
+    given_user_with_question_and_answers_from_model_macros
 
     it "put fields' value 'is_best' as true for selected answer,
         and false for all others answers concerning theirs' question" do
       answer.set_is_best
-      answer.question.answers.each do |other_answer|
-        other_answer.reload
-        if other_answer == answer
-          expect(other_answer.is_best?).to eq true
+      answer.question.answers.each do |the_answer|
+        the_answer.reload
+        if the_answer == answer
+          expect(the_answer.is_best?).to eq true
         else
-          expect(other_answer.is_best?).to eq false
+          expect(the_answer.is_best?).to eq false
         end
       end
     end
