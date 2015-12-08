@@ -30,7 +30,7 @@ I want to be able to edit my answers} do
         click_on 'edit'
         expect(page).to have_selector 'textarea'
         expect(page).to have_button 'Save'
-        fill_in 'editing', with: 'edited answer'
+        fill_in "answer_body_edit_#{answer.id}", with: 'edited answer'
         click_on 'Save'
         expect(page).to_not have_content answer.body
         expect(page).to have_content 'edited answer'

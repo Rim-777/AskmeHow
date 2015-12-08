@@ -16,6 +16,7 @@ function setAnswerEditClick() {
 function toggleEditQuestion() {
     $('.question_edit_link').toggle();
     $('.question_title_existed').toggle();
+    $('.question_title_existed').next().toggle();
     $('.question_body_existed').toggle();
     $('form.edit_question').toggle()
 
@@ -35,6 +36,7 @@ function setToggleOnAnswerEditLink(answerId){
     });
 
 }
+
 
 
 

@@ -28,8 +28,8 @@ I want to be able to edit my question} do
         click_on 'edit'
         expect(page).to have_selector 'textarea'
         expect(page).to have_button 'Save'
-        expect(page).to have_content 'question editing'
-        fill_in 'question editing', with: 'edited question'
+
+        fill_in "question_body_edit_#{question.id}", with: 'edited question'
         click_on 'Save'
         expect(page).to_not have_content question.body
         expect(page).to have_content 'edited question'

@@ -1,0 +1,14 @@
+= render 'common/errors', resource: question
+div class="field"
+  = f.text_field :title
+br
+
+div class="field"
+  - if question.new_record?
+    = f.text_area :body
+  - else
+    = f.text_area :body, id: "question_body_edit_#{question.id}"
+
+
+  div class="actions"
+    = f.submit "#{question.new_record? ? 'Create' : 'Save'}"

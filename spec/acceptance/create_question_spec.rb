@@ -12,8 +12,8 @@ I want to be able to ask questions } do
 
     visit questions_path
     click_on 'Ask question'
-    fill_in 'Title', with: 'Test question'
-    fill_in 'Body', with: 'Test question body'
+    fill_in 'question_title', with: 'Test question'
+    fill_in 'question_body', with: 'Test question body'
     click_on 'Create'
     expect(page).to have_content 'Test question'
     expect(page).to have_content 'Test question body'

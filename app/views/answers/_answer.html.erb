@@ -1,38 +1,27 @@
-<% answer_id = answer.id %>
-<div id="answer_<%= answer_id %>" class="answer" data-answer-id='<%= answer_id %>'>
-  <div class="answer_body_existed" id="answer_body_existed_<%= answer_id %>">
+<div id="answer_<%= answer.id %>" class="answer" data-answer-id='<%= answer.id %>'>
+  <div class="answer_body_existed" id="answer_body_existed_<%= answer.id %>">
     <%= answer.body %>
   </div>
 
-  <%= render 'answers/edit_form', answer: answer, answer_id: answer_id %>
+  <%= render 'answers/edit_form', answer: answer, answer_id: answer.id %>
 
-  <span id="answer_crud_link_<%= answer_id %>">
-  <%= answer.user.email %>
+  <span id="answer_crud_link_<%= answer.id %>">
+    <%= answer.user.email %>
     <% if user_signed_in? %>
 
         <% if current_user.author_of?(answer) %>
-      <%= link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer_id},
-                  id: "answer_edit_link_#{answer_id}" %>
+      <%= link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer.id},
+                  id: "answer_edit_link_#{answer.id}" %>
             <%= link_to 'delete', answer, class: 'remove_link', remote: true, method: :delete,
                         data: {confirm: 'Do you want to remove the answer'} %>
     <% end %>
 
         <% if current_user.author_of?(@question) %>
             <%= link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link',
-                        id: "answer_best_link_#{answer_id}", remote: true, method: :patch %>
+                        id: "answer_best_link_#{answer.id}", remote: true, method: :patch %>
 
-            <% if answer.is_best? %>
-            <%= javascript_tag do %>
-                $('#answer_best_link_<%= answer_id %>').hide();
-                <% end %>
-            <% end %>
     <% end %>
     <% end %>
-</span>
+  </span>
 
 </div>
-
-
-
-
-
