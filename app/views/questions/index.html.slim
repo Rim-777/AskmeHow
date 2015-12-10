@@ -7,4 +7,5 @@ div class="question_list"
       p
         = link_to "#{question.title}", question
         - if user_signed_in? && current_user.author_of?(question)
+          span>
           = link_to 'remove', question, class: 'remove_link', method: :delete, data: {confirm: 'Удалить вопрос?'}

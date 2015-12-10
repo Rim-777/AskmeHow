@@ -6,8 +6,11 @@ class Answer < ActiveRecord::Base
 
   def set_is_best
     ActiveRecord::Base.transaction do
-      question.answers.update_all(is_best: false)
-      raise ActiveRecord::Rollback unless update_attribute(:is_best, true)
+      old_best_answer = question.answers.where(is_best: true).first
+      unless old_best_answer == self
+        question.answers.update_all(is_best: false)
+        raise ActiveRecord::Rollback unless update(is_best: true)
+      end
     end
   end
 end

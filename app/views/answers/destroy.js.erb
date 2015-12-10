@@ -1,12 +1,12 @@
-var answerId = '<%= @answer.id %>'
+    var answerId = '<%= @answer.id %>'
+    var answer = $('#answer_'+ answerId);
 <% if @answer.errors.present? %>
 
 <% @answer.errors.full_messages.each do |message| %>
-$('#answer_' + answerId + '_errors').html('<%= j message %>');
+    $('#answer_' + answerId + '_errors').html('<%= j message %>');
 <% end %>
 
 <% else %>
-var answer = $('#answer_'+ answerId);
-answer.hide();
-answer.remove();
+    answer.hide();
+    answer.remove();
 <% end %>

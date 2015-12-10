@@ -1,11 +1,11 @@
 <% if @answer.errors.present? %>
 
 <% @answer.errors.full_messages.each do |message| %>
-$('.new_answer_errors').html('<%= j message %>');
+    $('.new_answer_errors').html('<%= j message %>');
 <% end %>
 
 <% else %>
-$('.others_answers').append("<%= j render  @answer %>");
-$('#answer_body_new').val('');
-setToggleOnAnswerEditLink('<%= @answer.id %>');
+    $('.others_answers').append("<%= j render  @answer %>");
+    $('#answer_body_new').val('');
+    setToggleOnAnswerEditLink('<%= @answer.id %>');
 <% end %>
