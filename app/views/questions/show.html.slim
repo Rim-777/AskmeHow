@@ -1,0 +1,64 @@
+h4 Question of
+
+= render 'common/errors', resource: @question
+
+div class="question_existed_area"
+  div class="question_errors"
+
+  div class="question_user_existed"
+    = @question.user.email
+
+  br
+
+  div class="question_title_existed"
+    = @question.title
+
+  br
+
+  div class="question_body_existed"
+    = @question.body
+
+
+  = form_for @question, remote: true do |f|
+    == render 'question_form', question: @question, f: f
+
+
+  - if user_signed_in? && current_user.author_of?(@question)
+    div class="question_crud_link"
+      = link_to 'edit', '', class: 'question_edit_link'
+
+div class="question_attachments"
+  p Attachments:
+  ul
+    - @question.attachments.each do |a|
+      li= link_to a.file_name, a.file_url if a.file_attached?
+      /li= image_tag(a.file)
+      /li= image_tag(a.file_url)
+
+
+div class="answers"
+  - if @question.answers && @question.answers.any?
+    h3 Answers:
+
+    div class="best_answer"
+      - best_answer = @question.best_answer
+      == render best_answer if best_answer.present?
+
+    div class="others_answers"
+      - @question.answers.each do |answer|
+        - if answer.persisted?
+          == render answer unless answer.is_best?
+  - else
+    p  No answers
+
+
+- if current_user
+  p = render 'answer_new_form', question: @question, answer: @answer
+- else
+  p Please #{link_to 'log in', new_user_session_path} If You want to add a new Answer.
+
+
+
+
+
+

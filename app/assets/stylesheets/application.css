@@ -48,3 +48,7 @@ form input[type='text'], .question_title_existed{
     display: block;
     align-content: center;
 }
+
+img{
+    width: 200px;
+}

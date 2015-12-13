@@ -3,6 +3,11 @@ div id="answer_#{ answer.id}" class="answer" data-answer-id="#{ answer.id}"
     = answer.body
   == render 'answers/edit_form', answer: answer
 
+  div class="answer_attachments"
+    - if answer.attachments.any?
+      - answer.attachments.each do |a|
+        = link_to a.file_name, a.file_url if a.file_attached?
+
   span id="answer_crud_link_#{ answer.id}"
     = answer.user.email
     span>
