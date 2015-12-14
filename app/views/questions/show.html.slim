@@ -29,9 +29,8 @@ div class="question_existed_area"
 
 div class="question_attachments"
   p Attachments:
-  ul
-    - @question.attachments.each do |a|
-      == render 'attachments/attachment', attachment: a, attachable: @question
+  - @question.attachments.each do |a|
+    == render 'attachments/attachment', attachment: a, attachable: @question
 
 
 div class="answers"

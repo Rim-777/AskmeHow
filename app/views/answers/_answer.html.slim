@@ -4,9 +4,10 @@ div id="answer_#{ answer.id}" class="answer" data-answer-id="#{ answer.id}"
   == render 'answers/edit_form', answer: answer
 
   div class="answer_attachments"
-    - if answer.attachments.any?
-      - answer.attachments.each do |a|
-        == render 'attachments/attachment', attachment: a, attachable: answer
+    span>
+
+    - answer.attachments.each do |a|
+      = render 'attachments/attachment', attachment: a, attachable: answer
 
   span id="answer_crud_link_#{ answer.id}"
     = answer.user.email

@@ -13,16 +13,20 @@ I want to be able to delete attachment from my Question} do
 
 
 
-
     scenario 'Author of question is trying delete his attachment', js: true do
       sign_in(author_of_question)
       visit question_path(question)
-      within '.question_attachments' do
+
+      expect(page).to have_selector "#attachment_#{attachment.id}"
+      within "#attachment_#{attachment.id}" do
         expect(page).to have_link 'spec_helper.rb'
-        expect(page).to have_link 'delete'
-        click_on 'delete'
+        expect(page).to have_link 'delete file'
+        click_on 'delete file'
+      end
+
+      within '.question_attachments' do
         expect(page).to_not have_link 'spec_helper.rb'
-        expect(page).to_not have_link 'delete'
+        expect(page).to_not have_link 'delete file'
       end
 
     end
@@ -34,7 +38,7 @@ I want to be able to delete attachment from my Question} do
     visit question_path(question)
     within '.question_attachments' do
       expect(page).to have_link 'spec_helper.rb'
-      expect(page).to_not have_link 'delete'
+      expect(page).to_not have_link 'delete file'
     end
   end
 
@@ -43,7 +47,7 @@ I want to be able to delete attachment from my Question} do
     visit question_path(question)
     within '.question_attachments' do
       expect(page).to have_link 'spec_helper.rb'
-      expect(page).to_not have_link 'delete'
+      expect(page).to_not have_link 'delete file'
     end
   end
 
