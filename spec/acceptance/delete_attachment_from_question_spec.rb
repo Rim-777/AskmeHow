@@ -11,34 +11,35 @@ I want to be able to delete attachment from my Question} do
                                file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/spec_helper.rb")) }
 
 
-  describe 'Owner of Question and his attachment' do
-    before do
+
+
+
+    scenario 'Author of question is trying delete his attachment', js: true do
       sign_in(author_of_question)
       visit question_path(question)
-    end
-
-    scenario 'Author of question is trying delete his attachment' do
-      # question.reload
       within '.question_attachments' do
         expect(page).to have_link 'spec_helper.rb'
-        within '.question_attachment_links' do
-          expect(page).to have_link 'delete'
-        end
+        expect(page).to have_link 'delete'
+        click_on 'delete'
+        expect(page).to_not have_link 'spec_helper.rb'
+        expect(page).to_not have_link 'delete'
       end
-
-      click_on 'delete'
-      # within '.question_attachments' do
-      #   expect(page).to_not have_link 'spec_helper.rb'
-      #   expect(page).to_not have_link 'delete'
-      # end
-
 
     end
 
+
+
+  scenario 'Some user is trying delete his not attachment', js: true do
+    sign_in(another_authenticated_user)
+    visit question_path(question)
+    within '.question_attachments' do
+      expect(page).to have_link 'spec_helper.rb'
+      expect(page).to_not have_link 'delete'
+    end
   end
 
-  scenario 'Some usern is trying delete his not attachment' do
-    sign_in(another_authenticated_user)
+
+  scenario 'Un-authenticate user is trying delete any  attachment' do
     visit question_path(question)
     within '.question_attachments' do
       expect(page).to have_link 'spec_helper.rb'

@@ -1,0 +1,12 @@
+var attachmentId = '<%= @attachment.id %>';
+var attachment = $('#attachment_'+ attachmentId);
+<% if @attachment.errors.present? %>
+
+<% @attachment.errors.full_messages.each do |message| %>
+$('#attachment_' + attachmentId + '_errors').html('<%= j message %>');
+<% end %>
+
+<% else %>
+attachment.hide();
+attachment.remove();
+<% end %>
