@@ -32,6 +32,9 @@ div class="question_attachments"
   ul
     - @question.attachments.each do |a|
       li= link_to a.file_name, a.file_url if a.file_attached?
+      - if current_user.author_of?(@question)
+          span class="question_attachment_links"
+            = link_to 'delete',''
       /li= image_tag(a.file)
       /li= image_tag(a.file_url)
 
