@@ -28,7 +28,6 @@ I want to be able to delete attachment from my Question} do
 
   end
 
-
   scenario 'Some user is trying delete his not attachment', js: true do
     sign_in(another_authenticated_user)
     visit question_path(question)
@@ -46,5 +45,6 @@ I want to be able to delete attachment from my Question} do
       expect(page).to_not have_link "attachment_remove_link_#{attachment.id}"
     end
   end
+
 
 end

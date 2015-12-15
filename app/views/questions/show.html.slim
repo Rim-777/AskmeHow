@@ -27,10 +27,10 @@ div class="question_existed_area"
     div class="question_crud_link"
       = link_to 'edit', '', class: 'question_edit_link'
 
-div class="question_attachments"
-  p Attachments:
-  - @question.attachments.each do |a|
-    == render 'attachments/attachment', attachment: a, attachable: @question
+  div class="question_attachments"
+    p Attachments:
+    - @question.attachments.each do |a|
+      == render 'attachments/attachment', attachment: a, attachable: @question
 
 
 div class="answers"

@@ -8,10 +8,6 @@
     = f.text_area :body, id: 'answer_body_new', placeholder: 'write answer'
 
   == render 'attachments/attachments', f: f
-  /div class="attachments"
-  /  = f.fields_for :attachments do |a|
-  /    == render "attachments/attachment_fields", f: a
-  /    = link_to_add_association '[+]', f, :attachments, partial: "attachments/attachment_fields"
 
   div class="actions"
     = f.submit 'Create'

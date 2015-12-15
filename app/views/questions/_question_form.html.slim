@@ -9,11 +9,9 @@ div class="field"
   - else
     = f.text_area :body, id: "question_body_edit_#{question.id}"
 
-== render 'attachments/attachments', f: f
-/div class="attachments"
-/  = f.fields_for :attachments do |a|
-/    == render "attachments/attachment_fields", f: a
-/    = link_to_add_association '[+]', f, :attachments, partial: "attachments/attachment_fields"
+
+== render 'attachments/attachments', f: f if question.new_record?
 
 div class="actions"
-  = f.submit "#{question.new_record? ? 'Create' : 'Save'}"
+  = f.submit "#{question.new_record? ? 'Create' : 'Save'}",
+             id: "#{question.new_record? ? 'question_create_button' : 'question_update_button' }"
