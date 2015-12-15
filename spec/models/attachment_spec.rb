@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Attachment, type: :model do
   it { should belong_to(:attachable) }
-  # it { should validate_presence_of :file }
     let!(:attachment_with_file) { create(:attachment, file:  Rack::Test::UploadedFile.new("#{Rails.root}/spec/spec_helper.rb")) }
 
   describe 'method file_attached?' do
