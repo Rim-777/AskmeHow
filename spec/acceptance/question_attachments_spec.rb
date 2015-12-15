@@ -28,7 +28,7 @@ I want to be able to attach some files to my question} do
     within '.new_question' do
       expect(page).to have_link '[+]'
       click_on '[+]'
-      click_on '[+]'
+      # click_on '[+]'
 
       all_inputs_type_file = all('input[type="file"]')
       all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
@@ -42,7 +42,7 @@ I want to be able to attach some files to my question} do
       end
   end
 
-  scenario 'user is trying remove one of few added file_fields to question', js: true do
+  scenario 'user is trying remove one of few added file_fields from question', js: true do
 
     within '#question_form_new' do
       fill_in 'question_title', with: 'Question Title Test'
@@ -51,13 +51,12 @@ I want to be able to attach some files to my question} do
 
     within '.new_question' do
       click_on '[+]'
-      click_on '[+]'
 
       all_inputs_type_file = all('input[type="file"]')
       all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
       all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
-      expect(page).to have_link '[-]'
 
+      expect(page).to have_link '[-]'
       click_on '[-]',  match: :first
 
     end
