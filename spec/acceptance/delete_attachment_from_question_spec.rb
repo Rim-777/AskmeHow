@@ -11,26 +11,22 @@ I want to be able to delete attachment from my Question} do
                                file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/spec_helper.rb")) }
 
 
+  scenario 'Author of question is trying delete his attachment', js: true do
+    sign_in(author_of_question)
+    visit question_path(question)
 
-
-    scenario 'Author of question is trying delete his attachment', js: true do
-      sign_in(author_of_question)
-      visit question_path(question)
-
-      expect(page).to have_selector "#attachment_#{attachment.id}"
-      within "#attachment_#{attachment.id}" do
-        expect(page).to have_link 'spec_helper.rb'
-        expect(page).to have_link 'delete file'
-        click_on 'delete file'
-      end
-
-      within '.question_attachments' do
-        expect(page).to_not have_link 'spec_helper.rb'
-        expect(page).to_not have_link 'delete file'
-      end
-
+    expect(page).to have_selector "#attachment_#{attachment.id}"
+    within "#attachment_#{attachment.id}" do
+      expect(page).to have_link 'spec_helper.rb'
+      expect(page).to have_link "attachment_remove_link_#{attachment.id}"
     end
+    click_on "attachment_remove_link_#{attachment.id}"
+    sleep(1)
 
+    expect(page).to_not have_link 'spec_helper.rb'
+    expect(page).to_not have_link "attachment_remove_link_#{attachment.id}"
+
+  end
 
 
   scenario 'Some user is trying delete his not attachment', js: true do
@@ -38,7 +34,7 @@ I want to be able to delete attachment from my Question} do
     visit question_path(question)
     within '.question_attachments' do
       expect(page).to have_link 'spec_helper.rb'
-      expect(page).to_not have_link 'delete file'
+      expect(page).to_not have_link "attachment_remove_link_#{attachment.id}"
     end
   end
 
@@ -47,7 +43,7 @@ I want to be able to delete attachment from my Question} do
     visit question_path(question)
     within '.question_attachments' do
       expect(page).to have_link 'spec_helper.rb'
-      expect(page).to_not have_link 'delete file'
+      expect(page).to_not have_link "attachment_remove_link_#{attachment.id}"
     end
   end
 

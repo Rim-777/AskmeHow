@@ -3,7 +3,8 @@ div id="attachment_#{attachment.id}"
   - if user_signed_in? && current_user.author_of?(attachable)
     span class="#{attachable.class.to_s.downcase}_attachment_links"
       span>
-      = link_to 'delete file', attachment, class: 'remove_link', remote: true, method: :delete, data: {confirm: 'Удалить файл?'}
+      = link_to 'delete', attachment, id: "attachment_remove_link_#{attachment.id}",
+                remote: true, method: :delete, data: {confirm: 'Удалить файл?'}
 
 div id="attachment_#{attachment.id}_errors"
 
