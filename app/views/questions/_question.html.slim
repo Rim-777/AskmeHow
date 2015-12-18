@@ -1,0 +1,34 @@
+h4 Question of
+
+= render 'common/errors', resource: @question
+
+div class="question_existed_area"
+  div class="question_errors"
+
+  div class="question_user_existed"
+    = @question.user.email
+
+  br
+
+  div class="question_title_existed"
+    = @question.title
+
+  br
+
+  div class="question_body_existed"
+    = @question.body
+
+
+  = form_for @question, remote: true do |f|
+    == render 'question_form', question: @question, f: f
+
+
+  - if user_signed_in? && current_user.author_of?(@question)
+    div class="question_crud_link"
+      = link_to 'edit', '', class: 'question_edit_link'
+
+  div class="question_attachments"
+    - if @question.attachments.any?
+      p Attachments:
+      - @question.attachments.each do |a|
+        == render 'attachments/attachment', attachment: a, attachable: @question
