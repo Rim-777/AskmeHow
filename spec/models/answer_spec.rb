@@ -12,8 +12,6 @@ RSpec.describe Answer, type: :model do
   it { should have_many(:opinions).dependent(:destroy) }
 
 
-
-
   describe 'method set_is_best' do
 
     given_user_with_question_and_answers_from_model_macros
