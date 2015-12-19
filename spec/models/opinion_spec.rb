@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Opinion, type: :model do
   it { should validate_presence_of :value }
   it { should belong_to(:opinionable) }
+  it { should belong_to(:user) }
 
   describe 'method is_changed?' do
     let!(:opinion) { create(:opinion, value: 1) }

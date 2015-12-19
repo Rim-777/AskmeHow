@@ -3,15 +3,15 @@ module Opinionable
   included do
     has_many :opinions, as: :opinionable, dependent: :destroy
 
-    def add_оpinion(value)
-
-      opinion = opinions.where(user: current_user)
-      if opinion.persisted?
-        opinion.delete if  opinion.is_changed?(value)
-      else
-        opinion.create(vote: value)
-      end
-
-    end
+    # def say_оpinion(value)
+    #
+    #   opinion = self.opinions.where(user: current_user).first
+    #   if opinion.persisted?
+    #     opinion.delete if opinion.is_changed?(value)
+    #   else
+    #     opinion.create(value: value)
+    #   end
+    #
+    # end
   end
 end
