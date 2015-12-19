@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  include Opinionable
+
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy
   # , dependent: :destroy

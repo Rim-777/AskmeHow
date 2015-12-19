@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212132438) do
+ActiveRecord::Schema.define(version: 20151219154424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 20151212132438) do
   end
 
   add_index "attachments", ["attachable_id", "attachable_type"], name: "index_attachments_on_attachable_id_and_attachable_type", using: :btree
+
+  create_table "opinions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "opinionable_id"
+    t.string   "opinionable_type"
+    t.integer  "value"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "opinions", ["opinionable_id", "opinionable_type"], name: "index_opinions_on_opinionable_id_and_opinionable_type", using: :btree
+  add_index "opinions", ["user_id"], name: "index_opinions_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"

@@ -26,6 +26,11 @@ div class="question_existed_area"
   - if user_signed_in? && current_user.author_of?(@question)
     div class="question_crud_link"
       = link_to 'edit', '', class: 'question_edit_link'
+  div class="question_rating"
+
+  = link_to 'positive', '', id: "up_vote_question_#{@question.id}_link"
+  span>
+  = link_to 'negative', '', id: "down_vote_question_#{@question.id}_link"
 
   div class="question_attachments"
     - if @question.attachments.any?

@@ -1,4 +1,6 @@
 class Answer < ActiveRecord::Base
+  include Opinionable
+
   belongs_to :question
   belongs_to :user
   has_many :attachments, as: :attachable, dependent: :destroy
