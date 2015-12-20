@@ -12,12 +12,10 @@ I want to be able to vote for question} do
   scenario 'Some authenticated user is trying vote for his not Question', js: true do
         sign_in(some_authenticated_user)
         visit question_path(question)
-    within '.question_existed_area'  do
-
-
-      expect(page).to have_link "up_vote_question_#{question.id}_link"
-      expect(page).to have_link "down_vote_question_#{question.id}_link"
       expect(page).to have_selector '.question_rating'
+    within '.question_rating'  do
+      expect(page).to have_button "up_vote_question_#{question.id}_link"
+      expect(page).to have_button "down_vote_question_#{question.id}_link"
         # within '.question_rating' do
         #   expect(page).to have_content '0'
         # end

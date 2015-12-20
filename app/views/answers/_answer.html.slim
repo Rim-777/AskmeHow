@@ -24,3 +24,4 @@ div id="answer_#{ answer.id}" class="answer" data-answer-id="#{ answer.id}"
         span>
         = link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link',
                   id: "answer_best_link_#{answer.id}", remote: true, method: :patch
+

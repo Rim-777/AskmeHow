@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
 
+  resource :opinion, only: [:say_positive, :say_negative ] do
+    patch :positive, on: :member
+    patch :negative, on: :member
+  end
+
   root to: "questions#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
