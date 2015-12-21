@@ -1,7 +1,6 @@
 class OpinionsController < ApplicationController
   before_action :set_openionable
 
-
   respond_to do |format|
     format.json
   end
