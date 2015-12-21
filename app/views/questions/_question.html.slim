@@ -9,15 +9,8 @@ div class="question_existed_area"
     = @question.user.email
 
   br
-  div class="question_rating"
-    |Rating:
-    br
-    = button_to '+', positive_opinion_path(@question),  id: "up_vote_question_#{@question.id}_link", method: :patch, remote: true
-    span> |
-    = @question.opinions.rating
-    span>  |
-    = button_to '-', negative_opinion_path(@question), id: "down_vote_question_#{@question.id}_link", method: :patch, remote: true
-  br
+  == render 'opinions/opinion', opinionable: @question
+
   div class="question_title_existed"
     = @question.title
 

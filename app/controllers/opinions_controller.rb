@@ -3,12 +3,12 @@ class OpinionsController < ApplicationController
 
   def positive
     current_user.say_оpinion(@opinionable, 1)
-    render 'questions/show'#todo
+    render 'questions/show'#todo временно для теста
   end
 
   def negative
     current_user.say_оpinion(@opinionable, -1)
-    render 'questions/show'#todo
+    render 'questions/show'#todo временно для теста
   end
 
 

@@ -1,0 +1,8 @@
+div class="#{opinionable}_rating"
+  |Rating:
+  br
+  = button_to '+', positive_opinion_path(opinionable),  id: "up_vote_question_#{opinionable.id}_link", method: :patch, remote: true
+  span> |
+  = opinionable.opinions.rating
+  span>  |
+  = button_to '-', negative_opinion_path(opinionable), id: "down_vote_question_#{opinionable.id}_link", method: :patch, remote: true
