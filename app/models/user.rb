@@ -12,10 +12,14 @@ class User < ActiveRecord::Base
     self.id == entity.user_id
   end
 
+  def not_author_of?(entity)
+    !self.author_of?(entity)
+  end
+
   def is_author_of!(entity)
     entity.user_id = self.id
-
   end
+
 
   def say_оpinion(opinionable, value)
 

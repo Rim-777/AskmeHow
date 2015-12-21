@@ -8,41 +8,43 @@ I want to be able to vote for question} do
   given!(:question) { create(:question, user: author_of_question) }
 
 
-
   scenario 'Some authenticated user is trying vote for his not Question', js: true do
-        sign_in(some_authenticated_user)
-        visit question_path(question)
-      expect(page).to have_selector '.question_rating'
-    within '.question_rating'  do
-      expect(page).to have_button "up_vote_question_#{question.id}_link"
-      expect(page).to have_button "down_vote_question_#{question.id}_link"
-        # within '.question_rating' do
-        #   expect(page).to have_content '0'
-        # end
-        #
-        # click_on "up_vote_question_#{question.id}_link"
-        #
-        # within '.question_rating' do
-        #   expect(page).to_not have_content '0'
-        #   expect(page).to have_content '1'
-        # end
-        #
-        # click_on "down_vote_question_#{question.id}_link"
-        #
-        # within '.question_rating' do
-        #   expect(page).to_not have_content '1'
-        #   expect(page).to have_content '0'
-        # end
-        #
-        # click_on "down_vote_question_#{question.id}_link"
-        #
-        # within '.question_rating' do
-        #   expect(page).to_not have_content '0'
-        #   expect(page).to have_content '-1'
-        # end
+    sign_in(some_authenticated_user)
+    visit question_path(question)
 
+    expect(page).to have_selector '.question_rating'
+    within '.question_rating' do
+      expect(page).to have_button "positive_opinion_question_#{question.id}_button"
+      expect(page).to have_button "negative_opinion_question_#{question.id}_button"
+      expect(page).to have_content '0'
+    end
+
+    click_on "positive_opinion_question_#{question.id}_button"
+
+    within '.question_rating' do
+      expect(page).to_not have_content '0'
+      expect(page).to have_content '1'
+    end
+
+    click_on "negative_opinion_question_#{question.id}_button"
+
+    within '.question_rating' do
+      expect(page).to_not have_content '1'
+      expect(page).to have_content '0'
+    end
+
+    click_on "negative_opinion_question_#{question.id}_button"
+
+    within '.question_rating' do
+      expect(page).to_not have_content '0'
+      expect(page).to have_content '-1'
     end
 
   end
 
+  scenario 'author of question is trying vote for his not Question', js: true do
+
+  end
+
 end
+
