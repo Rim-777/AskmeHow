@@ -13,8 +13,11 @@ input[type='submit'].opinion_button {
 
 .rating_result {
   width: 24px;
+  height: 24px;
   justify-content: center;
+  align-items: center;
   border: dashed 1px;
   display: flex;
-  border-radius: 50%;
+  border-radius: 47%;
+  border-color: deeppink;
 }

@@ -17,7 +17,7 @@ div class="answers"
 
 
 - if current_user
-  p = render 'answer_new_form', question: @question, answer: @answer
+  p = render 'answers/answer_new_form', question: @question, answer: @answer
 - else
   p Please #{link_to 'log in', new_user_session_path} If You want to add a new Answer.
 
