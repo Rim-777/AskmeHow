@@ -11,10 +11,10 @@ RSpec.describe Answer, type: :model do
   it { should accept_nested_attributes_for(:attachments) }
   it { should have_many(:opinions).dependent(:destroy) }
 
-
-  describe 'method set_is_best' do
-
     given_user_with_question_and_answers_from_model_macros
+
+  describe '#method set_is_best' do
+
 
     it "put fields' value 'is_best' as true for selected answer,
         and false for all others answers concerning theirs' question" do
@@ -30,4 +30,11 @@ RSpec.describe Answer, type: :model do
     end
 
   end
+
+  describe '#type_and_id' do
+    it "return string with class_name and id of opinmonable entity" do
+      expect(answer.type_and_id).to eq "answer_#{answer.id}"
+    end
+  end
+
 end
