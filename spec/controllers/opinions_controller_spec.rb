@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OpinionsController, type: :controller do
-  let(:user) { create(:user) }
+  let!(:author_of_question) { create(:user) }
   let!(:some_user) { create(:user) }
-  let!(:question) { create(:question, user: user, title: 'OldTitleText', body: 'OldBodyText') }
+  let!(:question) { create(:question, user: author_of_question, title: 'OldTitleText', body: 'OldBodyText') }
+  let!(:one_more_user) { create(:user) }
+  let!(:one_more_question) { create(:question, user: one_more_user, title: 'OldTitleText', body: 'OldBodyText') }
 
 
   describe 'PATCH #say_positive' do
@@ -48,6 +50,32 @@ RSpec.describe OpinionsController, type: :controller do
     #   patch :update, id: question, question: attributes_for(:question), format: :js
     #   expect(response).to render_template :update
     # end
+    context 'Author of question is trying to say a new opinion for his question' do
+      it 'note create new opinion' do
+        sign_in(author_of_question)
+        expect { patch :positive, opinionable_id: question.id,
+                       opinionable_type: question.class, format: :js }.to_not change(Opinion, :count)
+      end
+      it 'render nothing' do
+        patch :positive, opinionable_id: question.id, opinionable_type: question.class, format: :js
+        expect(response).to render_template nil
+      end
+    end
+
+    context 'Some one more user is trying to change  opinion of other user for his not question' do
+      let!(:one_more_opinion) { create(:opinion, opinionable: one_more_question, user: some_user,
+                                       opinionable_type: one_more_question.class, value: -1) }
+      let!(:one_more_some_user) { create(:user) }
+
+      it 'note delete opinion of other user' do
+        sign_in(one_more_some_user)
+        expect { patch :positive, opinionable_id: one_more_question,
+                       opinionable_type: one_more_question.class, format: :js}.to change(Opinion, :count).by(1)
+        expect(one_more_opinion).to_not eq nil
+        expect(one_more_opinion.value).to eq -1
+      end
+    end
+
   end
 
   describe 'PATCH #say_negative' do
