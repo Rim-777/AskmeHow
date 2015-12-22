@@ -1,3 +1,20 @@
 // Place all the styles related to the Opinions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.question_rating {
+  height: 100px;
+  width: 47px;
+}
+
+input[type='submit'].opinion_button {
+  width: 25px;
+}
+
+.rating_result {
+  width: 24px;
+  justify-content: center;
+  border: dashed 1px;
+  display: flex;
+  border-radius: 50%;
+}

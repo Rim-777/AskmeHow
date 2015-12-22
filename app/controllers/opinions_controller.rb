@@ -26,7 +26,7 @@ class OpinionsController < ApplicationController
   def set_user_opinion(value)
     if user_signed_in? && current_user.not_author_of?(@opinionable)
       current_user.say_оpinion(@opinionable, value)
-      render json: @opinionable.opinions.rating
+      render :opinion
     else
       render nothing: true
     end
