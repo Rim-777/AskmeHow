@@ -2,9 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.question_rating {
+div.question_rating{
   height: 100px;
   width: 47px;
+}
+
+div.answer_rating{
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: dashed 1px;
 }
 
 input[type='submit'].opinion_button {
@@ -12,6 +20,7 @@ input[type='submit'].opinion_button {
 }
 
 .rating_result {
+  margin: 3px;
   width: 24px;
   height: 24px;
   justify-content: center;

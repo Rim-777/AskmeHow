@@ -58,12 +58,14 @@ I want to be able to vote for question} do
 
     within '.question_rating' do
       expect(page).to have_content '0'
+      expect(page).to_not have_content '1'
     end
 
     click_on "negative_opinion_question_#{question.id}_button"
 
     within '.question_rating' do
       expect(page).to have_content '0'
+      expect(page).to_not have_content '-1'
     end
 
   end
@@ -82,12 +84,14 @@ I want to be able to vote for question} do
 
     within '.question_rating' do
       expect(page).to have_content '0'
+      expect(page).to_not have_content '1'
     end
 
     click_on "negative_opinion_question_#{question.id}_button"
 
     within '.question_rating' do
       expect(page).to have_content '0'
+      expect(page).to_not have_content '-1'
     end
 
   end

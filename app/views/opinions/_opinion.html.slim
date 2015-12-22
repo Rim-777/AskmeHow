@@ -2,11 +2,11 @@ div class="#{opinionable.class.to_s.downcase}_rating"
   |Rating:
   br
   = button_to '+', positive_opinion_path(opinionable), class: 'opinion_button',
-              id: "positive_opinion_question_#{opinionable.id}_button", method: :patch, remote: true
-  div class="rating_result"
+              id: "positive_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true
+  div  id="rating_#{opinionable.type_and_id}_result" class="rating_result"
     = opinionable.opinions.rating
 
   = button_to '-', negative_opinion_path(opinionable), class: 'opinion_button',
-              id: "negative_opinion_question_#{opinionable.id}_button", method: :patch, remote: true
+              id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true
 
 br
