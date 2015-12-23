@@ -13,17 +13,21 @@ RSpec.describe User do
   describe '#method say_оpinion(оpinionable, value)' do
 
 
-
-    it "create new users' opinion for question or remove old opinion" do
+    it "create new users' opinion for question " do
       user_with_opinion.say_оpinion(question, 1)
       expect(question.opinions.first.value).to eq 1
+    end
 
+    it "remove  old users' opinion for question if new opinion is different" do
+      user_with_opinion.say_оpinion(question, 1)
       user_with_opinion.say_оpinion(question, -1)
       expect(question.opinions.first).to eq nil
+    end
+
+    it "it again create new users' opinion for question " do
 
       user_with_opinion.say_оpinion(question, -1)
       expect(question.opinions.first.value).to eq -1
-
     end
 
   end
@@ -31,7 +35,8 @@ RSpec.describe User do
 
   describe "#method author_of?(entity)" do
     it "returne true if users is author of question" do
-      expect(author_of_question.author_of?(question)).to eq true
+      # expect(author_of_question.author_of?(question)).to eq true
+      expect(author_of_question).to be_author_of(question)
     end
 
     it "returne false if users is not author of question" do
