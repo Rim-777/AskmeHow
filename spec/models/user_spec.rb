@@ -40,7 +40,10 @@ RSpec.describe User do
     end
 
     it "returne false if users is not author of question" do
-      expect(not_author_of_question.author_of?(question)).to eq false
+      # expect(not_author_of_question.author_of?(question)).to eq false
+      expect(not_author_of_question).to be_not_author_of(question)
+
+
     end
 
   end
