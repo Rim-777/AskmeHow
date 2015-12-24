@@ -26,14 +26,14 @@ a:hover {
 
 
 form input[type='text'], .question_title_existed{
-    width: 350px;
+    width: 550px;
     min-height: 20px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
     border-radius: 10px;
 }
 
 .answer_body_existed, form textarea, .question_body_existed {
-    width: 350px;
+    width: 550px;
     min-height: 50px;
     border: solid rgba(18, 26, 225, 0.35) 1px;
     border-radius: 10px;

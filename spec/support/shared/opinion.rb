@@ -60,14 +60,14 @@ shared_examples_for 'Opinion' do
     end
 
     context 'Author of opinionable_object is trying to say a new opinion for his opinionable_object' do
+      before{sign_in(author_of_opinionable_object)}
       it 'note create new opinion' do
-        sign_in(author_of_opinionable_object)
         expect { patch :positive, opinionable_id: opinionable_object.id,
                        opinionable_type: opinionable_object.class, format: :json }.to_not change(Opinion, :count)
       end
-      it 'render nothing' do
+      it 'render author_error template' do
         patch :positive, opinionable_id: opinionable_object.id, opinionable_type: opinionable_object.class, format: :json
-        expect(response).to render_template nil
+        expect(response).to render_template :author_error
       end
     end
 

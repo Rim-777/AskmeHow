@@ -1,12 +1,13 @@
-div class="#{opinionable.class.to_s.downcase}_rating"
+div class="#{opinionable.class.to_s.downcase}_rating"  id="#{opinionable.type_and_id}_rating"
   |Rating:
   br
   = button_to '+', positive_opinion_path(opinionable), class: 'opinion_button',
-              id: "positive_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true
+              id: "positive_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: { type: :json }
   div  id="rating_#{opinionable.type_and_id}_result" class="rating_result"
     = opinionable.opinions.rating
 
   = button_to '-', negative_opinion_path(opinionable), class: 'opinion_button',
-              id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true
+              id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: { type: :json }
 
+div id="#{opinionable.type_and_id}_errors" class="#{opinionable.class.to_s.downcase}_errors"
 br

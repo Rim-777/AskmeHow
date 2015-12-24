@@ -1,8 +1,11 @@
 class OpinionsController < ApplicationController
   before_action :set_openionable
+  before_action :if_user_not_signed_in
+  before_action :check_authorship
 
   respond_to do |format|
     format.json
+    format.js
   end
 
   def positive
@@ -22,14 +25,21 @@ class OpinionsController < ApplicationController
     @opinionable = type.find(params[:opinionable_id])
   end
 
+  def if_user_not_signed_in
+    render nothing: true unless user_signed_in?
+
+  end
+
+
+  def check_authorship
+    # format.json { render json: :author_error, status: :unprocessable_entity}
+    render :author_error, status: :unprocessable_entity if current_user.author_of?(@opinionable)
+
+  end
 
   def set_user_opinion(value)
-    if user_signed_in? && current_user.not_author_of?(@opinionable)
-      current_user.say_оpinion(@opinionable, value)
-      render :opinion
-    else
-      render nothing: true
-    end
+    current_user.say_оpinion(@opinionable, value)
+    render :opinion
   end
-end
 
+end

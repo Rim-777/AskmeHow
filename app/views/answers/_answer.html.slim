@@ -1,6 +1,5 @@
 div id="answer_#{answer.id}" class="answer" data-answer-id="#{ answer.id}"
-  div class="answer_rating" id="answer_#{answer.id}_rating"
-    == render 'opinions/opinion', opinionable: answer
+  == render 'opinions/opinion', opinionable: answer
   div class="answer_body_existed" id="answer_body_existed_#{ answer.id}"
     = answer.body
   == render 'answers/edit_form', answer: answer
