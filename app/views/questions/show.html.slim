@@ -1,6 +1,6 @@
 == render @question
 
-div class="answers"
+div class="answers" data={question_id: "#{@question.id}"} data={current_user_id: "#{current_user.id if user_signed_in?}" }
   - if @question.answers && @question.answers.any?
     h3 Answers:
 
@@ -22,7 +22,8 @@ div class="answers"
   p Please #{link_to 'log in', new_user_session_path} If You want to add a new Answer.
 
 
-
+= subscribe_to "/question/#{@question.id}/answers"
+= subscribe_to "/question/#{@question.id}/comments"
 
 
 

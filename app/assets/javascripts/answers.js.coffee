@@ -1,14 +1,9 @@
-$(document).ready ->
-  setAnswerEditClick()
+$(document).on 'click', 'a.answer_edit_link', (e) ->
+  e.preventDefault()
+  answerId = $(this).data('answerId')
+  toggleEditAnswer(answerId)
 
-#$(document).on page: change, ->
-#  setAnswerEditClick()
 
-#$(document).on page: load, ->
-#  setAnswerEditClick()
-##
-#$(document).on page: update, ->
-#  setAnswerEditClick()
-##
-#$(document).on page: partial - load, ->
-#  setAnswerEditClick()
+
+
+

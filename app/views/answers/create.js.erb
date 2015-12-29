@@ -1,11 +1,14 @@
 <% if @answer.errors.present? %>
-
-<% @answer.errors.full_messages.each do |message| %>
+    <% @answer.errors.full_messages.each do |message| %>
     $('.new_answer_errors').html('<%= j message %>');
-<% end %>
+    <% end %>
 
 <% else %>
-    $('.others_answers').append("<%= j render  @answer %>");
-    $('#answer_body_new').val('');
-    setToggleOnAnswerEditLink('<%= @answer.id %>');
+
+<% publish_to "/question/#{@question.id}/answers" do %>
+$('.others_answers').append("<%= j render  @answer %>");
+<% end %>
+$("#answer_crud_links_container_<%= @answer.id%>").html('<%= j render "answer_crud_links", answer: @answer, question: @answer.question%>');
+$('#answer_body_new').val('');
+
 <% end %>

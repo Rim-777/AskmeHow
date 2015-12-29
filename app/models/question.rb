@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  include Opinionable, Attachable
+  include Opinionable, Attachable, Commentable
 
   has_many :answers, dependent: :destroy
   belongs_to :user

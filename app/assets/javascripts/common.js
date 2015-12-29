@@ -4,15 +4,6 @@ function toggleEditAnswer(answerId, time) {
     $('#answer_edit_form_' + answerId).toggle();
 }
 
-
-function setAnswerEditClick() {
-    $('a.answer_edit_link').click(function (e) {
-        e.preventDefault();
-        var answerId = $(this).data('answerId');
-        toggleEditAnswer(answerId);
-    })
-}
-
 function toggleEditQuestion() {
     $('.question_edit_link').toggle();
     $('.question_title_existed').toggle();

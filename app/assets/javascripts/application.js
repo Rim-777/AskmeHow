@@ -11,11 +11,12 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require turbolinks
+//= require private_pub
 //= require cocoon
+//= require skim
+//= require turbolinks
 //= require_tree .
 
 

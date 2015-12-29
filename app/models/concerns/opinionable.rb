@@ -7,5 +7,9 @@ module Opinionable
       "#{self.class.to_s.downcase}_#{self.id}"
     end
 
+    def type_of_entity
+      "#{self.class.to_s.downcase}"
+    end
+
   end
 end

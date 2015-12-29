@@ -2,16 +2,22 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :comments, only: :create
+
   resources :questions do
+
+    resources :comments, only: :create,  defaults: {commentable: 'questions'}, shallow: true
+
     resources :answers, shallow: true do
       patch :select_best, on: :member
+    # resources :comments, only: :create, shallow: true
     end
 
   end
 
   resources :attachments, only: :destroy
 
-  resource :opinion, only: [:say_positive, :say_negative ] do
+  resource :opinion, only: [:say_positive, :say_negative] do
     patch :positive, on: :member
     patch :negative, on: :member
   end

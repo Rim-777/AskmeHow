@@ -1,0 +1,6 @@
+= form_for [commentable, comment], html: {id: "comment_form_new", style: "display: none"}, remote: true do |f|
+  div class="field"
+    = f.text_area :body, id: 'question_comment_body_area'
+  div class="actions"
+    = f.submit "Add", id: 'question_add_comment_button'
+

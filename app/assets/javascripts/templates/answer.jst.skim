@@ -1,0 +1,5 @@
+div class="answer_body_existed"
+  = @object.body
+= @object.user_id
+- if @object.user_id == @current_user_id
+  a class="answer_edit_link" data-answer-id="#{@object.id}" id="answer_edit_link_#{@object.id}" href="" edit

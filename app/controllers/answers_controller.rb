@@ -3,12 +3,18 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:create]
   before_action :set_answer, except: [:create]
 
+  respond_to do |format|
+    format.js
+    format.json
+
+  end
 
   def create
     @answer = @question.answers.new(answers_params)
     current_user.is_author_of!(@answer)
     @answer.save
 
+    # render nothing: true
   end
 
   def update

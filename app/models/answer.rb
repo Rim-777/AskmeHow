@@ -1,6 +1,6 @@
 class Answer < ActiveRecord::Base
 
-  include Opinionable, Attachable
+  include Opinionable, Attachable, Commentable
 
   belongs_to :question
   belongs_to :user

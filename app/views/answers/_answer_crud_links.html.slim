@@ -1,0 +1,15 @@
+span id="answer_crud_link_#{ answer.id}"
+  span>
+  - if user_signed_in?
+    - if current_user.author_of?(answer)
+      = link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer.id},
+                id: "answer_edit_link_#{answer.id}"
+      span>
+      = link_to 'delete', answer, class: 'remove_link', remote: true, method: :delete,
+                data: {confirm: 'Do you want to remove the answer'}
+
+    - if current_user.author_of?(question)
+      span>
+      = link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link',
+                id: "answer_best_link_#{answer.id}", remote: true, method: :patch
+
