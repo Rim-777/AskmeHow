@@ -9,9 +9,10 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     current_user.is_author_of!(@comment) if user_signed_in?
     if @comment.save
-      PrivatePub.publish_to "/question/#{@commentable.id}/comments", comment: @comment.to_json
+      PrivatePub.publish_to "/#{@commentable.class.to_s.downcase}/#{@commentable.id}/comments", comment: @comment.to_json
     end
-      render nothing: true
+    render nothing: true
+    #   render text: : true
 
   end
 

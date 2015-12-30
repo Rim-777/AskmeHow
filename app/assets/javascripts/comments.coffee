@@ -1,26 +1,35 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'focus', 'input[type="text"].question_comment_add_area', (e) ->
-  $('#comment_form_new').show()
-  $('#question_comment_body_area')[0].focus()
+  question_id = $(this).data('commentableId')
+  $('#question_' + question_id + '_comment_form_new').show()
+  $('#question_' + question_id + '_comment_body_area')[0].focus()
   $(this).hide()
+
+  PrivatePub.subscribe "/question/" + question_id + "/comments", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    $('#question_' + question_id + '_comments').append('<div class="comment">' + comment.body + '</div>' + '<br>')
+    $('#question_' + question_id + '_comment_body_area').val('');
+    $('#question_' + question_id + '_comment_form_new').hide()
+    $('input[type="text"].question_comment_add_area').show()
+
+$(document).on 'focus', 'input[type="text"].answer_comment_add_area', (e) ->
+  answer_id = $(this).data('commentableId')
+  $('#answer_' + answer_id + '_comment_form_new').show()
+  $('#answer_' + answer_id + '_comment_body_area')[0].focus()
+  $(this).hide()
+
+  PrivatePub.subscribe "/answer/" + answer_id + "/comments", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    $('#answer_' + answer_id + '_comments').append('<div class="comment">' + comment.body + '</div>' + '<br>')
+    $('#answer_' + answer_id + '_comment_body_area').val('');
+    $('#answer_' + answer_id + '_comment_form_new').hide()
+    $('input[type="text"].answer_comment_add_area').show()
+
 
 #$(document).on 'blur', '#question_comment_body_area', (e) ->
 #  if $('#question_comment_body_area')[0].val == null
 #    $('#comment_form_new').hide()
 #    $('input[type="text"].question_comment_add_area').show()
 
-$ ->
-  commentable_id = $('.question_comments').data('commentableId')
-  PrivatePub.subscribe "/question/" + commentable_id + "/comments", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
-    $('#question_' + commentable_id + '_comments').append('<div class="comment">' + comment.body + '</div>' + '<br>')
-    $('#question_comment_body_area').val('');
-    $('#comment_form_new').hide()
-    $('input[type="text"].question_comment_add_area').show()
-
-
-
+#$ ->
 
 

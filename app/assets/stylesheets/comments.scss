@@ -9,7 +9,7 @@
   text-align: right;
 }
 
-.comment, #question_comment_add_area{
+.comment, .question_comment_add_area{
   margin-left: 250px;
   border: 1px solid rgba(12, 21, 154, 0.61);
   width: 300px;
@@ -17,7 +17,9 @@
   border-radius: 10px;
   text-align: left;
 }
-#question_comment_body_area{
+#question_comment_body_area, #answer_comment_body_area{
   width: 295px;
   height: 25px;
 }
+
+//answer_comment_add_area

@@ -15,3 +15,7 @@ div id="answer_#{answer.id}" class="answer" data-answer-id="#{ answer.id}"
 
   span id="answer_crud_links_container_#{answer.id}"
     == render 'answers/answer_crud_links', answer: answer, question: @question
+
+  == render 'comments/comments', commentable: answer
+
+= subscribe_to "/answer/#{answer.id}/comments"

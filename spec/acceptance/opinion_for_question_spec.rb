@@ -1,4 +1,4 @@
-require_relative 'acceptance_helper'
+ require_relative 'acceptance_helper'
 
 feature 'Vote for Question', %q{
 In order to show my opinion about some question

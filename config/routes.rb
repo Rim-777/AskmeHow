@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :answers, shallow: true do
       patch :select_best, on: :member
-    # resources :comments, only: :create, shallow: true
+    resources :comments, only: :create, defaults: {commentable: 'answers'}, shallow: true
     end
 
   end

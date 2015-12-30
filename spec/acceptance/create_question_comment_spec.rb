@@ -17,7 +17,7 @@ I want to be able to create  comment } do
       expect(page).to have_field "question_#{question.id}_comment_add_area"
 
       fill_in "question_#{question.id}_comment_add_area", with: ''
-      expect(page).to_not have_field 'question_comment_add_area'
+      expect(page).to_not have_field "question_#{question.id}_comment_add_area"
       expect(page).to have_field "question_#{question.id}_comment_body_area"
       expect(page).to have_button "question_#{question.id}_add_comment_button"
       fill_in "question_#{question.id}_comment_body_area", with: 'some comment text'
@@ -27,7 +27,7 @@ I want to be able to create  comment } do
 
       expect(page).to have_content 'some comment text'
       expect(page).to_not have_field "question_#{question.id}_comment_body_area"
-      expect(page).to_not have_button 'question_add_comment_button'
+      expect(page).to_not have_button "question_#{question.id}_add_comment_button"
       expect(page).to have_field "question_#{question.id}_comment_add_area"
     end
 
