@@ -2,19 +2,20 @@ require_relative 'acceptance_helper'
 
 
 feature 'Create Comment', %q{
-In order to comment answers or questions  as an authenticate user
-I want to be able to create create comment } do
+In order to comment answers  as an authenticate user
+I want to be able to  create comment } do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
+  given!(:answer) { create(:answer, user: user, question: question) }
 
 
-  scenario 'Authenticate User is trying to add comment to question', js: true do
+  scenario 'Authenticate User is trying to add comment to answer', js: true do
 
 
     sign_in(user)
     visit question_path(question)
-    within '.question_existed_area .question_comments' do
-      expect(page).to have_field 'question_comment_add_area'
+    within '.answers .answer_comments' do
+      expect(page).to have_field 'answer_comment_add_area'
 
       fill_in 'question_comment_add_area', with: ''
       expect(page).to_not have_field 'question_comment_add_area'

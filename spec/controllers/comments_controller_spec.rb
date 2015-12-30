@@ -6,9 +6,6 @@ RSpec.describe CommentsController, type: :controller do
   let!(:question) { create(:question, user: user) }
   let!(:answer) { create(:answer, question: question, user: user) }
 
-
-
-
   describe 'POST #create' do
     describe 'Commentable comment' do
       let(:comment_params) do
@@ -63,33 +60,5 @@ RSpec.describe CommentsController, type: :controller do
   end
 end
 
-
-#
-# it 'save new comment in database depending with commentable_object' do
-#
-#   expect { post :create, commentable_id: question.id,  user_id: user.id, commentable_type: question.class}.to change(question.comments, :count).by(1)
-# end
-#
-# it 'save new comments in database depending with user' do
-#   expect { post :create, commentable_id: question.id, user_id: user.id}.to change(user.comments, :count).by(1)
-# end
-
-# it 'render template Answers/create.js view' do
-#   post :create, question_id: question, answer: attributes_for(:answer), format: :js
-#   expect(response).to render_template :create
-# end
-
-# context 'with invalid attributes' do
-#   it 'does not save the answer' do
-#     expect { post :create, question_id: question, answer: attributes_for(:invalid_answer), format: :js
-#     }.to_not change(Answer, :count)
-#   end
-#
-#   it 'render template Answers/create.js view' do
-#     post :create, question_id: question, answer: attributes_for(:invalid_answer), format: :js
-#     expect(response).to render_template :create
-#
-#   end
-# end
 
 
