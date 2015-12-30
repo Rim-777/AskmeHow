@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   private
 
   def set_commentable
-    commentable_class = params[:commentable].classify.constantize
+    commentable_class = params[:commentable].capitalize.constantize
     commentable_object = "#{params[:commentable].singularize}_id".to_sym
     commentable_id = params[commentable_object]
     @commentable = commentable_class.find(commentable_id)
