@@ -6,6 +6,10 @@ $(document).on 'focus', 'input[type="text"].question_comment_add_area', (e) ->
   $('#question_comment_body_area')[0].focus()
   $(this).hide()
 
+#$(document).on 'blur', '#question_comment_body_area', (e) ->
+#  if $('#question_comment_body_area')[0].val == null
+#    $('#comment_form_new').hide()
+#    $('input[type="text"].question_comment_add_area').show()
 
 $ ->
   commentable_id = $('.question_comments').data('commentableId')
@@ -15,6 +19,8 @@ $ ->
     $('#question_comment_body_area').val('');
     $('#comment_form_new').hide()
     $('input[type="text"].question_comment_add_area').show()
+
+
 
 
 

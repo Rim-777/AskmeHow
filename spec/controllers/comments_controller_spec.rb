@@ -5,7 +5,7 @@ RSpec.describe CommentsController, type: :controller do
   let!(:user) { create(:user) }
   let!(:question) { create(:question, user: user) }
   let!(:answer) { create(:answer, question: question, user: user) }
-  let!(:answer) { create(:answer, question: question, user: user) }
+
 
 
 
@@ -25,16 +25,16 @@ RSpec.describe CommentsController, type: :controller do
 
         context 'with valid attributes' do
           it 'assigns the requested commentable_object to @commentable' do
-            post :create, comment_params
+            post :create, comment_params  , format: :json
             expect(assigns(:commentable)).to eq question
           end
 
           it 'save new comment in database depending with commentable_object' do
-            expect { post :create, comment_params }.to change(question.comments, :count).by(1)
+            expect { post :create, comment_params, format: :json }.to change(question.comments, :count).by(1)
           end
 
           it 'save new comment in database depending with user' do
-            expect { post :create, comment_params }.to change(user.comments, :count).by(1)
+            expect { post :create, comment_params, format: :json }.to change(user.comments, :count).by(1)
           end
 
           it 'render nothing' do
@@ -46,7 +46,7 @@ RSpec.describe CommentsController, type: :controller do
 
         context 'with invalid attributes' do
           it 'do not save new comment in database depending with commentable_object' do
-            expect { post :create, invalid_params }.to_not change(question.comments, :count)
+            expect { post :create, invalid_params, format: :json }.to_not change(question.comments, :count)
           end
         end
       end
@@ -54,7 +54,7 @@ RSpec.describe CommentsController, type: :controller do
 
       describe 'Un-athenticate user' do
         it 'do not save new comment in database depending with commentable_object' do
-          expect { post :create, comment_params }.to_not change(question.comments, :count)
+          expect { post :create, comment_params, format: :json }.to_not change(question.comments, :count)
         end
       end
 

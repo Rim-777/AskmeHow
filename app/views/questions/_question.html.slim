@@ -34,14 +34,4 @@ div class="question_existed_area"
       - @question.attachments.each do |a|
         == render 'attachments/attachment', attachment: a, attachable: @question
 
-  div class="question_comments" data={commentable_id: "#{@question.id}"}
-    - if @question.comments.any?
-      div id="question_#{@question.id}_comments"
-        - @question.comments.each do |comment|
-          == render comment  if comment.body
-          = comment.user.email if comment.user
-
-
-    div class="question_comments_form_new"
-      = text_field_tag :comment, "", placeholder: 'write you comment here', class: 'question_comment_add_area', id: 'question_comment_add_area'
-      == render 'comments/comment_new_form', commentable: @question, comment: @comment
+  == render 'comments/comments', commentable: @question
