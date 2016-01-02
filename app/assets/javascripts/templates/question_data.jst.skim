@@ -1,0 +1,7 @@
+p
+  a href="/questions/#{@question.question_id}"
+    = @question.question_title
+  - if @current_user_id == @question.author_id
+    a href="/questions/#{@question.question_id}" data-confirm="Удалить вопрос?" data-method="delete"
+      = ' '
+      | remove

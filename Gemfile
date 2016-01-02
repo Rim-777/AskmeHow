@@ -36,7 +36,7 @@ gem 'devise'
 gem 'slim-rails'
 # gem 'haml-rails'
 # gem 'slim'
-gem 'gon'
+# gem 'gon'
 gem 'remotipart'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

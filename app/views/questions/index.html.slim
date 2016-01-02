@@ -1,7 +1,7 @@
 p
 = link_to 'Ask question', new_question_path
 
-div class="question_list"
+div class="question_list" data={current_user_id: user_signed_in? ? current_user.id : nil}
   - if @questions.any?
     - @questions.each do |question|
       p
@@ -9,3 +9,5 @@ div class="question_list"
         - if user_signed_in? && current_user.author_of?(question)
           span>
           = link_to 'remove', question, class: 'remove_link', method: :delete, data: {confirm: 'Удалить вопрос?'}
+
+= subscribe_to "/questions"

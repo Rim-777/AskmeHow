@@ -3,6 +3,12 @@ class QuestionsController < ApplicationController
 
   before_action :set_question, only: [:show, :update, :destroy]
 
+  respond_to do |format|
+    format.html
+    format.js
+    format.json
+  end
+
   def index
     @questions = Question.all
   end
@@ -22,6 +28,8 @@ class QuestionsController < ApplicationController
     @question = Question.new(questions_params)
     current_user.is_author_of!(@question)
     if @question.save
+      PrivatePub.publish_to "/questions", question: render_to_string(partial: 'questions/question_data.json.jbuilder')
+
       redirect_to @question
     else
       render :new

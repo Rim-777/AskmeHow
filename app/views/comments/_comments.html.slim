@@ -3,8 +3,6 @@ div class="#{commentable.entity}_comments" data={commentable_id: "#{commentable.
   div id="#{commentable.type_and_id}_comments"
     - commentable.comments.each do |comment|
       == render comment
-      = comment.user.email if comment.user
-
 
   div class="#{commentable.entity}_comments_form_new"
     = text_field_tag :comment, "", placeholder: 'write you comment here',

@@ -13,21 +13,6 @@ function toggleEditQuestion() {
 
 }
 
-function setQuestionEditClick(){
-    $('a.question_edit_link').click(function (e) {
-        e.preventDefault();
-       toggleEditQuestion()
-    })
-}
-
-function setToggleOnAnswerEditLink(answerId){
-    $('#answer_edit_link_'+ answerId ).click(function (e) {
-        e.preventDefault();
-        toggleEditAnswer(answerId);
-    });
-
-}
-
 
 
 

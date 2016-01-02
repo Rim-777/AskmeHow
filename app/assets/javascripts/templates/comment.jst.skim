@@ -1,0 +1,3 @@
+div class="comment"
+  = @object.body
+= @author_of_comment
