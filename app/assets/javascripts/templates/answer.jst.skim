@@ -1,0 +1,65 @@
+div id="answer_#{@answer.answer_id}" class="answer" data-answer-id="#{ @answer.answer_id}"
+  div class="answer_rating" id="answer_#{@answer.answer_id}_rating"
+    |Rating:
+    br
+    form class="button_to" method="post" action="/opinion/positive?opinionable_id=#{@answer.answer_id}&amp;opinionable_type=Answer" data-remote="true"
+      input type="hidden" name="_method" value="patch"
+      input class="opinion_button" id="positive_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit" value="+"
+
+    div class="rating_result" id="rating_answer_#{@answer.answer_id}_result"
+      = 0
+    form class="button_to" method="post" action="/opinion/negative?opinionable_id=#{@answer.answer_id}&amp;opinionable_type=Answer" data-remote="true"
+      input type="hidden" name="_method" value="patch"
+      input class="opinion_button" id="negative_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit" value="-"
+
+  div class="answer_errors" id="answer_#{@answer.answer_id}_errors"
+  br
+  div class="answer_body_existed" id="answer_body_existed_#{@answer.answer_id}"
+    = @answer.answer_body
+
+  form id="answer_edit_form_#{@answer.answer_id}" class="edit_answer" action="/answers/#{@answer.answer_id}" accept-charset="UTF-8" data-remote="true" method="post"
+    input name="utf8" type="hidden" value="✓"
+    input type="hidden" name="_method" value="patch"
+    div id="answer_984_errors"
+    div class="field"
+      textarea id="answer_body_edit_#{@answer.answer_id}" name="answer[body]"
+        = @answer.answer_body
+    div class="actions"
+      input type="submit" name="commit" value="Save"
+    br
+  div class="answer_attachments"
+    span>
+    - for attachment in @answer.answer_attachments
+      - file_url = attachment['file']['url']
+      - file_data = file_url.split('\\').pop().split('/')
+      - file_name = file_data.pop()
+      - file_id = file_data.pop()
+      div id="attachment_#{file_id}"
+        a href="#{file_url}"
+          = file_name
+        span class="answer_attachment_links"
+          span>
+          - if @current_user_id == @answer.answer_author_id
+            a id="attachment_remove_link_#{file_id}" data-confirm="Удалить файл?" data-remote="true" rel="nofollow" data-method="delete" href="/attachments/#{file_id}"
+              |delete
+      div id="attachment_#{file_id}_errors"
+  span class="user_to_show"
+    = @answer.answer_author_name
+    span>
+
+  - if @current_user_id == @answer.answer_author_id
+    span id="answer_crud_links_container_#{@answer.answer_id}"
+      span id="answer_crud_link_#{@answer.answer_id}"
+        span>
+        a href="" class="answer_edit_link" data-answer-id="#{@answer.answer_id}" id="answer_edit_link_#{@answer.answer_id}"
+          |edit
+        span>
+        a href="/answers/#{@answer.answer_id}" class="remove_link" data-confirm="Do you want to remove the answer" data-remote="true" rel="nofollow" data-method="delete"
+          |delete
+  - if @current_user_id == @answer.answer_question_author_id
+    span>
+    a href="/answers/#{@answer.answer_id}/select_best" class="answer_best_link" id="answer_best_link_#{@answer.answer_id}" data-remote="true" rel="nofollow" data-method="patch"
+      |best?
+    span>
+
+

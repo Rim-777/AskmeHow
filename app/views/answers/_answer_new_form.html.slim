@@ -5,7 +5,7 @@
   div class="field"
     = f.label :body_new, 'You Answer:'
     br
-    = f.text_area :body, id: 'answer_body_new', placeholder: 'write answer'
+    = f.text_area :body, id: 'answer_body_new', placeholder: 'write answer', data:{question_id: question.id}
 
   == render 'attachments/attachments', f: f
 

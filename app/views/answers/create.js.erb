@@ -4,11 +4,17 @@
     <% end %>
 
 <% else %>
+    var answer = $('#answer_<%= @answer.id %>')[0];
+    <% publish_to "/question/#{@question.id}/answers" do %>
+    $('.others_answers').append("<%= j render  @answer, show_links: false %>");
+    <% end %>
+    $('#answer_body_new').val('');
+    while(true){
+        if ($('#answer_<%= @answer.id %>')[0]!= undefined){
+            $('#answer_crud_links_container_<%= @answer.id %>').html("<%= j render  'answer_crud_links', answer: @answer, question: @question  %>");
+            break
+        }
+    }
 
-<% publish_to "/question/#{@question.id}/answers" do %>
-$('.others_answers').append("<%= j render  @answer %>");
 <% end %>
-$("#answer_crud_links_container_<%= @answer.id%>").html('<%= j render "answer_crud_links", answer: @answer, question: @answer.question%>');
-$('#answer_body_new').val('');
 
-<% end %>

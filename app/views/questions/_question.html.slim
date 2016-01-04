@@ -2,7 +2,7 @@ h4 Question of
 
 = render 'common/errors', resource: @question
 
-div class="question_existed_area"
+div class="question_existed_area" data={question_id: @question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
   div class="question_errors"
 
   div class="question_user_existed"

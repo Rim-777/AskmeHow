@@ -1,6 +1,6 @@
 == render @question
 
-div class="answers" data={question_id: "#{@question.id}"} data={current_user_id: "#{current_user.id if user_signed_in?}" }
+div class="answers" data={question_id: @question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
   - if @question.answers && @question.answers.any?
     h3 Answers:
 

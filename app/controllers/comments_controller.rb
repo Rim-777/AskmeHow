@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
                             {comment: @comment.to_json, author_of_comment: @comment.user.email.to_json }
     end
     render nothing: true
-    #   render text: : true
 
   end
 

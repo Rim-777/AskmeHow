@@ -1,3 +1,4 @@
+- show_links = local_assigns.fetch :show_links, true
 div id="answer_#{answer.id}" class="answer" data-answer-id="#{ answer.id}"
   == render 'opinions/opinion', opinionable: answer
   div class="answer_body_existed" id="answer_body_existed_#{ answer.id}"
@@ -8,14 +9,15 @@ div id="answer_#{answer.id}" class="answer" data-answer-id="#{ answer.id}"
     span>
 
     - answer.attachments.each do |a|
-      = render 'attachments/attachment', attachment: a, attachable: answer
+      = render 'attachments/attachment', attachment: a, attachable: answer, show_links: show_links
   span class="user_to_show"
     = answer.user.email
     = ' '
 
   span id="answer_crud_links_container_#{answer.id}"
-    == render 'answers/answer_crud_links', answer: answer, question: @question
+    == render 'answers/answer_crud_links', answer: answer, question: @question if show_links
+
 
   == render 'comments/comments', commentable: answer
-
 = subscribe_to "/answer/#{answer.id}/comments"
+

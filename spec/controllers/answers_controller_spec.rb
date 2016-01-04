@@ -31,6 +31,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'render template Answers/create.js view' do
         post :create, question_id: question, answer: attributes_for(:answer), format: :js
+        # expect(response).to render_template "answers/_answer_data.json.jbuilder"
         expect(response).to render_template :create
       end
     end
