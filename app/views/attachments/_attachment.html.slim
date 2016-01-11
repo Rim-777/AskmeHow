@@ -1,13 +1,12 @@
-div id="attachment_#{attachment.id}"
-  = link_to attachment.file_name, attachment.file_url
-
+span id="attachment_#{attachment.id}"
   - if user_signed_in? && current_user.author_of?(attachable)
     span class="#{attachable.class.to_s.downcase}_attachment_links"
-      span>
-      = link_to 'delete', attachment, id: "attachment_remove_link_#{attachment.id}",
-                remote: true, method: :delete, data: {confirm: 'Удалить файл?'} if show_links
+      = link_to 'x', attachment, id: "attachment_remove_link_#{attachment.id}", class: "btn attachment_remove_link", remote: true, method: :delete
+    span>
 
-div id="attachment_#{attachment.id}_errors"
+  = link_to attachment.file_name, attachment.file_url, class: "btn"
+
+/div id="attachment_#{attachment.id}_errors"
 
 
   /li= image_tag(attachment.file)

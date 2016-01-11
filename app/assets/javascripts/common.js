@@ -10,6 +10,7 @@ function toggleEditQuestion() {
     $('.question_title_existed').next().toggle();
     $('.question_body_existed').toggle();
     $('form.edit_question').toggle()
+    $('.question_rating').toggle()
 
 }
 

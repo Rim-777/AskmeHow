@@ -1,0 +1,19 @@
+.container-fluid
+  .answers data={question_id: @question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
+
+    - if @question.answers && @question.answers.any?
+      h3 Answers:
+      - best_answer = @question.best_answer
+      .best_answer
+        == render best_answer if best_answer.present?
+
+      .others_answers
+        - @question.answers.each do |answer|
+          - if answer.persisted?
+           == render answer unless answer.is_best?
+
+  br
+  - if signed_in?
+    = render 'answers/answer_new_form', question: @question, answer: @answer
+  - else
+    p Please #{link_to 'log in', new_user_session_path} If You want to add a new Answer.

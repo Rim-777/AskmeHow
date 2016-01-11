@@ -1,13 +1,17 @@
-div class="#{opinionable.class.to_s.downcase}_rating"  id="#{opinionable.type_and_id}_rating"
-  |Rating:
-  br
-  = button_to '+', positive_opinion_path(opinionable), class: 'opinion_button',
-              id: "positive_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: { type: :json }
-  div  id="rating_#{opinionable.type_and_id}_result" class="rating_result"
-    = opinionable.opinions.rating
+div class="col-lg-12 col-md-12 col-sm-12 col-lg-offset-1 #{opinionable.class.to_s.downcase}_rating" id="#{opinionable.type_and_id}_rating"
 
-  = button_to '-', negative_opinion_path(opinionable), class: 'opinion_button',
-              id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: { type: :json }
+  = button_to '+', positive_opinion_path(opinionable), class: 'opinion_button  btn-primary ',
+              id: "positive_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: {type: :json}
 
-div id="#{opinionable.type_and_id}_errors" class="#{opinionable.class.to_s.downcase}_errors"
-br
+  p
+    div id="rating_#{opinionable.type_and_id}_result" class="rating_result text-center"
+      = opinionable.opinions.rating
+
+
+  = button_to '-', negative_opinion_path(opinionable), class: 'opinion_button btn-primary',
+                id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: {type: :json}
+
+
+    /div id="#{opinionable.type_and_id}_errors" class="#{opinionable.class.to_s.downcase}_errors"
+
+

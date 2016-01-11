@@ -1,0 +1,31 @@
+footer{
+  position: fixed;
+  top: 97%;
+}
+
+form textarea {
+min-height: 100px;
+  resize: none;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #6f9a91;
+}
+
+a:hover {
+  box-shadow: 0 0 1px;
+  color: #49655c;
+
+}
+
+
+
+img{
+  width: 200px;
+}
+
+
+.yo {
+  border: solid 1px blue;
+}

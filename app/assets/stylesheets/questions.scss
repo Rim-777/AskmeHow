@@ -1,6 +1,59 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-form.edit_question{
+
+.question_user_existed, .answer_user_existed {
+  width: auto;
+  height: auto;
+  min-width: 13%;
+  max-width: 13%;
+  border-radius: 10%;
+  box-shadow: 0 0 1px;
+  font-size: 1em;
+
+}
+.answer_user_existed{
+margin-top: 25px;
+
+}
+.question_existed_area, .answer_existed_area{
+  margin-left: 1%;
+}
+.question_title_existed {
+  margin-left: 5%;
+}
+
+.question_body_existed, .answer_body_existed {
+
+ margin-top: 25px;
+  margin-left: 5%;
+  min-height: 100px;
+}
+
+form.edit_question {
   display: none;
 }
+
+.question_errors {
+  //display: inline;
+  //width: 450px;
+  //height: 50px;
+  //color: rgba(255, 20, 148, 0.53);
+  ////border: solid 1px;
+  //z-index: 1000;
+}
+
+.question_crud_link, .answer_crud_link, {
+  margin-left: 5%;
+  margin-top: 25px;
+  width: auto;
+}
+
+.question_edit_form_box {
+  margin-left: 5%;
+}
+
+.question_new_form_box{
+  margin-left: 3%;
+}
+

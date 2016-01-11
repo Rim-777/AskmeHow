@@ -1,13 +1,15 @@
-div class="#{commentable.entity}_comments" data={commentable_id: "#{commentable.id}"}
+.row
+  div class="#{commentable.entity}_comments col-lg-push-1 col-lg-10 " data={commentable_id: "#{commentable.id}"}
+    br
+    table.table.table-hover
+      tbody id="#{commentable.type_and_id}_comments"
+        - commentable.comments.each do |comment|
+          == render comment
 
-  div id="#{commentable.type_and_id}_comments"
-    - commentable.comments.each do |comment|
-      == render comment
-
-  div class="#{commentable.entity}_comments_form_new"
-    = text_field_tag :comment, "", placeholder: 'write you comment here',
-                     class: "#{commentable.entity}_comment_add_area",
-                     id: "#{commentable.type_and_id}_comment_add_area",
-                     data:{commentable_id: "#{commentable.id}"}
-    == render 'comments/comment_new_form', commentable: commentable, comment: Comment.new
+    div class="#{commentable.entity}_comments_form_new"
+      = text_field_tag :comment, "", placeholder: 'Add comment',
+                       class: "#{commentable.entity}_comment_add_area form-control",
+                       id: "#{commentable.type_and_id}_comment_add_area",
+                       data: {commentable_id: "#{commentable.id}"}
+      == render 'comments/comment_new_form', commentable: commentable, comment: Comment.new
 

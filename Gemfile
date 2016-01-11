@@ -32,6 +32,8 @@ gem 'carrierwave'
 gem 'devise'
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails'
 
 gem 'slim-rails'
 # gem 'haml-rails'

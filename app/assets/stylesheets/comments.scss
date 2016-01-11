@@ -1,25 +1,18 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.question_comments, .comment{
-
-  width: 550px;
-  //display: block;
-  //align: center;
-  text-align: right;
+.question_comments, .answer_comments {
+  margin-left: 5%;
+  font-size: 0.8em;
 }
 
-.comment, .question_comment_add_area, .answer_comment_add_area{
-  margin-left: 250px;
-  border: 1px solid rgba(12, 21, 154, 0.61);
-  width: 300px;
-  height: 25px;
-  border-radius: 10px;
+
+.question_comment_add_area, .answer_comment_add_area {
+  box-shadow:  0 0 0.1px ;
   text-align: left;
 }
-#question_comment_body_area, #answer_comment_body_area{
-  width: 295px;
-  height: 25px;
-}
 
-//answer_comment_add_area
+
+.comment_author_signature{
+  font-size: 0.7em;
+}

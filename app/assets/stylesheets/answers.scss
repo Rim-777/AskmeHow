@@ -14,11 +14,14 @@ div.best_answer .answer .answer_best_link{
 }
 
 
-.answer_errors, .question_errors{
-  display: inline;
+.answer_errors {
   width: 450px;
   height: 50px;
   color: rgba(255, 20, 148, 0.53);
   //border: solid 1px;
   z-index: 1000;
+}
+
+#answer_body_new{
+  min-height: 200px;
 }

@@ -1,3 +1,5 @@
-div class="comment"
-  = @object.body
-= @author_of_comment
+tr
+  td.col-lg-10
+    = @object.body
+  td.col-lg-1
+    = @author_of_comment

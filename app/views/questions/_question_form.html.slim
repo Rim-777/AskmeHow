@@ -1,17 +1,17 @@
 = render 'common/errors', resource: question
 div class="field"
-  = f.text_field :title
+  = f.text_field :title, class: 'form-control'
 br
 
 div class="field"
   - if question.new_record?
-    = f.text_area :body
+    = f.text_area :body, class: 'form-control'
   - else
-    = f.text_area :body, id: "question_body_edit_#{question.id}"
+    = f.text_area :body, class: 'question_body_edit form-control', id: "question_body_edit_#{question.id}"
 
 
 == render 'attachments/attachments', f: f if question.new_record?
-
+br
 div class="actions"
-  = f.submit "#{question.new_record? ? 'Create' : 'Save'}",
+  = f.submit "#{question.new_record? ? 'Create' : 'Save'}",  class: 'btn btn-primary',
              id: "#{question.new_record? ? 'question_create_button' : 'question_update_button' }"

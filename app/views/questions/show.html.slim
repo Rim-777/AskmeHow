@@ -1,26 +1,13 @@
+- show_links = local_assigns.fetch :show_links, true
 == render @question
 
-div class="answers" data={question_id: @question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
-  - if @question.answers && @question.answers.any?
-    h3 Answers:
+br
+hr
 
-    div class="best_answer"
-      - best_answer = @question.best_answer
-      == render best_answer if best_answer.present?
+== render 'answers/answers'
 
-    div class="others_answers"
-      - @question.answers.each do |answer|
-        - if answer.persisted?
-          == render answer unless answer.is_best?
-  - else
-    p  No answers
-
-
-- if current_user
-  p = render 'answers/answer_new_form', question: @question, answer: @answer
-- else
-  p Please #{link_to 'log in', new_user_session_path} If You want to add a new Answer.
-
+br
+hr
 
 = subscribe_to "/question/#{@question.id}/answers"
 = subscribe_to "/question/#{@question.id}/comments"

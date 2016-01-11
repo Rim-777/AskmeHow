@@ -2,33 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.question_rating{
-  height: 100px;
-  width: 47px;
+
+.answer_rating, .question_rating {
+  margin-left: 5%;
+  margin-top: 25px;
+  display: block;
+  padding:  0;
+  width: auto;
+  height: auto;
 }
 
-.answer_rating {
-  width: 200px;
-  display: flex;
-  //justify-content: center;
-  align-items: center;
 
-  //border: dashed 1px;
-}
-
-input[type='submit'].opinion_button {
-  width: 25px;
-}
 
 .rating_result {
-  margin: 3px;
   width: 24px;
   height: 24px;
-  justify-content: center;
-  align-items: center;
-  border: dashed 1px;
-  display: flex;
-  border-radius: 47%;
-  border-color: deeppink;
-  z-index: 1000;
+  color: #3071a9;
+
 }
+
+.opinion_button {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+
+}
+

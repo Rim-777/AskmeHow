@@ -1,6 +1,7 @@
-= form_for [commentable, comment], html: {id: "#{commentable.type_and_id}_comment_form_new", style: "display: none"}, remote: true do |f|
+= form_for [commentable, comment], html: {id: "#{commentable.type_and_id}_comment_form_new", style: "display: none"},  remote: true do |f|
   div class="field"
-    = f.text_area :body, id: "#{commentable.type_and_id}_comment_body_area"
-  div class="actions"
-    = f.submit "Add", id: "#{commentable.type_and_id}_add_comment_button"
+    = f.text_area :body, id: "#{commentable.type_and_id}_comment_body_area", class: 'form-control'
+  div class="actions col-lg-12 "
+    br
+    = f.submit "Add", class: 'btn btn-primary', id: "#{commentable.type_and_id}_add_comment_button"
 

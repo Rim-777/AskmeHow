@@ -1,3 +1,11 @@
-= form_for @question, html: {id: "question_form_new"}  do |f|
-  == render 'question_form', question: @question, f: f
+.container-fluid
+  .row
+    .col-lg-12.col-md-12.col-sm-12.bg-success.question_user_existed
+      | author:
+      br
+      = current_user.email
+
+    .col-lg-10.col-md-10.col-sm-10.question_new_form_box
+      = form_for @question, html: {id: "question_form_new"}  do |f|
+        == render 'question_form', question: @question, f: f
 

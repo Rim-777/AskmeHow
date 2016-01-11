@@ -1,3 +1,15 @@
 // Place all the styles related to the Attachments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.attachment_remove_link{
+  background-color: rgba(164, 62, 41, 0.15);
+
+}
+
+.question_attachments, .answer_attachments {
+
+  margin-left: 5%;
+  //width: auto;
+
+}
