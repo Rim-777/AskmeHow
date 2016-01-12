@@ -8,12 +8,8 @@ class CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.new(comment_params)
     current_user.is_author_of!(@comment) if user_signed_in?
-    if @comment.save
-      PrivatePub.publish_to "/#{@commentable.class.to_s.downcase}/#{@commentable.id}/comments",
-                            {comment: @comment.to_json, author_of_comment: @comment.user.email.to_json }
-    end
+    PrivatePub.publish_to set_chanel_for(@commentable), data_for_chanel if @comment.save
     render nothing: true
-
   end
 
 
@@ -28,6 +24,19 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def set_chanel_for(commentable)
+    commentable_class = commentable.class
+    if commentable_class == Question
+      "/question/#{@commentable.id}/comments"
+    elsif commentable_class == Answer
+      "/question/#{@commentable.question_id}/answers/comments"
+    end
+  end
+
+  def data_for_chanel
+    {comment: @comment.to_json, author_of_comment: @comment.user.email.to_json}
   end
 end
 
