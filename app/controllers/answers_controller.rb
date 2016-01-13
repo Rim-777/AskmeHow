@@ -12,8 +12,8 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answers_params)
     current_user.is_author_of!(@answer)
-    @answer.save
-    # PrivatePub.publish_to "/question/#{@question.id}/answers", answer: render_to_string(partial: 'answer_data.json.jbuilder') if @answer.save
+    PrivatePub.publish_to "/question/#{@question.id}/answers", answer: render_to_string(partial: 'answer_data.json.jbuilder') if @answer.save
+
   end
 
   def update

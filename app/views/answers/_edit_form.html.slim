@@ -1,11 +1,13 @@
-= form_for answer, remote: true, html: {id: "answer_edit_form_#{answer.id}"}, method: :patch do |f|
-  div id="answer_#{ answer.id }_errors"
-  div class="field"
-    = f.text_area :body, id: "answer_body_edit_#{answer.id}"
-
-
-  div class="actions"
-    = f.submit 'Save'
-
+.col-lg-10.answer_edit_form_box
   br
+  = form_for answer, remote: true, html: {id: "answer_edit_form_#{answer.id}"}, method: :patch do |f|
+    div id="answer_#{ answer.id }_errors"
+    div class="field"
+      = f.text_area :body, id: "answer_body_edit_#{answer.id}", class: 'form-control'
+
+    br
+    div class="actions"
+      = f.submit 'Save', class: 'btn btn-primary'
+
+    br
 

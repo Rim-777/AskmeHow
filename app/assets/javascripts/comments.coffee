@@ -1,9 +1,16 @@
-$(document).on 'focus', 'input[type="text"].question_comment_add_area', (e) ->
-  setActionToCommentField('question', this)
-$(document).on 'focus', 'input[type="text"].answer_comment_add_area', (e) ->
-  setActionToCommentField('answer', this)
+$(document).on 'focus', 'input[type="text"].question_comment_add_area', () ->
+  setActionToCommentField('question')
+$(document).on 'focus', 'input[type="text"].answer_comment_add_area', () ->
+  setActionToCommentField('answer')
 
 ready = ->
+#  $('input[type="text"].question_comment_add_area').bind 'focus', () ->
+#    setActionToCommentField('question', this)
+#
+#  $('input[type="text"].answer_comment_add_area').bind 'focus', () ->
+#    setActionToCommentField('answer', this)
+
+
   question_id = $('.question_existed_area').data('questionId')
   PrivatePub.subscribe "/question/" + question_id + "/comments", (data, channel) ->
     comment = $.parseJSON(data['comment'])

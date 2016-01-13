@@ -14,11 +14,11 @@ function toggleEditQuestion() {
 
 }
 
-function setActionToCommentField(entity,  self) {
-    entity_id = $(self).data('commentableId');
+function setActionToCommentField(entity) {
+    entity_id = $(document.activeElement).data('commentableId');
     $('#' + entity + '_' + entity_id + '_comment_form_new').show();
     $('#' + entity + '_' + entity_id + '_comment_body_area')[0].focus();
-    $(self).hide()
+    $('#' + entity + '_' + entity_id + '_comment_add_area').hide()
 }
 
 

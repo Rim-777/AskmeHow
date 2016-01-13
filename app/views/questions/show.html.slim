@@ -1,17 +1,13 @@
-- show_links = local_assigns.fetch :show_links, true
 == render @question
-
 br
 hr
-
 == render 'answers/answers'
-
 br
 hr
 
+= subscribe_to "/question/#{@question.id}/answers/comments"
 = subscribe_to "/question/#{@question.id}/answers"
 = subscribe_to "/question/#{@question.id}/comments"
-= subscribe_to "/question/#{@question.id}/answers/comments"
 
 
 
