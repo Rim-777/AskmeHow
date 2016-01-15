@@ -10,7 +10,7 @@
       .others_answers
         - @question.answers.each do |answer|
           - if answer.persisted?
-           == render answer unless answer.is_best?
+            == render answer unless answer.is_best?
 
   br
   - if signed_in?
