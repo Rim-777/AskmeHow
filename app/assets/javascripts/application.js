@@ -17,7 +17,6 @@
 //= require private_pub
 //= require cocoon
 //= require skim
-//= require turbolinks
 //= require_tree .
 
 

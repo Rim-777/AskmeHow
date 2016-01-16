@@ -92,10 +92,9 @@ RSpec.describe AnswersController, type: :controller do
 
     context "Author of question is trying to mark 'is_best' an answer on his question " do
 
-      it 'assigns the requested answer to @answer and answer.question to @question' do
+      it 'assigns the requested answer to @answer' do
         patch :select_best, id: one_more_answer, question_id: one_more_answer.question, answer: attributes_for(:answer), format: :js
         expect(assigns(:answer)).to eq one_more_answer
-        expect(assigns(:question)).to eq one_more_answer.question
       end
 
       it "change answer's field 'is_best' " do

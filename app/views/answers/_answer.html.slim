@@ -1,4 +1,5 @@
 .row.answer id="answer_#{answer.id}" data-answer-id="#{ answer.id}"
+  = render 'common/errors', resource: answer
   hr
   .col-lg-12.col-md-12.col-sm-12.bg-success.answer_user_existed
     | author:
@@ -14,14 +15,14 @@
       == render 'answers/edit_form', answer: answer
 
     - if user_signed_in?
-      - if current_user.author_of?(answer) || current_user.author_of?(@question)
+      - if current_user.author_of?(answer) || current_user.author_of?(answer.question)
         .row
           .col-lg-12.col-lg-push-1.answer_crud_link id="answer_crud_link_#{answer.id}"
             - if current_user.author_of?(answer)
               = link_to 'edit', '', class: 'answer_edit_link', data: {answer_id: answer.id}, id: "answer_edit_link_#{answer.id}"
               span>
               = link_to 'delete', answer, class: 'remove_link', remote: true, method: :delete, data: {confirm: 'Do you want to remove the answer'}
-            - if current_user.author_of?(@question)
+            - if current_user.author_of?(answer.question)
               span>
               = link_to 'best?', select_best_answer_path(answer), class: 'answer_best_link',
                         id: "answer_best_link_#{answer.id}", remote: true, method: :patch

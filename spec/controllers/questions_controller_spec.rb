@@ -34,14 +34,6 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
-    it 'assigns the  @attachments for question' do
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'builds new attachment for @answer' do
-      expect(assigns(:answer).attachments.first).to be_a_new(Attachment)
-    end
-
     it 'render show view' do
       expect(response).to render_template :show
     end
@@ -52,10 +44,6 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
-    end
-
-    it 'builds new attachment for @question' do
-      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
     end
 
     it 'render show view' do
@@ -156,7 +144,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
 
-    context 'User is trying to delete no his question' do
+    context 'User is trying to delete  his not question' do
       it 'Does not remove a question' do
         sign_in(another_user)
         expect { delete :destroy, id: question }.to_not change(Question, :count)

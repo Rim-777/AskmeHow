@@ -4,13 +4,13 @@ br
   = form_for [question, answer], remote: true, html: {id: "answer_form_new"} do |f|
 
     div class="new_answer_errors"
-
+    /= render 'common/errors', resource: @answer
     div class="field"
       = f.label :body_new, 'You Answer:'
       br
       = f.text_area :body, id: 'answer_body_new', class: 'form-control', placeholder: 'Add answer', data:{question_id: question.id}
 
-    == render 'attachments/attachments', f: f
+    == render 'attachments/attachments', f: f, attachable: answer
 
     div class="actions"
       = f.submit 'Create', class: 'btn btn-primary', id: 'answer_create_button'

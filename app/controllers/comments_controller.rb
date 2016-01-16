@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: :create
   before_action :set_commentable
+
   respond_to do |format|
     format.js
     format.json

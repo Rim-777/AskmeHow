@@ -1,5 +1,5 @@
 div class="attachment_fields"
-  = f.fields_for :attachments do |a|
+  = f.fields_for :attachments, attachable.attachments.new do |a|
     == render "attachments/attachment_fields", f: a
   = link_to_add_association '[+]',  f, :attachments, partial: "attachments/attachment_fields"
 

@@ -5,10 +5,11 @@
 
 <% else %>
 
-    if ($('#answer_<%= @answer.id %>')[0]== undefined){
+    if ($('#answer_<%= @answer.id %>')[0]== undefined) {
         $('.others_answers').append("<%= j render  @answer %>");
         $('#answer_body_new').val('');
     }
+
 
 <% end %>
 

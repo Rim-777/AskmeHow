@@ -2,6 +2,7 @@
   br
   = form_for answer, remote: true, html: {id: "answer_edit_form_#{answer.id}"}, method: :patch do |f|
     div id="answer_#{ answer.id }_errors"
+    = render 'common/errors', resource: answer
     div class="field"
       = f.text_area :body, id: "answer_body_edit_#{answer.id}", class: 'form-control'
 

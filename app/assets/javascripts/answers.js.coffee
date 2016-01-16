@@ -9,6 +9,7 @@ $ ->
   PrivatePub.subscribe '/question/' + question_id + '/answers', (data, channel) ->
     token = $('meta[name="csrf-token"]').attr('content')
     answer = $.parseJSON(data['answer'])
-    $('.others_answers').append(JST["templates/answer"]({answer: answer, current_user_id: current_user_id, token: token }))
-    $('#answer_body_new').val('') if answer.answer_author_id == current_user_id
+    if ($('#answer_' + answer.answer_id)[0]== undefined)
+      $('.others_answers').append(JST["templates/answer"]({answer: answer, current_user_id: current_user_id, token: token }))
+      $('#answer_body_new').val('') if answer.answer_author_id == current_user_id
 

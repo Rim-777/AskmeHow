@@ -2,35 +2,27 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :set_question, only: [:create]
   before_action :set_answer, except: [:create]
+  after_action :publish_answer, only: [:create]
 
-  respond_to do |format|
-    format.js
-    format.json
+  respond_to :js
+  respond_to :json, only: :create
 
-  end
 
   def create
-    @answer = @question.answers.new(answers_params)
-    current_user.is_author_of!(@answer)
-    PrivatePub.publish_to "/question/#{@question.id}/answers", answer: render_to_string(partial: 'answer_data.json.jbuilder') if @answer.save
-
+    respond_with(@answer = @question.answers.create(answers_params.merge!(user_id: current_user.id)))
   end
 
   def update
     @answer.update(answers_params) if current_user.author_of?(@answer)
-
+    respond_with(@answer)
   end
 
   def destroy
-    @answer.destroy if current_user.author_of?(@answer)
-
+    respond_with(@answer.destroy) if current_user.author_of?(@answer)
   end
 
   def select_best
-    if current_user.author_of?(@answer.question)
-      @question = @answer.question
-      @answer.set_is_best
-    end
+      respond_with(@answer.set_is_best) if current_user.author_of?(@answer.question)
   end
 
   private
@@ -44,5 +36,14 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = Answer.find(params[:id])
+  end
+
+  def publish_answer
+    PrivatePub.publish_to "/question/#{@question.id}/answers", answer: render_to_string(partial: 'answer_data.json.jbuilder')
+  end
+
+  def interpolation_options
+    {resource_name: 'New Answer', time: @answer.created_at}
+
   end
 end
