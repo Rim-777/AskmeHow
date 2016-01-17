@@ -32,7 +32,10 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy if current_user.author_of?(@question)
-    redirect_to questions_path
+    respond_with (@question) do |format|
+      format.html { redirect_to questions_path }
+    end
+
     # respond_with(@question.destroy) if current_user.author_of?(@question)
     # respond_with(@question)
   end
@@ -51,8 +54,12 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.new if @question
   end
 
+  def data_for_chanel
+     render_to_string(partial: 'questions/question_data.json.jbuilder')
+  end
+
   def publish_question
-    PrivatePub.publish_to "/questions", question: render_to_string(partial: 'questions/question_data.json.jbuilder')
+    PrivatePub.publish_to "/questions", question: data_for_chanel if @question.errors.empty?
   end
 
   def interpolation_options
