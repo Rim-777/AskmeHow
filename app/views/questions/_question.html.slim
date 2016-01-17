@@ -28,7 +28,7 @@
       - if @question.attachments.any?
         br
         .row
-          .col-lg-10.col-lg-push-1.question_attachments.well
+          .col-lg-10.col-lg-push-1.question_attachments.well id="question_#{@question.id}_attachments"
             |Files:
             br
               - @question.attachments.each do |a|

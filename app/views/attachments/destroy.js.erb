@@ -1,3 +1,9 @@
 var attachment = $('#attachment_'+ '<%= @attachment.id %>');
 attachment.hide();
 attachment.remove();
+if ($('.<%= @attachment.attachable.type_and_id %>_attachment')[0] == undefined){
+
+var attachableAttachments = $('#<%= @attachment.attachable.type_and_id %>_attachments');
+    attachableAttachments.hide()
+
+}

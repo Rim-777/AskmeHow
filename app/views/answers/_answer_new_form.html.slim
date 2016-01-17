@@ -10,7 +10,7 @@ br
       br
       = f.text_area :body, id: 'answer_body_new', class: 'form-control', placeholder: 'Add answer', data:{question_id: question.id}
 
-    == render 'attachments/attachments', f: f, attachable: answer
+    == render 'attachments/attachment_form', f: f, attachable: answer
 
     div class="actions"
       = f.submit 'Create', class: 'btn btn-primary', id: 'answer_create_button'

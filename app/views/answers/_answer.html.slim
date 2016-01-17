@@ -29,7 +29,7 @@
     - if answer.attachments.any?
       br
       .row
-        .col-lg-10.col-lg-push-1.answer_attachments.well
+        .col-lg-10.col-lg-push-1.answer_attachments.well id="question_#{answer.id}_attachments"
           |Files:
           br
             - answer.attachments.each do |a|
