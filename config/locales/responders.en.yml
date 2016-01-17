@@ -2,7 +2,7 @@ en:
   flash:
     actions:
       create:
-        notice: '%{resource_name} was successfully created at %{time}.'
+        notice: '%{resource_name} was successfully'
         alert: '%{resource_name} could not be created.'
       update:
         notice: '%{resource_name} was successfully updated.'

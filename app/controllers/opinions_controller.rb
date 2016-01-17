@@ -1,4 +1,5 @@
 class OpinionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_openionable
   before_action :if_user_not_signed_in
   before_action :check_authorship
@@ -32,9 +33,7 @@ class OpinionsController < ApplicationController
 
 
   def check_authorship
-    # format.json { render json: :author_error, status: :unprocessable_entity}
     render :author_error, status: :forbidden if current_user.author_of?(@opinionable)
-
   end
 
   def set_user_opinion(value)

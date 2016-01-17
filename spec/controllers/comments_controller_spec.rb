@@ -5,7 +5,7 @@ describe CommentsController do
   let!(:user) { create(:user) }
   let!(:commentable_object) { create(:question, user: user) }
   let(:comment_params) do
-    {comment: attributes_for(:comment),  commentable: 'question',   question_id: commentable_object.id  }
+    {comment: attributes_for(:comment),  commentable: 'question', commentable_type: Question, question_id: commentable_object.id  }
   end
 
   let(:invalid_params) do

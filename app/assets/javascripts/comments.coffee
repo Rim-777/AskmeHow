@@ -6,9 +6,8 @@ $(document).on 'focus', 'input[type="text"].answer_comment_add_area', () ->
 ready = ->
   question_id = $('.question_existed_area').data('questionId')
   PrivatePub.subscribe "/question/" + question_id + "/comments", (data, channel) ->
-    sendCommentToUsers('question', data)
-  PrivatePub.subscribe "/question/" + question_id + "/answers/comments", (data, channel) ->
-    sendCommentToUsers('answer', data)
+    sendCommentToUsers(data)
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

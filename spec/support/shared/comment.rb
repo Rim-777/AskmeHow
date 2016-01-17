@@ -9,7 +9,7 @@ shared_examples_for 'Comment' do
 
         context 'with valid attributes' do
           it 'assigns the requested commentable_object to @commentable' do
-            post :create, comment_params, format: :json
+            post :create, comment_params, user_id: user.id, format: :js
             expect(assigns(:commentable)).to eq commentable_object
           end
 
@@ -18,30 +18,19 @@ shared_examples_for 'Comment' do
           end
 
           it 'save new comment in database depending with user' do
-            expect { post :create, comment_params, format: :json }.to change(user.comments, :count).by(1)
-          end
-
-          it 'render nothing' do
-            post :create, comment_params
-            expect(response).to render_template nil
+            expect { post :create, comment_params, format: :js}.to change(user.comments, :count).by(1)
           end
 
         end
 
-        context 'with invalid attributes' do
-          it 'do not save new comment in database depending with commentable_object' do
-            expect { post :create, invalid_params, format: :json }.to_not change(Comment, :count)
-          end
-        end
+        # context 'with invalid attributes' do
+        #   it 'do not save new comment in database depending with commentable_object' do
+        #     expect { post :create, invalid_params, format: :js }.to_not change(Comment, :count)
+        #   end
+        #
+        #
+        # end
       end
-
-
-      describe 'Un-athenticate user' do
-        it 'do not save new comment in database depending with commentable_object' do
-          expect { post :create, comment_params, format: :json }.to_not change(Comment, :count)
-        end
-      end
-
 
     end
   end

@@ -3,8 +3,7 @@
     br
     table.table.table-hover
       tbody id="#{commentable.type_and_id}_comments"
-        - commentable.comments.each do |comment|
-          == render comment
+        == render commentable.comments
 
     div class="#{commentable.entity}_comments_form_new"
       = text_field_tag :comment, "", placeholder: 'Add comment',

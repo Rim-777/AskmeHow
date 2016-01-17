@@ -9,7 +9,7 @@ I want to be able to  create comment } do
   given!(:answer) { create(:answer, user: user, question: question, body: "123") }
 
 
-  scenario 'Authenticate User is trying to add comment to question', js: true do
+  scenario 'Authenticate User is trying to add comment to answer', js: true do
 
 
     sign_in(user)
@@ -39,21 +39,21 @@ I want to be able to  create comment } do
   end
 
 
-  scenario 'Un-authenticate User is trying to add comment to question', js: true do
+  scenario 'Un-authenticate User is trying to add comment to answer', js: true do
 
     visit question_path(question)
     within '.answers .answer_comments' do
 
-      fill_in "answer_#{question.id}_comment_add_area", with: ''
-      fill_in "answer_#{question.id}_comment_body_area", with: 'some comment text'
+      fill_in "answer_#{answer.id}_comment_add_area", with: ''
+      fill_in "answer_#{answer.id}_comment_body_area", with: 'some comment text'
 
 
-      click_on "answer_#{question.id}_add_comment_button"
+      click_on "answer_#{answer.id}_add_comment_button"
 
       expect(page).to_not have_content 'some comment text'
-      expect(page).to have_field "answer_#{question.id}_comment_body_area"
-      expect(page).to have_button "answer_#{question.id}_add_comment_button"
-      expect(page).to_not have_field "answer_#{question.id}_add_area"
+      expect(page).to have_field "answer_#{answer.id}_comment_body_area"
+      expect(page).to have_button "answer_#{answer.id}_add_comment_button"
+      expect(page).to_not have_field "answer_#{answer.id}_add_area"
     end
 
   end
@@ -62,13 +62,14 @@ I want to be able to  create comment } do
 
     sign_in(user)
     visit question_path(question)
-    within '.answers .answer_comments' do
+    within '.answer_comments' do
 
-      fill_in "answer_#{question.id}_comment_add_area", with: ''
+      fill_in "answer_#{answer.id}_comment_add_area", with: ''
+      sleep(1)
       click_on "answer_#{question.id}_add_comment_button"
-      expect(page).to have_field "answer_#{question.id}_comment_body_area"
+      expect(page).to have_field "answer_#{answer.id}_comment_body_area"
       expect(page).to have_button "answer_#{question.id}_add_comment_button"
-      expect(page).to_not have_field "answer_#{question.id}_add_area"
+      expect(page).to_not have_field "answer_#{answer.id}_add_area"
     end
   end
 

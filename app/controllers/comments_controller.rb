@@ -1,17 +1,18 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: :create
-  before_action :set_commentable
+  before_action :set_commentable, only: :create
+  after_action :publish_comment, only: :create
 
-  respond_to do |format|
-    format.js
-    format.json
-  end
+
+  respond_to :js
+  respond_to :json
+
 
   def create
-    @comment = @commentable.comments.new(comment_params)
-    current_user.is_author_of!(@comment) if user_signed_in?
-    PrivatePub.publish_to set_chanel_for(@commentable), data_for_chanel if @comment.save
-    render nothing: true
+    @comment = @commentable.comments.new(comment_params.merge!(user_id: current_user.id))
+    @comment.save
+    respond_with(@commentable, @comment, location: @commentable)
+
   end
 
 
@@ -28,17 +29,21 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
-  def set_chanel_for(commentable)
-    commentable_class = commentable.class
-    if commentable_class == Question
-      "/question/#{@commentable.id}/comments"
-    elsif commentable_class == Answer
-      "/question/#{@commentable.question_id}/answers/comments"
-    end
+  def set_chanel_for
+    "/question/#{@commentable.class == Question ? @commentable.id : @commentable.question_id}/comments"
   end
 
   def data_for_chanel
     {comment: @comment.to_json, author_of_comment: @comment.user.email.to_json}
+  end
+
+  def publish_comment
+    PrivatePub.publish_to set_chanel_for, data_for_chanel if @comment.errors.empty?
+  end
+
+  def interpolation_options
+    {resource_name: 'New Comment', time: @comment.created_at}
+
   end
 end
 

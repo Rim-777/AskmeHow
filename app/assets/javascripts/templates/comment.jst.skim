@@ -1,4 +1,4 @@
-tr
+tr.comment id="comment_#{@object.id}"
   td.col-lg-10
     = @object.body
   td.col-lg-1

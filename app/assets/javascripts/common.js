@@ -21,14 +21,20 @@ function setActionToCommentField(entity) {
     $('#' + entity + '_' + entity_id + '_comment_add_area').hide()
 }
 
-function sendCommentToUsers (entity, data) {
+function sendCommentToUsers (data) {
     comment = $.parseJSON(data['comment']);
+    entity = comment.commentable_type.toLowerCase();
     author_of_comment = $.parseJSON(data['author_of_comment']);
     entity_id = comment.commentable_id;
-    $('#' + entity + '_' + entity_id + '_comments').append(JST["templates/comment"]({object: comment , author_of_comment: author_of_comment}));
-    $('#' + entity + '_' + entity_id + '_comment_body_area').val('');
-    $('#' + entity + '_' + entity_id + '_comment_form_new').hide();
-    $('input[type="text"].' + entity + '_comment_add_area').show();
+    if ($('#comment_'+ comment.id)[0] == undefined){
+        $('#' + entity + '_' + entity_id + '_comments').append(JST["templates/comment"]({object: comment , author_of_comment: author_of_comment}));
+        $('#' + entity + '_' + entity_id + '_comment_body_area').val('');
+        $('#' + entity + '_' + entity_id + '_comment_form_new').hide();
+        $('input[type="text"].' + entity + '_comment_add_area').show();
+
+    }
+
+
 }
 
 

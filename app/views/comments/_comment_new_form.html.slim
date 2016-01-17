@@ -1,4 +1,7 @@
-= form_for [commentable, comment], html: {id: "#{commentable.type_and_id}_comment_form_new", style: "display: none"},  remote: true do |f|
+= render 'common/errors', resource: comment
+.new_comment_errors
+= form_for [commentable, comment], html: {id: "#{commentable.type_and_id}_comment_form_new", style: "display: none"},
+           remote: true do |f|
   div class="field"
     = f.text_area :body, id: "#{commentable.type_and_id}_comment_body_area", class: 'form-control'
   div class="actions col-lg-12 "
