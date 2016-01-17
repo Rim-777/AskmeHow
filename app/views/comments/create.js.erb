@@ -1,0 +1,17 @@
+<% if @comment.errors.present? %>
+<% @comment.errors.full_messages.each do |message| %>
+$('.new_comment_errors').html('<%= j message %>');
+<% end %>
+
+<% else %>
+
+if ($('#comment_<%= @comment.id %>')[0] == undefined) {
+    var commentable = '<%= @comment.commentable.type_and_id %>';
+    $('#'+ commentable +'_comments').append("<%= j render  @comment %>");
+    $('#'+ commentable + '_comment_body_area').val('');
+    $('#'+ commentable + '_comment_form_new').hide();
+    $('input[type="text"].<%= @comment.commentable.entity %>_comment_add_area').show();
+}
+
+
+<% end %>
