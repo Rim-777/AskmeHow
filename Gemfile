@@ -35,7 +35,9 @@ gem 'devise'
 # gem 'unicorn'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
-
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem 'slim-rails'
 # gem 'haml-rails'
 # gem 'slim'
@@ -68,6 +70,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
+
+  gem 'letter_opener'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
