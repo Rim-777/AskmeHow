@@ -44,6 +44,8 @@ html lang="en"
                 li
                   h3 You are:
                 = current_user.email
+                br
+                = link_to 'edit profile', edit_user_registration_path
                 li= link_to "log out", destroy_user_session_path, method: :delete
               - else
                 li= link_to "log in", new_user_session_path

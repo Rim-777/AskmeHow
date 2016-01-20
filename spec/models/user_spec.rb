@@ -104,7 +104,7 @@ RSpec.describe User do
     end
 
     context 'user does not exist' do
-      let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123457', info: {email: 'new@user.ml'} ) }
+      let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345678', info: {email: 'new@user.ml'} ) }
 
       it 'create new user' do
         expect { User.find_by_oauth(auth) }.to change(User, :count).by(1)
