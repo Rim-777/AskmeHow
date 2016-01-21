@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     authorization = Authorization.where(provider: oauth.provider, uid: oauth.uid.to_s).first
     return authorization.user if authorization
 
-    tmp_email = oauth.info[:email] || "#{oauth.uid.to_s}@#{oauth.provider}.tmp"
+    tmp_email = oauth.info.email || "#{oauth.uid.to_s}@#{oauth.provider}.tmp"
     user = User.where(email: tmp_email).first
     if user
       user.authorizations.create(provider: oauth.provider, uid: oauth.uid.to_s)
