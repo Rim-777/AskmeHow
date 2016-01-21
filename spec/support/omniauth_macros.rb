@@ -6,5 +6,8 @@ module OmniauthMacros
   end
 
 
+  def mock_auth_invalid_hash(provider)
+    OmniAuth.config.mock_auth[provider.to_sym] = :invalid_credentials
 
+  end
 end
