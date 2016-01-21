@@ -69,6 +69,7 @@ RSpec.describe User do
   describe '.method find_by_oauth' do
     let!(:user) { create(:user) }
     let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123457') }
+
     context 'user already has an social net authorization' do
       it 'returns the user' do
         user.authorizations.create(provider: 'facebook', uid: '123457')
@@ -88,7 +89,7 @@ RSpec.describe User do
           expect { User.find_by_oauth(auth) }.to change(user.authorizations, :count).by(1)
         end
 
-        it 'create authorization wit provider and uid' do
+        it 'create authorization with provider and uid' do
           user = User.find_by_oauth(auth)
           authorization = user.authorizations.first
           expect(authorization.provider).to eq auth.provider
@@ -104,7 +105,23 @@ RSpec.describe User do
     end
 
     context 'user does not exist' do
-      let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345678', info: {email: 'new@user.ml'} ) }
+
+      let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345678', info: {email: 'new@user.ml'}) }
+      context 'provider  return email for user' do
+        it 'fills user emails' do
+          user = User.find_by_oauth(auth)
+          expect(user.email).to eq auth.info.email
+        end
+      end
+
+      context 'provider dont return email' do
+        let(:auth) { OmniAuth::AuthHash.new(provider: 'twitter', uid: '12345678', info: {email: nil}) }
+        it 'fills tmp email for user' do
+          user = User.find_by_oauth(auth)
+          expect(user.email.split('@').last).to eq 'twitter.tmp'
+        end
+      end
+
 
       it 'create new user' do
         expect { User.find_by_oauth(auth) }.to change(User, :count).by(1)
@@ -114,10 +131,6 @@ RSpec.describe User do
         expect(User.find_by_oauth(auth)).to be_a(User)
       end
 
-      it 'fills user emails' do
-        user = User.find_by_oauth(auth)
-         expect(user.email).to eq auth.info.email
-      end
 
       it 'create authorizations for user' do
         user = User.find_by_oauth(auth)
@@ -130,6 +143,9 @@ RSpec.describe User do
         expect(authorization.provider).to eq auth.provider
         expect(authorization.uid).to eq auth.uid
       end
+
+
+
     end
 
   end
