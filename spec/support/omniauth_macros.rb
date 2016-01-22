@@ -10,4 +10,6 @@ module OmniauthMacros
     OmniAuth.config.mock_auth[provider.to_sym] = :invalid_credentials
 
   end
+
+
 end

@@ -4,7 +4,7 @@ feature 'OAuth' do
   before { visit new_user_session_path }
 
   describe 'user try sign_in ' do
-    scenario 'uccessfully' do
+    scenario 'successfully' do
       mock_auth_hash(:twitter)
       click_on 'Sign in with Twitter'
       expect(page).to have_content "Successfully authenticated from Twitter account."
