@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
   respond_to :json, only: :create
   respond_to :js, except: :destroy
 
+  authorize_resource
 
   def index
     respond_with(@questions = Question.all)
@@ -35,9 +36,6 @@ class QuestionsController < ApplicationController
     respond_with (@question) do |format|
       format.html { redirect_to questions_path }
     end
-
-    # respond_with(@question.destroy) if current_user.author_of?(@question)
-    # respond_with(@question)
   end
 
 

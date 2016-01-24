@@ -4,6 +4,9 @@ class AnswersController < ApplicationController
   before_action :set_answer, except: [:create]
   after_action :publish_answer, only: [:create]
 
+
+  authorize_resource
+
   respond_to :js
   respond_to :json, only: :create
 

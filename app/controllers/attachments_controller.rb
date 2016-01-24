@@ -2,6 +2,8 @@ class AttachmentsController < ApplicationController
   before_action :authenticate_user!, only: :destroy
   before_action :set_attachment, only: :destroy
 
+  authorize_resource
+
   respond_to :js
 
   def destroy

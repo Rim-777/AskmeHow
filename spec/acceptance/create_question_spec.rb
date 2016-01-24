@@ -21,9 +21,8 @@ I want to be able to ask questions } do
 
   scenario 'Un-authenticate User is trying ask a question' do
     visit questions_path
-    click_on 'Ask question'
+    expect(page).to_not have_link 'Ask question'
     # save_and_open_page
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 
 end

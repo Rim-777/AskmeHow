@@ -1,5 +1,6 @@
 span id="attachment_#{attachment.id}" class="#{attachable.type_and_id}_attachment"
-  - if user_signed_in? && current_user.author_of?(attachable)
+
+  - if can?(:destroy, attachment)
     span class="#{attachable.class.to_s.downcase}_attachment_links"
       = link_to 'x', attachment, id: "attachment_remove_link_#{attachment.id}", class: "btn attachment_remove_link", remote: true, method: :delete
 

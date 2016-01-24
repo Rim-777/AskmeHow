@@ -88,7 +88,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #select_best' do
-    let!(:one_more_answer) { create(:answer, question: question, user: user, is_best: false) }
+    let!(:one_more_answer) { create(:answer, question: question, user: create(:user), is_best: false) }
 
     context "Author of question is trying to mark 'is_best' an answer on his question " do
 

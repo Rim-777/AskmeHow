@@ -20,6 +20,7 @@ be able to mark answer} do
     end
 
     click_on 'best?'
+    sleep(1)
     within ".best_answer" do
       expect(page).to have_selector "#answer_#{answer.id}"
       expect(page).to have_content answer.body

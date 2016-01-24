@@ -4,6 +4,10 @@ class OpinionsController < ApplicationController
   before_action :if_user_not_signed_in
   before_action :check_authorship
 
+  authorize_resource
+
+  # skip_authorization_check
+
   respond_to do |format|
     format.json
     format.js
