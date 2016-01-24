@@ -7,12 +7,9 @@ class Ability
     else
       guest_abilities
     end
-
-
   end
 
   private
-
   def guest_abilities
     can :read, :all
   end
@@ -33,11 +30,8 @@ class Ability
       !opinion.opinionable.user_id == user
     end
 
-
     alias_action :positive, :negative, to: :say_opinion_for
-
     can :say_opinion_for, [Question, Answer]
-    #
     cannot :say_opinion_for, [Question, Answer], user:user
 
   end

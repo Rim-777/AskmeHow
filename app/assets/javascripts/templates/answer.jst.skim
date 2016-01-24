@@ -45,7 +45,7 @@
               span>
             a href="/answers/#{@answer.answer_id}" class="remove_link" data-confirm="Do you want to remove the answer" data-remote="true" rel="nofollow" data-method="delete"
               |delete
-          - if @current_user_id == @answer.answer_question_author_id
+          - if @current_user_id == @answer.answer_question_author_id && @current_user_id != @answer.answer_author_id
             span>
             a href="/answers/#{@answer.answer_id}/select_best" class="answer_best_link" id="answer_best_link_#{@answer.answer_id}" data-remote="true" rel="nofollow" data-method="patch"
               |best?
