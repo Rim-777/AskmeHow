@@ -4,9 +4,9 @@ class OpinionsController < ApplicationController
   before_action :if_user_not_signed_in
   before_action :check_authorship
 
-  authorize_resource
 
-  # skip_authorization_check
+
+  skip_authorization_check
 
   respond_to do |format|
     format.json
@@ -14,11 +14,13 @@ class OpinionsController < ApplicationController
   end
 
   def positive
+    authorize! :positive, @opinionable
     set_user_opinion(1)
   end
 
 
   def negative
+    authorize! :negative, @opinionable
     set_user_opinion(-1)
   end
 

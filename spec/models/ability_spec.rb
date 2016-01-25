@@ -23,8 +23,6 @@ describe 'Ability' do
     let(:other_user){create :user, admin: false}
     let(:question_of_other_user){create(:question, user: other_user)}
     let(:question_attachment){create(:attachment, attachable: question)}
-    let(:opinion_of_user){create(:opinion, opinionable: question_of_other_user, user: user)}
-    let(:opinion_of_other_user){create(:opinion, opinionable: question, user: other_user)}
     let(:answer_of_user){create(:answer, question: question_of_other_user, user:user)}
     let(:answer_of_other_user){create(:answer, question: question, user:other_user)}
 
@@ -34,7 +32,6 @@ describe 'Ability' do
     it {should be_able_to :create, Question}
     it {should be_able_to :create, Answer}
     it {should be_able_to :create, Comment}
-    it {should be_able_to :manage, Opinion  }
 
 
 
@@ -56,8 +53,6 @@ describe 'Ability' do
     it {should be_able_to :select_best, create(:answer, question: question, user:other_user), user:user}
     it {should_not be_able_to :select_best, create(:answer, question: question_of_other_user, user:other_user), user:user}
 
-    it {should be_able_to :manage, opinion_of_user, user: user  }
-    it {should_not be_able_to :manage, opinion_of_other_user, user: user  }
 
     it {should be_able_to :say_opinion_for, question_of_other_user, user: user  }
     it {should_not be_able_to :say_opinion_for, question, user: user  }

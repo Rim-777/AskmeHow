@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     render nothing: true, alert: exception.message
+    # redirect_to root_path, alert: exception.message
   end
 
   check_authorization unless: :devise_controller?
