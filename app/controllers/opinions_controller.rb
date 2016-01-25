@@ -6,7 +6,7 @@ class OpinionsController < ApplicationController
 
 
 
-  skip_authorization_check
+  # skip_authorization_check
 
   respond_to do |format|
     format.json
