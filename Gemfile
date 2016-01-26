@@ -40,6 +40,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'slim-rails'
+gem 'doorkeeper'
 # gem 'haml-rails'
 # gem 'slim'
 # gem 'gon'
@@ -65,6 +66,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'json_spec'
 end
 
 group :development do

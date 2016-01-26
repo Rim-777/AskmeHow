@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper
   devise_for :users, controllers: {omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'}
 
   concern :commentable do
@@ -18,6 +19,15 @@ Rails.application.routes.draw do
   resource :opinion, only: [:say_positive, :say_negative] do
     patch :positive, on: :member
     patch :negative, on: :member
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [:index] do
+        get :me, on: :collection
+        # get :index, on: :collection
+      end
+    end
   end
 
   root to: "questions#index"
