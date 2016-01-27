@@ -14,4 +14,11 @@ module ApiMacros
     end
   end
 
+  def it_return_200_status
+  it 'return 200 status' do
+    expect(response).to be_success
+  end
+
+  end
+
 end

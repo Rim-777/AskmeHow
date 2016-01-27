@@ -1,6 +1,6 @@
 class Api::V1::ProfilesController < ApplicationController
   skip_authorization_check
-  before_action :doorkeeper_authorize!, only: [:me, :index]
+  before_action :doorkeeper_authorize!
 
   respond_to :json
 
@@ -9,8 +9,13 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def index
-    @users = User.where.not(id:current_resource_owner)
+    @users = User.all
     respond_with(@users)
+  end
+
+  def other_users
+    @other_users = User.where.not(id:current_resource_owner)
+    respond_with(@other_users)
   end
 
   protected
