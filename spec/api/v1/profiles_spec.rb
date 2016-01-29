@@ -16,7 +16,7 @@ describe 'Profile API' do
 
       %w(email id created_at updated_at admin).each do |attr|
         it "contain #{attr}" do
-          expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path(attr)
+          expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path("#{attr.to_sym}")
         end
       end
 
@@ -38,7 +38,8 @@ describe 'Profile API' do
 
     context 'authorized' do
       let!(:all_users) { create_list(:user, 5) }
-      let(:access_token) { create(:access_token, resource_owner_id: all_users[0]) }
+      let!(:access_token) { create(:access_token, resource_owner_id: all_users.first.id) }
+
 
       before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 
@@ -62,7 +63,8 @@ describe 'Profile API' do
     un_authorized_request('/api/v1/profiles/other_users')
 
     context 'authorized' do
-      let!(:me) { create (:user) }
+      let!(:me) { create (:user), admin: true }
+
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
       let!(:other_users) { create_list(:user, 4) }
 
@@ -76,13 +78,13 @@ describe 'Profile API' do
       end
 
       it "contain all others users except me" do
-        other_users.each do |other_user|
-          expect(response.body).to include_json(other_user.to_json).at_path('profiles')
-        end
+
+          expect(response.body).to be_json_eql(other_users.to_json).at_path('profiles')
+
       end
 
       it "not contain me" do
-        expect(response.body).to_not include_json(me.to_json).at_path('profiles')
+        expect(response.body).to_not include_json(me.to_json)
       end
 
     end

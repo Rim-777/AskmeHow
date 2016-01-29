@@ -1,6 +1,6 @@
 class Api::V1::ProfilesController < Api::V1::BaseController
-  skip_authorization_check
-  # authorize_resource class: User
+  # skip_authorization_check
+  authorize_resource class: User, user: @current_resource_owner
 
   def me
     respond_with(current_resource_owner)
