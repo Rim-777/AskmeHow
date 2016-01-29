@@ -11,6 +11,7 @@ FactoryGirl.define do
   factory :question do
     title
     body
+    # user {create(:user)}
   end
 
   factory :invalid_question, class: 'Question' do

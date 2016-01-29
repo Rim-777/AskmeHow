@@ -34,7 +34,7 @@ describe 'Profile API' do
 
   describe 'GET /index' do
 
-      un_authorized_request('/api/v1/profiles')
+    un_authorized_request('/api/v1/profiles')
 
     context 'authorized' do
       let!(:all_users) { create_list(:user, 5) }
@@ -43,7 +43,7 @@ describe 'Profile API' do
       before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 
 
-      it_return_200_status
+     it_return_200_status
 
       it "return the number of users equal to the number of users in database" do
         expect(response.body).to have_json_size(5)
@@ -68,7 +68,7 @@ describe 'Profile API' do
 
       before { get '/api/v1/profiles/other_users', format: :json, access_token: access_token.token }
 
-      it_return_200_status
+       it_return_200_status
 
 
       it "return number of all users except one" do
