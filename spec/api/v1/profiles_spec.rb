@@ -46,11 +46,11 @@ describe 'Profile API' do
      it_return_200_status
 
       it "return the number of users equal to the number of users in database" do
-        expect(response.body).to have_json_size(5)
+        expect(response.body).to have_json_size(5).at_path('profiles')
       end
 
       it "contain all users" do
-          expect(response.body).to be_json_eql(all_users.to_json)
+          expect(response.body).to be_json_eql(all_users.to_json).at_path('profiles')
       end
 
     end
@@ -72,17 +72,17 @@ describe 'Profile API' do
 
 
       it "return number of all users except one" do
-        expect(response.body).to have_json_size(4)
+        expect(response.body).to have_json_size(4).at_path('profiles')
       end
 
       it "contain all others users except me" do
         other_users.each do |other_user|
-          expect(response.body).to include_json(other_user.to_json)
+          expect(response.body).to include_json(other_user.to_json).at_path('profiles')
         end
       end
 
       it "not contain me" do
-        expect(response.body).to_not include_json(me.to_json)
+        expect(response.body).to_not include_json(me.to_json).at_path('profiles')
       end
 
     end
