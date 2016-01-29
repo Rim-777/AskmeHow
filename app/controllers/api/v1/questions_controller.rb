@@ -7,4 +7,8 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     # respond_with(@questions.to_json(include: :answers ))
     respond_with(@questions)
   end
+
+  def show
+    respond_with Question.find(params[:id])
+  end
 end
