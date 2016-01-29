@@ -1,7 +1,7 @@
 require 'rails_helper'
 include ApiMacros
 
-describe 'question API' do
+describe 'questions API' do
   let(:user) { create (:user) }
   let(:access_token) { create(:access_token, resource_owner_id: user.id) }
   let!(:questions_list) { create_list(:question, 2, user: user) }

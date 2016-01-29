@@ -6,6 +6,7 @@ class Answer < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, :body, :question_id, presence: true
+  default_scope { order(:created_at) }
 
   def set_is_best
     ActiveRecord::Base.transaction do

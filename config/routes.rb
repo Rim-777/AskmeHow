@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :questions, only: [:index, :show]
+      resources :questions, only: [:index, :show], shallow: true do
+        resources :answers, only: [:index]
+      end
 
       resources :profiles,  only: [:index] do
         get :me, on: :collection
