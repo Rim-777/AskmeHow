@@ -6,6 +6,6 @@ class QuestionSerializer < ActiveModel::Serializer
   # has_one :user
 
   def short_title
-    object.title.truncate(10)
+    object.title.truncate(10) if object.title
   end
 end
