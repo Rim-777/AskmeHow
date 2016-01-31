@@ -3,8 +3,9 @@ include ApiMacros
 
 describe 'Profile API' do
   describe 'GET /me' do
-
-    un_authorized_request('/api/v1/profiles/me')
+    context 'un-authorized' do
+    un_authorized_request('/api/v1/profiles/me', get: true)
+    end
 
     context 'authorized' do
       let(:me) { create (:user) }
@@ -34,7 +35,10 @@ describe 'Profile API' do
 
   describe 'GET /index' do
 
-    un_authorized_request('/api/v1/profiles')
+    context 'un-authorized' do
+      un_authorized_request('/api/v1/profiles', get: true)
+    end
+
 
     context 'authorized' do
       let!(:all_users) { create_list(:user, 5) }
@@ -60,7 +64,11 @@ describe 'Profile API' do
 
   describe 'GET /other_users' do
 
-    un_authorized_request('/api/v1/profiles/other_users')
+
+    context 'un-authorized' do
+      un_authorized_request('/api/v1/profiles/other_users', get: true)
+    end
+
 
     context 'authorized' do
       let!(:me) { create (:user), admin: true }

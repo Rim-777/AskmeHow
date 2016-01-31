@@ -71,6 +71,7 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'json_spec'
+  gem "json_matchers"
 end
 
 group :development do

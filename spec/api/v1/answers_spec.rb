@@ -1,10 +1,10 @@
 require 'rails_helper'
 include ApiMacros
 describe 'answers API' do
-  let(:user) { create (:user) }
-  let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+  let(:author_of_answer) { create (:user) }
+  let(:access_token) { create(:access_token, resource_owner_id: author_of_answer.id) }
   let!(:question) { create(:question, user: create(:user)) }
-  let!(:answer_list) { create_list(:answer, 3, question: question, user: create(:user)) }
+  let!(:answer_list) { create_list(:answer, 3, question: question, user: author_of_answer) }
   let!(:answer) { answer_list.first }
   let!(:attachment_list) { create_list(:attachment, 2, attachable: answer) }
   let!(:attachment) { attachment_list.first }
@@ -15,19 +15,10 @@ describe 'answers API' do
   describe 'GET /index' do
 
     context 'un-authorized' do
-      it 'return 401 status if there is no access_token' do
-        get "/api/v1/questions/#{question.id}/answers", format: :json
-        expect(response.status).to eq 401
-      end
-
-      it 'return 401 status if there is invalid access_token' do
-        get "/api/v1/questions/#{question.id}/answers", format: :json, access_token: '1234'
-        expect(response.status).to eq 401
-      end
+     before{ un_authorized_request("/api/v1/questions/#{question.id}/answers", get: true)}
     end
 
-
-    context 'authorized' do
+     context 'authorized' do
 
 
       before do
@@ -58,7 +49,7 @@ describe 'answers API' do
         end
 
         it "attachment object contains file with url" do
-          expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("answers/0/attachments/0/file/url")
+          expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("answers/0/attachments/0/file/file/url")
         end
 
       end
@@ -83,19 +74,10 @@ describe 'answers API' do
   describe 'GET /show' do
 
     context 'un-authorized' do
-      it 'return 401 status if there is no access_token' do
-        get "/api/v1/answers/#{answer.id}", format: :json
-        expect(response.status).to eq 401
-      end
-
-      it 'return 401 status if there is invalid access_token' do
-        get "/api/v1/answers/#{answer.id}", format: :json, access_token: '1234'
-        expect(response.status).to eq 401
-      end
+      before{ un_authorized_request("/api/v1/answers/#{answer.id}", get: true)}
     end
+
     context 'authorized' do
-
-
       before do
         get "/api/v1/answers/#{answer.id}/", format: :json, access_token: access_token.token
       end
@@ -125,7 +107,7 @@ describe 'answers API' do
         end
 
         it "attachment object contains file with url" do
-          expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("answer/attachments/0/file/url")
+          expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("answer/attachments/0/file/file/url")
         end
 
       end
@@ -150,39 +132,45 @@ describe 'answers API' do
   describe 'POST /create' do
 
     context 'un-authorized' do
-      it 'return 401 status if there is no access_token' do
-        post  "/api/v1/questions/#{question.id}/answers", format: :json
-        expect(response.status).to eq 401
-      end
-      it 'return 401 status if there is invalid access_token' do
-        post "/api/v1/questions/#{question.id}/answers", format: :json, access_token: '1234'
-        expect(response.status).to eq 401
-      end
+      before{ un_authorized_request("/api/v1/questions/#{question.id}/answers", post: true)}
     end
 
+    context 'authorized' do
+      it 'returns 422 code' do
+        post "/api/v1/questions/#{question.id}/answers", answer: attributes_for(:invalid_answer), format: :json, access_token: access_token.token
+        expect(response.status).to eq 422
+      end
 
-    # context 'authorized' do
-    #   it 'returns 422 code' do
-    #     post "/api/v1/questions/", question: attributes_for(:invalid_question), format: :json, access_token: access_token.token
-    #     expect(response.status).to eq 422
-    #   end
-    #
-    #   it 'creates a new question' do
-    #     expect { post "/api/v1/questions/", question: attributes_for(:question), format: :json, access_token: access_token.token }.to change(user.questions, :count).by(1)
-    #   end
-    #
-    #   it 'returns success code ' do
-    #     post "/api/v1/questions/", question: attributes_for(:question), format: :json, access_token: access_token.token
-    #     expect(response).to be_success
-    #   end
-    #
-    #   it 'return list of question' do
-    #     post "/api/v1/questions/", question: attributes_for(:question), format: :json, access_token: access_token.token
-    #     expect(response.body).to have_json_size(1)
-    #   end
-    #
-    #
-    # end
+      it 'creates a new answer for author of answer' do
+        expect { post "/api/v1/questions/#{question.id}/answers", answer: attributes_for(:answer),
+                      format: :json, access_token: access_token.token }.to change(author_of_answer.answers, :count).by(1)
+      end
+
+      it 'creates a new answer for question' do
+        expect { post "/api/v1/questions/#{question.id}/answers", answer: attributes_for(:answer),
+                      format: :json, access_token: access_token.token }.to change(question.answers, :count).by(1)
+      end
+      let!(:answer_attributes) { attributes_for(:answer) }
+      before { post "/api/v1/questions/#{question.id}/answers", answer: answer_attributes, format: :json, access_token: access_token.token }
+
+      it 'returns success code 201 ' do
+        expect(response).to be_success
+      end
+
+      it 'return only 1 answer' do
+        expect(response.body).to have_json_size(1)
+      end
+
+
+
+      it "contains correct answer attributes" do
+        answer_attributes.each do |key, value|
+          expect(response.body).to be_json_eql(value.to_json).at_path("answer/#{key}")
+        end
+      end
+
+
+    end
   end
 
 

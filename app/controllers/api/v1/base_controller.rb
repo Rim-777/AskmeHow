@@ -1,13 +1,10 @@
 class Api::V1::BaseController < ApplicationController
   skip_authorization_check
   before_action :doorkeeper_authorize!
-  # protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session
 
   respond_to :json
 
-  rescue_from CanCan::AccessDenied do |exception|
-    render json: {error: 'Вы не авторизованы'}
-  end
 
   protected
 
