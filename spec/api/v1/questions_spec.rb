@@ -176,7 +176,7 @@ describe 'questions API' do
         expect { post "/api/v1/questions/", question: question_attributes, format: :json, access_token: access_token.token }.to change(user.questions, :count).by(1)
       end
 
-      let!(:question_attributes) { attributes_for(:question) }
+      let!(:question_attributes) { attributes_for(:question).merge(user_id: user.id) }
       before {post "/api/v1/questions/", question: question_attributes, format: :json, access_token: access_token.token}
       it 'returns 201 success code' do
         expect(response).to be_success
@@ -191,11 +191,13 @@ describe 'questions API' do
           expect(response.body).to be_json_eql(value.to_json).at_path("question/#{key}")
         end
 
-
       end
 
-
-
+      %w(id title body created_at updated_at attachments user_id ).each do |attr|
+        it "created question contains #{attr}" do
+          expect(response.body).to be_json_eql(user.questions.last.send(attr.to_sym).to_json).at_path("question/#{attr}")
+        end
+      end
 
     end
   end

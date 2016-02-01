@@ -4,7 +4,7 @@ include ApiMacros
 describe 'Profile API' do
   describe 'GET /me' do
     context 'un-authorized' do
-    un_authorized_request('/api/v1/profiles/me', get: true)
+      before { un_authorized_request('/api/v1/profiles/me', get: true) }
     end
 
     context 'authorized' do
@@ -36,7 +36,8 @@ describe 'Profile API' do
   describe 'GET /index' do
 
     context 'un-authorized' do
-      un_authorized_request('/api/v1/profiles', get: true)
+      before { un_authorized_request('/api/v1/profiles', get: true) }
+
     end
 
 
@@ -48,14 +49,14 @@ describe 'Profile API' do
       before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 
 
-     it_return_200_status
+      it_return_200_status
 
       it "return the number of users equal to the number of users in database" do
         expect(response.body).to have_json_size(5).at_path('profiles')
       end
 
       it "contain all users" do
-          expect(response.body).to be_json_eql(all_users.to_json).at_path('profiles')
+        expect(response.body).to be_json_eql(all_users.to_json).at_path('profiles')
       end
 
     end
@@ -66,7 +67,7 @@ describe 'Profile API' do
 
 
     context 'un-authorized' do
-      un_authorized_request('/api/v1/profiles/other_users', get: true)
+      before { un_authorized_request('/api/v1/profiles/other_users', get: true) }
     end
 
 
@@ -78,7 +79,7 @@ describe 'Profile API' do
 
       before { get '/api/v1/profiles/other_users', format: :json, access_token: access_token.token }
 
-       it_return_200_status
+      it_return_200_status
 
 
       it "return number of all users except one" do
@@ -87,7 +88,7 @@ describe 'Profile API' do
 
       it "contain all others users except me" do
 
-          expect(response.body).to be_json_eql(other_users.to_json).at_path('profiles')
+        expect(response.body).to be_json_eql(other_users.to_json).at_path('profiles')
 
       end
 

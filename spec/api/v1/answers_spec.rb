@@ -169,6 +169,12 @@ describe 'answers API' do
         end
       end
 
+      %w(id body created_at updated_at attachments user_id ).each do |attr|
+        it "created question contains #{attr}" do
+          expect(response.body).to be_json_eql(author_of_answer.answers.last.send(attr.to_sym).to_json).at_path("answer/#{attr}")
+        end
+      end
+
 
     end
   end
