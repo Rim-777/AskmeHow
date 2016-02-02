@@ -26,5 +26,12 @@ module AcceptanceMacros
     end
   end
 
+
+def add_inputs_type_files
+  all_inputs_type_file = all('input[type="file"]')
+  all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
+  all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
+end
+
 end
 

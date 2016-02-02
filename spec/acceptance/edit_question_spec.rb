@@ -8,18 +8,12 @@ I want to be able to edit my question} do
 
   given!(:question) { create(:question, user: author_of_question) }
 
-
-
-
-
-
   describe 'Authenticate User and his Question' do
 
     before do
       sign_in(author_of_question)
       visit question_path(question)
     end
-
 
     scenario 'Author of Question is trying edit his Question', js: true do
       within '.question_existed_area'  do

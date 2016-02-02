@@ -1,6 +1,5 @@
 require_relative 'acceptance_helper'
 
-
 feature 'Browse questions', %q{
 Before ask my question
 I want to be able to  browse the questions

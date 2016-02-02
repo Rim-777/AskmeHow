@@ -31,9 +31,7 @@ I want to be able to attach some files to my answer} do
         expect(page).to have_link '[+]'
         click_on '[+]'
 
-        all_inputs_type_file = all('input[type="file"]')
-        all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
-        all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
+        add_inputs_type_files
       end
 
       click_on 'answer_create_button'
@@ -51,10 +49,8 @@ I want to be able to attach some files to my answer} do
 
         expect(page).to have_link '[+]'
         click_on '[+]'
+        add_inputs_type_files
 
-        all_inputs_type_file = all('input[type="file"]')
-        all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
-        all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
         expect(page).to have_link '[-]'
         click_on '[-]', match: :first
       end
