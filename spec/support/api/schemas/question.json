@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["question"],
+  "properties": {
+    "question": {
+      "type": "object",
+      "required": ["id", "title", "body"],
+      "properties": {
+        "id": {"type": "integer"},
+        "title": {"type": "string"},
+        "body": {"type": "string"}
+      }
+    }
+  }
+}
