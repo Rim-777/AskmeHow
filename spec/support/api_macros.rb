@@ -1,8 +1,7 @@
 module ApiMacros
 
   def let_questions_spec_objects
-    let(:user) { create (:user) }
-    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+    set_user_and_token
     let!(:questions_list) { create_list(:question, 2, user: user) }
     let!(:question) { questions_list.first }
     let!(:answer) { create(:answer, question_id: question.id, user: create(:user)) }
@@ -14,10 +13,8 @@ module ApiMacros
   end
 
 
-  
   def let_answers_spec_objects
-    let(:user) { create (:user) }
-    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+    set_user_and_token
     let!(:question) { create(:question, user: create(:user)) }
     let!(:answer_list) { create_list(:answer, 3, question: question, user: user) }
     let!(:answer) { answer_list.first }
@@ -27,8 +24,6 @@ module ApiMacros
                                       commentable_type: answer.class.to_s, user: create(:user)) }
     let!(:comment) { comment_list.first }
   end
-  
-  
 
 
   def it_return_200_status
@@ -39,9 +34,15 @@ module ApiMacros
   end
 
 
-    def do_request(method, path, options = {})
-      send method, path, { format: :json }.merge(options)
-    end
+  def do_request(method, path, options = {})
+    send method, path, {format: :json}.merge(options)
+  end
 
+  private
+
+  def set_user_and_token
+    let(:user) { create (:user) }
+    let(:access_token) { create(:access_token, resource_owner_id: user.id) }
+  end
 
 end
