@@ -53,23 +53,29 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:request) { post :create, question: attributes_for(:question) }
+      let(:channel) { "/questions" }
 
       it 'save new question in database' do
 
-        expect { post :create, question: attributes_for(:question)
-        }.to change(Question, :count).by(1)
+        expect { request }.to change(Question, :count).by(1)
       end
 
       it 'save new question in database depending with user' do
 
-        expect { post :create, question: attributes_for(:question)
-        }.to change(user.questions, :count).by(1)
+        expect { request }.to change(user.questions, :count).by(1)
       end
 
       it 'redirect_to show view' do
-        post :create, question: attributes_for(:question)
+        request
         expect(response).to redirect_to question_path(assigns(:question))
       end
+
+      it_behaves_like 'Publishable' do
+        let(:message) { :publish_question }
+      end
+
+
     end
 
     context 'with invalid attributes' do
@@ -82,6 +88,7 @@ RSpec.describe QuestionsController, type: :controller do
         post :create, question: attributes_for(:invalid_question)
         expect(response).to render_template :new
       end
+
     end
   end
 

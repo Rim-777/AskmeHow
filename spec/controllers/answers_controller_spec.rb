@@ -18,21 +18,24 @@ RSpec.describe AnswersController, type: :controller do
   describe 'POST #create' do
 
     context 'with valid attributes' do
+      let(:request) { post :create, question_id: question, answer: attributes_for(:answer), format: :js }
+      let(:channel) { "/question/#{question.id}/answers" }
 
       it 'save new answer in database depending with question' do
-        expect { post :create, question_id: question, answer: attributes_for(:answer), format: :js
-        }.to change(question.answers, :count).by(1)
+        expect { request }.to change(question.answers, :count).by(1)
       end
 
       it 'save new answer in database depending with user' do
-        expect { post :create, question_id: question, answer: attributes_for(:answer), format: :js
-        }.to change(user.answers, :count).by(1)
+        expect { request }.to change(user.answers, :count).by(1)
       end
 
       it 'render template Answers/create.js view' do
-        post :create, question_id: question, answer: attributes_for(:answer), format: :js
-        # expect(response).to render_template "answers/_answer_data.json.jbuilder"
+        request
         expect(response).to render_template :create
+      end
+
+      it_behaves_like 'Publishable' do
+        let(:message) { :publish_answer }
       end
     end
 
