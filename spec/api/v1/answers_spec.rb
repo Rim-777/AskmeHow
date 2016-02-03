@@ -54,7 +54,7 @@ describe 'answers API' do
     let!(:object_attributes) { attributes_for(:answer) }
     let(:object_for_json_path) { "answer" }
     let(:object_klass) { Answer }
-    let!(:post_request) { post api_path, answer: object_attributes,
+    let(:post_request) { post api_path, answer: object_attributes, question_id: question.id, user: user,
                                format: :json, access_token: access_token.token }
     let(:request_with_invalid_object) { post api_path, answer: attributes_for(:invalid_answer),
                                              format: :json, access_token: access_token.token }
@@ -67,13 +67,11 @@ describe 'answers API' do
     context 'authorized' do
 
       it 'creates a new answer for user' do
-        expect { post api_path, answer: object_attributes,
-                      format: :json, access_token: access_token.token }.to change(user.answers, :count).by(1)
+        expect { post_request }.to change(user.answers, :count).by(1)
       end
 
       it 'creates a new answer for question' do
-        expect { post api_path, answer: object_attributes,
-                      format: :json, access_token: access_token.token }.to change(question.answers, :count).by(1)
+        expect { post_request }.to change(question.answers, :count).by(1)
       end
 
       it_behaves_like 'Api Create'

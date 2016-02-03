@@ -10,7 +10,7 @@ shared_examples_for 'Api Create' do
     expect(response).to be_success
   end
 
-  it 'return only 1 answer' do
+  it 'return only 1 object' do
     expect(response.body).to have_json_size(1)
   end
 

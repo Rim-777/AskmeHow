@@ -4,4 +4,5 @@ class AnswerSerializer < ActiveModel::Serializer
   has_many :attachments
   has_many :comments
   has_one :user_id
+  has_one :question_id
 end
