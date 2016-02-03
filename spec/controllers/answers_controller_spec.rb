@@ -37,6 +37,7 @@ RSpec.describe AnswersController, type: :controller do
       it_behaves_like 'Publishable' do
         let(:message) { :publish_answer }
       end
+
     end
 
     context 'with invalid attributes' do
