@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  subject{Question.new}
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :body }
@@ -9,6 +8,28 @@ RSpec.describe Question, type: :model do
   it { should have_many(:attachments).dependent(:destroy) }
   it { should accept_nested_attributes_for(:attachments) }
   it { should have_many(:opinions).dependent(:destroy) }
+
+  describe 'reputation ' do
+    let(:user) { create(:user) }
+    subject { build(:question, user: user) }
+    it_behaves_like 'Reputationable'
+  end
+
+  describe 'method is_subscribed_with?' do
+    let(:user) { create(:user) }
+    let!(:question) { create(:question, user: user) }
+    let(:subscription) {create(:subscription, user: user, question:question )}
+
+    it 'return true if question is subscribed with user' do
+      subscription
+      expect(question.is_subscribed_with?(user)).to eq true
+    end
+
+    it 'return true if question is subscribed with user' do
+      expect(question.is_subscribed_with?(user)).to eq false
+    end
+
+  end
 
 
   describe 'method best_answer' do

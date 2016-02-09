@@ -41,19 +41,17 @@ gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'slim-rails'
 gem 'doorkeeper'
-# gem 'haml-rails'
-# gem 'slim'
-# gem 'gon'
 gem 'remotipart'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 gem 'cocoon'
 gem 'skim'
-
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
+# gem 'delayed_job_active_record'
+# gem 'whenever'
+gem 'sidekiq'
+gem 'sidetiq'
+gem 'sinatra', '>=1.3.0' , require: nil
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

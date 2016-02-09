@@ -5,13 +5,17 @@ RSpec.describe QuestionsController, type: :controller do
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user, title: 'OldTitleText', body: 'OldBodyText') }
   let(:another_user) { create(:user) }
-
-  before { sign_in(user) }
+  let!(:subscriber) { create(:user) }
 
   describe 'GET #index' do
+
+
     let(:questions) { create_list(:question, 2, user: user) }
 
-    before { get :index }
+    before do
+      sign_in(user)
+      get :index
+    end
 
     it 'populates an array of all question' do
       expect(assigns(:questions)).to match_array(questions)
@@ -24,7 +28,11 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'GET #show' do
 
-    before { get :show, id: question }
+    before do
+      sign_in(user)
+      get :show, id: question
+    end
+
 
     it 'assigns the requested question to @question' do
       expect(assigns(:question)).to eq question
@@ -40,7 +48,10 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new }
+    before do
+      sign_in(user)
+      get :new
+    end
 
     it 'assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
@@ -52,6 +63,8 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    before { sign_in(user) }
+
     context 'with valid attributes' do
       let(:request) { post :create, question: attributes_for(:question) }
       let(:channel) { "/questions" }
@@ -93,6 +106,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    before { sign_in(user) }
 
     context 'User is trying update his question' do
 
@@ -141,9 +155,14 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
 
+
+
   describe 'DELETE # destroy' do
 
-    before { question }
+    before do
+      sign_in(user)
+      question
+    end
 
     context 'User is trying to delete his own question' do
       it 'remove a question' do

@@ -11,7 +11,15 @@ RSpec.describe Answer, type: :model do
   it { should accept_nested_attributes_for(:attachments) }
   it { should have_many(:opinions).dependent(:destroy) }
 
-    given_user_with_question_and_answers_from_model_macros
+  describe 'reputation' do
+    let(:user) { create(:user) }
+    let(:question) { create(:question, user: user) }
+    subject { build(:answer, question: question, user: user) }
+    it_behaves_like 'Reputationable'
+  end
+
+
+  given_user_with_question_and_answers_from_model_macros
 
   describe '#method set_is_best' do
 

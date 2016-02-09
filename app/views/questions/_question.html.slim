@@ -35,3 +35,7 @@
                 == render 'attachments/attachment', attachment: a, attachable: @question
         br
       == render 'comments/comments', commentable: @question
+      .row
+        .col-lg-12.col-lg-push-1.question_crud_link
+          = link_to 'subscribe this question', question_subscription_path(@question),
+                    class: 'question_subscribe_link',  method: :post, remote: true

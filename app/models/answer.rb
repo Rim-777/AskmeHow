@@ -1,6 +1,5 @@
 class Answer < ActiveRecord::Base
-
-  include Opinionable, Attachable, Commentable
+  include Opinionable, Attachable, Commentable, Reputationable
 
   belongs_to :question
   belongs_to :user
@@ -17,4 +16,5 @@ class Answer < ActiveRecord::Base
       end
     end
   end
+
 end

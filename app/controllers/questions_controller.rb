@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_question, only: [:show, :update, :destroy, :subscribe, :unsubscribe]
   before_action :set_answer, only: :show
   after_action :publish_question, only: [:create]
 
@@ -39,6 +39,7 @@ class QuestionsController < ApplicationController
   end
 
 
+
   private
   def set_question
     @question = Question.find(params[:id])
@@ -53,7 +54,7 @@ class QuestionsController < ApplicationController
   end
 
   def data_for_chanel
-     render_to_string(partial: 'questions/question_data.json.jbuilder')
+    render_to_string(partial: 'questions/question_data.json.jbuilder')
   end
 
   def publish_question

@@ -6,6 +6,9 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'cancan/matchers'
 require "json_matchers/rspec"
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
 
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }

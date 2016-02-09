@@ -3,12 +3,19 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :opinions
   has_many :comments
+  has_many :subscriptions, dependent: :destroy
   has_many :authorizations, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter, :vkontakte]
+
+  def self.send_daily_digest
+    find_each.each do |user|
+      DailyMailer.digest(user).deliver_late
+    end
+  end
 
   def author_of?(entity)
     self.id == entity.user_id
@@ -50,7 +57,6 @@ class User < ActiveRecord::Base
     end
     user
   end
-
 
 
 end
