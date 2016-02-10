@@ -1,0 +1,8 @@
+br
+-if can?(:create, Subscription)
+  - if @question.is_not_subscribed_with?(current_user)
+    = link_to 'subscribe', question_subscription_path(@question),
+              id: "question_#{@question.id}_subscribe_link", method: :post, remote: true
+  - else
+    = link_to 'unsubscribe', question_subscription_path(@question),
+              id: "question_#{@question.id}_unsubscribe_link", method: :delete, remote: true
