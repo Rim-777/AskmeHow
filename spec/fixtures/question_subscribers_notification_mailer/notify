@@ -1,0 +1,3 @@
+QuestionSubscribersNotificationMailer#notify
+
+Hi, find me in app/views/question_subscribers_notification_mailer/notify

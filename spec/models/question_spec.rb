@@ -9,35 +9,52 @@ RSpec.describe Question, type: :model do
   it { should accept_nested_attributes_for(:attachments) }
   it { should have_many(:opinions).dependent(:destroy) }
 
+  let(:author_of_question) { create(:user) }
+  let!(:question) { create(:question, user: author_of_question) }
+
   describe 'reputation ' do
-    let(:user) { create(:user) }
-    subject { build(:question, user: user) }
+    subject { build(:question, user: author_of_question) }
     it_behaves_like 'Reputationable'
   end
 
   describe 'method is_subscribed_with?' do
-    let(:user) { create(:user) }
-    let!(:question) { create(:question, user: user) }
-    let(:subscription) {create(:subscription, user: user, question:question )}
+    let(:subscriber) { create(:user) }
+    let(:subscription) { create(:subscription, user: subscriber, question: question) }
 
-    it 'return true if question is subscribed with user' do
-      subscription
-      expect(question.is_subscribed_with?(user)).to eq true
+    it 'return true if question is subscribed with author of question' do
+      expect(question.is_subscribed_with?(author_of_question)).to eq true
     end
 
-    it 'return true if question is subscribed with user' do
-      expect(question.is_subscribed_with?(user)).to eq false
+    it 'return true if question is subscribed with subscriber' do
+      subscription
+      expect(question.is_subscribed_with?(subscriber)).to eq true
+    end
+
+    it 'return true if question is not subscribed with subscriber' do
+      expect(question.is_subscribed_with?(subscriber)).to eq false
+    end
+
+  end
+
+  describe 'method is_not_subscribed_with?' do
+    let(:subscriber) { create(:user) }
+    let(:subscription) { create(:subscription, user: subscriber, question: question) }
+
+    it 'return false if question is subscribed with subscriber' do
+      subscription
+      expect(question.is_not_subscribed_with?(subscriber)).to eq false
+    end
+
+    it 'return true if question is not subscribed with subscriber' do
+      expect(question.is_not_subscribed_with?(subscriber)).to eq true
     end
 
   end
 
 
   describe 'method best_answer' do
-
-    let(:user) { create(:user) }
-    let!(:question) { create(:question, user: user) }
-    let!(:best_answer) { create(:answer, question: question, user: user, is_best: true) }
-    let!(:other_answer) { create(:answer, question: question, user: user, is_best: false) }
+    let!(:best_answer) { create(:answer, question: question, user: create(:user), is_best: true) }
+    let!(:other_answer) { create(:answer, question: question, user: create(:user), is_best: false) }
 
     it 'return one answer from his answers, that has value of field "is_best" - true' do
       expect(question.best_answer).to eq best_answer

@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   belongs_to :user
 
+  after_create :subscribe_with_author
+
   scope :asked_one_day_ago, -> { where(created_at: Date.yesterday) }
   default_scope { order(:created_at)}
   validates :title, :body, :user_id, presence: true
@@ -21,6 +23,10 @@ class Question < ActiveRecord::Base
     !!self.subscriptions.where(user_id: user.id).first
   end
 
+  private
 
+  def subscribe_with_author
+    self.subscriptions.create(user_id: self.user_id)
+  end
 
 end

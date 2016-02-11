@@ -4,6 +4,8 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
 
+  after_create :notify_question_subscribers
+
   validates :user_id, :body, :question_id, presence: true
   default_scope { order(:created_at) }
 
@@ -15,6 +17,10 @@ class Answer < ActiveRecord::Base
         raise ActiveRecord::Rollback unless update(is_best: true)
       end
     end
+  end
+
+  def notify_question_subscribers
+    QuestionSubscribersNotificationJob.perform_later(self)
   end
 
 end
