@@ -14,6 +14,7 @@ class Ability
     can :read, :all
   end
 
+  public
   def admin_abilities
     can :manage, :all
   end
@@ -26,10 +27,10 @@ class Ability
     cannot :select_best, Answer, user_id: user.id
 
     can :create, Subscription
-
     can :destroy, Subscription do |subscription|
       subscription.question.is_subscribed_with?(user)
     end
+
 
     alias_action :positive, :negative, to: :say_opinion_for
     can :say_opinion_for, [Question, Answer]

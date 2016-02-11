@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :update, :destroy, :subscribe, :unsubscribe]
+  before_action :set_question, only: [:show, :update, :destroy]
   before_action :set_answer, only: :show
   after_action :publish_question, only: [:create]
 

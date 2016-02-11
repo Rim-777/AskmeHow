@@ -17,7 +17,7 @@ RSpec.describe Question, type: :model do
     it_behaves_like 'Reputationable'
   end
 
-  describe 'method is_subscribed_with?' do
+  describe '# is_subscribed_with?' do
     let(:subscriber) { create(:user) }
     let(:subscription) { create(:subscription, user: subscriber, question: question) }
 
@@ -36,7 +36,7 @@ RSpec.describe Question, type: :model do
 
   end
 
-  describe 'method is_not_subscribed_with?' do
+  describe '#is_not_subscribed_with?' do
     let(:subscriber) { create(:user) }
     let(:subscription) { create(:subscription, user: subscriber, question: question) }
 
@@ -52,7 +52,7 @@ RSpec.describe Question, type: :model do
   end
 
 
-  describe 'method best_answer' do
+  describe 'PATH/#best_answer' do
     let!(:best_answer) { create(:answer, question: question, user: create(:user), is_best: true) }
     let!(:other_answer) { create(:answer, question: question, user: create(:user), is_best: false) }
 

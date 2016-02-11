@@ -1,15 +1,5 @@
-<% if @subscription.errors.present? %>
-
-<% @subscription.errors.full_messages.each do |message| %>
-$('.subscription_errors').html('<%= j message %>');
-<% end %>
-
-<% else %>
-
 $('.question_subscribe_links').html('<%= j render 'questions/subscribe_links' %>');
 
-
-<% end %>
 
 
 
