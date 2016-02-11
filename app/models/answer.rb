@@ -19,6 +19,8 @@ class Answer < ActiveRecord::Base
     end
   end
 
+  private
+
   def notify_question_subscribers
     QuestionSubscribersNotificationJob.perform_later(self)
   end

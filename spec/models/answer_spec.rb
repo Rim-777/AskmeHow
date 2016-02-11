@@ -45,4 +45,17 @@ RSpec.describe Answer, type: :model do
     end
   end
 
+  describe 'it put in cue sending notification after creation of new answer' do
+    let(:user) { create(:user) }
+    let(:question) { create(:question, user: user) }
+    subject { build(:answer, question: question, user: user) }
+
+
+    it 'should calculate user reputation after create' do
+      expect(QuestionSubscribersNotificationJob).to receive(:perform_later).with(subject)
+      subject.save!
+    end
+  end
+
+
 end

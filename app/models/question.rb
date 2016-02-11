@@ -24,7 +24,6 @@ class Question < ActiveRecord::Base
   end
 
   private
-
   def subscribe_with_author
     self.subscriptions.create(user_id: self.user_id)
   end
