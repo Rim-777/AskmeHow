@@ -1,14 +1,5 @@
-p
-- if can?(:create, Question)
-  = link_to 'Ask question', new_question_path
-
-div class="question_list" data={current_user_id: user_signed_in? ? current_user.id : nil}
-  - if @questions.any?
-    - @questions.each do |question|
-      p
-        = link_to "#{question.title}", question
-        - if can?(:destroy, question)
-          span>
-          = link_to 'remove', question, class: 'remove_link', method: :delete, data: {confirm: 'Удалить вопрос?'}
-
-= subscribe_to "/questions"
+.container-fluid
+  p == render 'searches/search_form'
+  p == render 'questions/ask_question_button'
+  p == render 'questions/questions'
+  = subscribe_to "/questions"

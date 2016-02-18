@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   concern :commentable do
     resources :comments, only: :create
-
   end
 
 
@@ -18,7 +17,6 @@ Rails.application.routes.draw do
       patch :select_best, on: :member
     end
     resource :subscription, only: [:create, :destroy]
-
   end
 
   resources :attachments, only: :destroy
@@ -39,6 +37,10 @@ Rails.application.routes.draw do
         get :other_users, on: :collection
       end
     end
+  end
+
+  resource :search, only: :search do
+    get :search
   end
 
   root to: "questions#index"

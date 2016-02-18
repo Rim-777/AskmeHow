@@ -34,6 +34,8 @@ html lang="en"
     .container
       .row
         .col-lg-10.col-md-10.col-sm-10
+          /p id="notice" class="notice" = notice
+          /p class="alert" = alert
           = bootstrap_flash
           = yield
         .col-lg-2.col-md-2.col-sm-2

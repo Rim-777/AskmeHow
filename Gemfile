@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -50,8 +50,10 @@ gem 'oj_mimic_json'
 # gem 'delayed_job_active_record'
 gem 'whenever'
 gem 'sidekiq'
-gem 'sidetiq'
+# gem 'sidetiq'
 gem 'sinatra', '>=1.3.0' , require: nil
+gem 'mysql2'
+gem 'thinking-sphinx'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

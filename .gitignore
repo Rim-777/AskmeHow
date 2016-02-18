@@ -16,3 +16,5 @@ config/database.yml
 .idea
 /notes
 dump.rdb
+config/*.sphinx.conf
+db/sphinx

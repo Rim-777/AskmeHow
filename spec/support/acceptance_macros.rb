@@ -33,5 +33,12 @@ def add_inputs_type_files
   all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
 end
 
+
+  def page_has_search_area
+    expect(page).to have_selector 'select#category'
+    expect(page).to have_selector 'input[type="search"]#query'
+    expect(page).to have_button 'search_button'
+  end
+
 end
 
