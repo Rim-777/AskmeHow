@@ -3,7 +3,6 @@ class Search
 
 
   def self.result_link(result)
-    # result.email if result.class == User
     if result.class == User
       result.email
     elsif result.class == Question
