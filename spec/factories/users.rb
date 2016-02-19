@@ -9,6 +9,8 @@ FactoryGirl.define do
     password '12345678'
     password_confirmation '12345678'
     admin nil
+    first_name nil
+    last_name nil
   end
 
 

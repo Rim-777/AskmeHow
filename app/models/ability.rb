@@ -10,11 +10,11 @@ class Ability
   end
 
   private
+
   def guest_abilities
     can :read, :all
   end
 
-  public
   def admin_abilities
     can :manage, :all
   end
@@ -25,6 +25,7 @@ class Ability
     can :destroy, Attachment, attachable: {user: user}
     can :select_best, Answer, question: {user_id: user.id}
     cannot :select_best, Answer, user_id: user.id
+    can :update, User, id: user.id
 
     can :create, Subscription
     can :destroy, Subscription do |subscription|

@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get :search
   end
 
+  resources :users
+
   root to: "questions#index"
 
 end

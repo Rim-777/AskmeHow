@@ -5,10 +5,10 @@
         - @search_result.each do |result|
           tr.question_title
             td.col-lg-2
-              .rov
+              .row
                 = result.created_at
               .row
-                = result.id
+                = result.user.email
 
             td.col-lg-10.col-lg-pull-1
               .row

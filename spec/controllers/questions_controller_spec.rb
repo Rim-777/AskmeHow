@@ -155,8 +155,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
 
-
-
   describe 'DELETE # destroy' do
 
     before do
