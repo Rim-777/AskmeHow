@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!, only: :update
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_user, except: :index
   authorize_resource
 
@@ -11,9 +11,12 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def edit
+
+  end
+
   def update
-    @user.update(user_params)
-    # if @user.id == current_user.id
+    @user.update(user_params) if @user.id == current_user.id
     respond_with(@user)
   end
 
