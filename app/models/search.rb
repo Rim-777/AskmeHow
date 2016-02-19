@@ -4,7 +4,9 @@ class Search
 
   def self.result_link(result)
     # result.email if result.class == User
-    if result.class == Question
+    if result.class == User
+      result.email
+    elsif result.class == Question
       result.title
     elsif result.class == Answer
       result.question.title
@@ -21,7 +23,7 @@ class Search
   end
 
   def self.result_path(result)
-    if result.class == Question
+    if result.class == User || result.class == Question
       result
     elsif result.class == Answer
       result.question

@@ -66,13 +66,7 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to_not render_template :edit
         expect(response).to render_template nil
       end
-
     end
-
-
-
-
-
   end
 
   describe 'PATCH #update' do
