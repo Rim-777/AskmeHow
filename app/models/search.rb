@@ -1,40 +1,30 @@
 class Search
   CATEGORIES = %w(All\ categories Question Answer Comment User )
 
-
-  def self.result_link(result)
-    if result.class == User
-      result.email
-    elsif result.class == Question
-      result.title
-    elsif result.class == Answer
-      result.question.title
-    elsif result.class == Comment
-      if result.commentable_type == 'Question'
-        Question.find(result.commentable_id).title
-      elsif result.commentable_type == 'Answer'
-        answer = Answer.find(result.commentable_id)
-        answer.question.title
-      end
-    end
-
-
-  end
-
-  def self.result_path(result)
-    if result.class == User || result.class == Question
-      result
-    elsif result.class == Answer
-      result.question
-    elsif result.class == Comment
-      if result.commentable_type == 'Question'
-        Question.find(result.commentable_id)
-      elsif result.commentable_type == 'Answer'
-        answer = Answer.find(result.commentable_id)
-        answer.question
-      end
+  def self.search(category, query)
+    unless Search.is_wrong?(category, query)
+      search_area = category == 'All categories' ? ThinkingSphinx : category.constantize
+      escaped_query = Riddle::Query.escape(query)
+      search_area.search(escaped_query)
     end
   end
+
+  def self.is_wrong?(category, query)
+    self.is_not_valid?(category) || self.is_blank?(category, query)
+  end
+
+
+  private
+
+  def self.is_not_valid?(category)
+    !CATEGORIES.include?(category)
+  end
+
+
+  def self.is_blank?(category, query)
+    !!(category == 'All categories' && query == '')
+  end
+
 
 end
 

@@ -5,21 +5,12 @@ class SearchesController < ApplicationController
   respond_to :js
 
   def search
-   @search_result = category.search(query)
-   respond_with(@search_result)
+    @search_result = Search.search(params[:category], params[:query])
+    respond_with(@search_result)
   end
 
   private
-  def category
-    params[:category] == 'All categories' ? ThinkingSphinx : params[:category].constantize
-  end
-
   def check_search_validation
-    redirect_to 'questions/index' if category == ThinkingSphinx && query == ''
+   render nothing: true if Search.is_wrong?(params[:category], params[:query])
   end
-
-  def query
-    params[:query]
-  end
-
 end

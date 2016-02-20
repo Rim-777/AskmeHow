@@ -2,55 +2,61 @@ require 'rails_helper'
 
 RSpec.describe Search, type: :model do
 
-    let!(:user) { create(:user) }
-    let!(:question) { create(:question, user: user) }
-    let!(:answer) { create(:answer, question: create(:question, user: user), user: user) }
-    let!(:question_comment) { create(:comment, commentable: question, commentable_type: 'Question', user: user) }
-    let!(:answer_comment) { create(:comment, commentable: answer, commentable_type: 'Answer', user: user) }
+  CATEGORIES = ['Question', 'Answer', 'Comment', 'User']
 
-    describe '.result_link' do
-    it 'return question.title if found result is Question' do
-      expect(Search.result_link(question)).to eq question.title
+  describe '.is_wrong' do
+    it 'return true if search request is blank' do
+      expect(Search.is_wrong?('All categories', '')).to eq true
     end
 
-    it 'return answer.question.title if found result is Answer' do
-      expect(Search.result_link(answer)).to eq answer.question.title
+
+    it 'return true if search request contain non-existent category' do
+      expect(Search.is_wrong?('un-existing', '123')).to eq true
     end
 
-    it 'return comment.question.title if found result is comment for question' do
-      expect(Search.result_link(question_comment)).to eq question.title
+    CATEGORIES.each do |category|
+      it 'return false if search has existent category end query' do
+        expect(Search.is_wrong?(category, '123')).to eq false
+      end
     end
 
-    it 'return comment.answer.question.title if found result is comment for answer' do
-      expect(Search.result_link(answer_comment)).to eq answer.question.title
-    end
-
-    it 'return user.email if found result is user' do
-      expect(Search.result_link(user)).to eq user.email
+    CATEGORIES.each do |category|
+      it 'return false if search has existent category without query' do
+        expect(Search.is_wrong?(category, '')).to eq false
+      end
     end
 
   end
 
-  describe '.result_path' do
-    it 'return question if found result is Question' do
-      expect(Search.result_path(question)).to eq question
+
+  describe '.search' do
+    it 'should not receive search to ThinkingSphinx if search request is blank' do
+      expect(ThinkingSphinx).to_not receive(:search)
+      Search.search('All categories', '')
     end
 
-    it 'return answer.question if found result is Answer' do
-      expect(Search.result_path(answer)).to eq answer.question
+    it 'should not receive search to ThinkingSphinx if search request is wrong' do
+      expect(ThinkingSphinx).to_not receive(:search)
+      Search.search('un-existing', '123')
     end
 
-    it 'return comment.question if found result is comment for question' do
-      expect(Search.result_path(question_comment)).to eq question
+    it 'should receive search to ThinkingSphinx' do
+      expect(ThinkingSphinx).to receive(:search).with('123')
+      Search.search('All categories', '123')
     end
 
-    it 'return comment.answer.question if found result is comment for answer' do
-      expect(Search.result_path(answer_comment)).to eq answer.question
+    CATEGORIES.each do |category|
+      it "should receive search to #{category}" do
+        expect(category.constantize).to receive(:search).with('123')
+        Search.search(category, '123')
+      end
     end
 
-    it 'return user if found result is User' do
-      expect(Search.result_path(user)).to eq user
+    CATEGORIES.each do |category|
+      it "should receive search to #{category}" do
+        expect(category.constantize).to receive(:search).with('')
+        Search.search(category, '')
+      end
     end
   end
-
 end
