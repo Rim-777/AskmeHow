@@ -10,4 +10,5 @@ $(document).on 'click', 'a.question_edit_link', (e) ->
   height = $('.question_body_existed').height()
   $('.question_body_edit').height(height + 20 + 'px')
   toggleEditQuestion()
+  return false
 

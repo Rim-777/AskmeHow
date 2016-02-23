@@ -16,10 +16,10 @@ be able to mark answer} do
     visit question_path(question)
     within "#answer_#{answer.id}" do
       expect(page).to have_content answer.body
-      expect(page).to have_link 'best?'
+      expect(page).to have_button "answer_best_link_#{answer.id}"
     end
 
-    click_on 'best?'
+    click_on "answer_best_link_#{answer.id}"
     sleep(1)
     within ".best_answer" do
       expect(page).to have_selector "#answer_#{answer.id}"
@@ -37,12 +37,12 @@ be able to mark answer} do
     sign_in(another_authenticated_user)
     visit question_path(question)
     within '.answers' do
-      expect(page).to_not have_link 'best?'
+      expect(page).to_not have_button "answer_best_link_#{answer.id}"
     end
   end
 
   scenario 'Un-Authenticate User is trying mark as best any answer' do
     visit question_path(question)
-    expect(page).to_not have_link 'best?'
+    expect(page).to_not have_button "answer_best_link_#{answer.id}"
   end
 end

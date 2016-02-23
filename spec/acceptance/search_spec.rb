@@ -5,8 +5,8 @@ search it} do
   given!(:user){create(:user)}
   given!(:question) { create(:question, user: create(:user), title: 'Searching Title', body: 'Searching Body') }
   given!(:answer) { create(:answer, question: question, user: create(:user), body: 'Searching Body') }
-  given!(:question_comment) { create(:comment, commentable: question, commentable_type: 'Qutdtion', user: create(:user), body: 'Searching Body') }
-  given!(:answer_comment) { create(:comment, commentable: answer, commentable_type: 'Qutdtion', user: create(:user), body: 'Searching Body') }
+  given!(:question_comment) { create(:comment, commentable: question, commentable_type: 'Question', user: create(:user), body: 'Searching Body') }
+  given!(:answer_comment) { create(:comment, commentable: answer, commentable_type: 'Question', user: create(:user), body: 'Searching Body') }
   given!(:query) { 'Searching Body' }
 
   before {index}

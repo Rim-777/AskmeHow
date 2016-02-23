@@ -26,8 +26,8 @@ I want to be able to edit my answers} do
     scenario 'Author of Answer is trying edit his Answer', js: true do
       within '.answers' do
         expect(page).to have_content answer.body
-        expect(page).to have_link 'edit'
-        click_on 'edit'
+        expect(page).to have_link "answer_edit_link_#{answer.id}"
+        click_on  "answer_edit_link_#{answer.id}"
         expect(page).to have_selector 'textarea'
         expect(page).to have_button 'Save'
         fill_in "answer_body_edit_#{answer.id}", with: 'edited answer'

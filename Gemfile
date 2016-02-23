@@ -47,6 +47,7 @@ gem 'skim'
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
+gem "font-awesome-rails"
 # gem 'delayed_job_active_record'
 gem 'whenever'
 gem 'sidekiq'

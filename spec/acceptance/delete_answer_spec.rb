@@ -22,8 +22,8 @@ I want to be able to delete my answers} do
     scenario 'Author of Answer is trying tp remove his Answer', js: true do
       within '.answers' do
         expect(page).to have_content answer.body
-        expect(page).to have_link 'delete'
-        click_on 'delete'
+        expect(page).to have_link "answer_#{answer.id}_remove_link"
+        click_on "answer_#{answer.id}_remove_link"
         expect(page).to_not have_content answer.body
       end
     end

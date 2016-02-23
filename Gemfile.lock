@@ -115,6 +115,8 @@ GEM
     faye-websocket (0.10.2)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.3)
@@ -356,6 +358,7 @@ DEPENDENCIES
   devise
   doorkeeper
   factory_girl_rails
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   json_matchers

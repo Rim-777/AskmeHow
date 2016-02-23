@@ -23,8 +23,9 @@
 
       - if can?(:update, question)
         .row
-          .col-lg-12.col-lg-push-1.question_crud_link
-            = link_to 'edit', '', class: 'question_edit_link'
+          .col-lg-1.col-lg-push-11.question_crud_link
+            = link_to nil, class: 'question_edit_link btn-link', id:"question_edit_link", type: 'button'
+              span.glyphicon.glyphicon-pencil
       - if question.attachments.any?
         br
         .row
