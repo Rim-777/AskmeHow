@@ -9,7 +9,8 @@
       .col-lg-12.col-md-12.col-sm-12.col-lg-offset-1.answer_rating id="answer_#{@answer.answer_id}_rating"
         form class="button_to" method="post" action="/opinion/positive?opinionable_id=#{@answer.answer_id}&amp;opinionable_type=Answer" data-remote="true"
           input type="hidden" name="_method" value="patch"
-          input class="opinion_button btn-primary" id="positive_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit" value="+"
+          button class="opinion_button btn-link" id="positive_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit"
+            span class="glyphicon glyphicon-chevron-up"
           input type="hidden" name="authenticity_token" value="#{@token}"
         p
         .rating_result.text-center id="rating_answer_#{@answer.answer_id}_result"
@@ -17,7 +18,9 @@
         p
         form class="button_to" method="post" action="/opinion/negative?opinionable_id=#{@answer.answer_id}&amp;opinionable_type=Answer" data-remote="true"
           input type="hidden" name="_method" value="patch"
-          input class="opinion_button btn-primary" id="negative_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit" value="-"
+          button class="opinion_button btn-link" id="negative_opinion_answer_#{@answer.answer_id}_button" data-type="json" type="submit"   value=''
+            span class="glyphicon glyphicon-chevron-down"
+
           input type="hidden" name="authenticity_token" value="#{@token}"
 
       .col-lg-10.col-md-10.col-sm-10.answer_body_existed.bg-warning id="answer_body_existed_#{@answer.answer_id}"
@@ -38,17 +41,17 @@
             br
     - if @current_user_id == @answer.answer_author_id || @current_user_id == @answer.answer_question_author_id
       .row
-        .col-lg-12.col-lg-push-1.answer_crud_link id="answer_crud_link_#{@answer.answer_id}"
+        .col-lg-1.col-lg-push-11.answer_crud_link id="answer_crud_link_#{@answer.answer_id}"
           - if @current_user_id == @answer.answer_author_id
             a href="" class="answer_edit_link" data-answer-id="#{@answer.answer_id}" id="answer_edit_link_#{@answer.answer_id}"
-              |edit
+              span.glyphicon.glyphicon-edit
               span>
             a href="/answers/#{@answer.answer_id}" class="remove_link" data-confirm="Do you want to remove the answer" data-remote="true" rel="nofollow" data-method="delete"
-              |delete
+              span.glyphicon.glyphicon-trash
           - if @current_user_id == @answer.answer_question_author_id && @current_user_id != @answer.answer_author_id
             span>
             a href="/answers/#{@answer.answer_id}/select_best" class="answer_best_link" id="answer_best_link_#{@answer.answer_id}" data-remote="true" rel="nofollow" data-method="patch"
-              |best?
+              span.glyphicon.glyphicon-star-empty
 
     .row
       - attachments = @answer.answer_attachments
