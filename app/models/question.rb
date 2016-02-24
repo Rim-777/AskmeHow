@@ -8,7 +8,8 @@ class Question < ActiveRecord::Base
   after_create :subscribe_with_author
 
   scope :asked_one_day_ago, -> { where(created_at: Date.yesterday) }
-  default_scope { order(:created_at)}
+  default_scope { order(:created_at )}
+  # default_scope { order(created_at: :desc)}
   validates :title, :body, :user_id, presence: true
 
   def best_answer

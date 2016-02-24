@@ -1,5 +1,6 @@
     var answerId = '<%= @answer.id %>';
     var answer = $('#answer_'+ answerId);
+
 <% if @answer.errors.present? %>
 
 <% @answer.errors.full_messages.each do |message| %>
@@ -9,4 +10,5 @@
 <% else %>
     answer.hide();
     answer.remove();
+    $('.answers_count').html('<%= j @answer.question.answers.count.to_s %>');
 <% end %>

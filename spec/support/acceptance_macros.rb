@@ -12,7 +12,7 @@ module AcceptanceMacros
     visit questions_path
     visit question_path(question)
     expect(current_path).to eq question_path(question)
-    expect(page).to have_content question.title
+    expect(page).to have_content question.title.upcase
     expect(page).to have_content question.body
     if with_answers
       question.answers.each { |answer| expect(page).to have_content answer.body }

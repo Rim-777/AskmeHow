@@ -8,6 +8,8 @@
     if ($('#answer_<%= @answer.id %>')[0]== undefined) {
         $('.others_answers').append("<%= j render  @answer %>");
         $('#answer_body_new').val('');
+        $('.answers_count').html('<%= j @answer.question.answers.count.to_s %>');
+
     }
 
 

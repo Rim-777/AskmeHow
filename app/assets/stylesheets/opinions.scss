@@ -2,41 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .answer_rating, .question_rating {
   margin-left: 5%;
   margin-top: 25px;
   display: block;
-  padding:  0;
+  padding: 0;
   width: auto;
   height: auto;
 }
 
-.glyphicon-chevron-down, .glyphicon-chevron-up{
+.glyphicon-chevron-down, .glyphicon-chevron-up {
   color: #b3b3b3;
 }
 
 .rating_result {
-  //margin-left: 25%;
   width: 26px;
   height: 24px;
   color: rgba(78, 90, 104, 0.85);
   font-size: larger;
-  //border: solid blue 1px;
+
 
 }
 
 .opinion_button {
-  //width: 21px;
-  //height: 21px;
   margin-left: -5%;
-  //padding: -5%;
- //color: white;
- // background-color: white;
- // border-color: white;
- // box-shadow: none;
-  border-radius: 30%;
-
-
 }
 

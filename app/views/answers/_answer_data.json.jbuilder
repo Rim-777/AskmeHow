@@ -5,3 +5,4 @@ json.answer_attachments @answer.attachments
 json.answer_author_name @answer.user.email
 json.answer_author_id @answer.user_id
 json.answer_question_author_id @answer.question.user_id
+json.answers_count @answer.question.answers.count
