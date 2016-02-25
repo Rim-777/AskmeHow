@@ -7,8 +7,8 @@ class Answer < ActiveRecord::Base
   after_create :notify_question_subscribers
 
   validates :user_id, :body, :question_id, presence: true
-  default_scope { order(:created_at) }
-  # default_scope { order(created_at: :desc) }
+  # default_scope { order(:created_at) }
+  default_scope { order(created_at: :desc) }
 
   def set_is_best
     ActiveRecord::Base.transaction do

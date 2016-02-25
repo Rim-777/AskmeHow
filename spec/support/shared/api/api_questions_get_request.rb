@@ -49,7 +49,7 @@ shared_examples_for "Api questions GET request" do
 
     %w(id body commentable_id commentable_type created_at updated_at ).each do |attr|
       it "comment object contains #{attr}" do
-        expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/comments/0/#{attr}")
+        expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/comments/1/#{attr}")
       end
     end
   end

@@ -24,7 +24,7 @@ shared_examples_for 'Api Create' do
 
   %w(id body created_at updated_at attachments user_id ).each do |attr|
     it "created question contains #{attr}" do
-      expect(response.body).to be_json_eql(object_klass.last.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/#{attr}")
+      expect(response.body).to be_json_eql(object_klass.first.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/#{attr}")
     end
   end
 

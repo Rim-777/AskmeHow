@@ -1,11 +1,11 @@
 class Comment < ActiveRecord::Base
-  # after_create :publish_comment
+  after_create :publish_comment
   belongs_to :user
 
-  belongs_to :commentable
+  belongs_to :commentable, polymorphic: true
   validates :body, :commentable_id, :commentable_type, :user_id, presence: true
 
-  default_scope { order(:created_at)}
+  default_scope { order(created_at: :desc)}
 
 private
 

@@ -10,7 +10,7 @@ describe 'answers API' do
 
     let(:api_path) { "/api/v1/questions/#{question.id}/answers" }
     let(:request) { get api_path, format: :json, access_token: access_token.token }
-    let(:object_for_json_path) { "answers/0" }
+    let(:object_for_json_path) { "answers/2" }
 
     it_behaves_like 'Invalid Api Authorization'
 
