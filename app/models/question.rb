@@ -5,10 +5,8 @@ class Question < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   belongs_to :user
 
-  after_create :subscribe_with_author
-
+  after_create :subscribe_with_author,  :publish_question
   scope :asked_one_day_ago, -> { where(created_at: Date.yesterday) }
-  # default_scope { order(:created_at )}
   default_scope { order(created_at: :desc)}
   validates :title, :body, :user_id, presence: true
 
@@ -27,6 +25,11 @@ class Question < ActiveRecord::Base
   private
   def subscribe_with_author
     self.subscriptions.create(user_id: self.user_id)
+  end
+
+  def publish_question
+    question_data = {question_title: self.title, question_id: self.id, author_id: self.user_id  }
+    PrivatePub.publish_to "/questions", question: question_data.to_json if self.errors.empty?
   end
 
 end

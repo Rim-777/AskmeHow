@@ -9,6 +9,7 @@ $ ->
   PrivatePub.subscribe '/question/' + question_id + '/answers', (data, channel) ->
     token = $('meta[name="csrf-token"]').attr('content')
     answer = $.parseJSON(data['answer'])
+    console.log(answer)
     if ($('#answer_' + answer.answer_id)[0]== undefined)
       $('.others_answers').prepend(JST["templates/answer"]({answer: answer, current_user_id: current_user_id, token: token }))
       $('.answers_count').html(answer.answers_count)
