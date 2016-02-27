@@ -1,10 +1,11 @@
 module AcceptanceMacros
 
   def sign_in(user)
-    visit new_user_session_path
+    visit questions_path
+    click_on 'sign_in_user'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_on 'Log in'
+    click_on 'sign_in'
   end
 
 
@@ -12,7 +13,7 @@ module AcceptanceMacros
     visit questions_path
     visit question_path(question)
     expect(current_path).to eq question_path(question)
-    expect(page).to have_content question.title.upcase
+    expect(page).to have_content question.title
     expect(page).to have_content question.body
     if with_answers
       question.answers.each { |answer| expect(page).to have_content answer.body }

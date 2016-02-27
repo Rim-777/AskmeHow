@@ -10,7 +10,7 @@
     .col-lg-10.col-md-10.col-sm-10.question_existed_area data={question_id: question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
       .row
         .col-lg-11.col-md-11.col-sm-11.question_title_existed
-          = question.title.upcase
+          = question.title
           hr
       .row
         == render 'opinions/opinion', opinionable: question

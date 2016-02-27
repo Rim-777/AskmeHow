@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   use_doorkeeper
-  devise_for :users, controllers: {omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'}
+  devise_for :users, controllers: {omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions', registrations: 'registrations'}
 
   concern :commentable do
     resources :comments, only: :create

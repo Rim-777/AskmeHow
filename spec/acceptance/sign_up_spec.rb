@@ -6,7 +6,6 @@ I wont to be able to sign up} do
 
   scenario 'Un-Registered user is trying to sign up' do
     visit new_user_registration_path
-
     fill_in 'Email', with: 'new_user@test.com'
     fill_in 'Password', with: '12345678'
     fill_in 'Password confirmation', with: '12345678'

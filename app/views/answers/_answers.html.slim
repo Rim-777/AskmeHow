@@ -5,7 +5,8 @@
       h5.text-info
         span.answers_count
           = @question.answers.count
-        |  Answers:
+        span>
+        = @question.answers.count == 1 ? "Answer:" : "Answers:"
       - best_answer = @question.best_answer
       .best_answer
         == render best_answer if best_answer.present?

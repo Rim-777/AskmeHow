@@ -1,5 +1,6 @@
 .row
   hr
-  - if can?(:create, Question)
-    = link_to 'Ask question', new_question_path
+    .col-lg-2.col-lg-push-5
+      - if can?(:create, Question)
+        = button_to 'Ask question', new_question_path, class: 'create_question_button', method: :get
 br

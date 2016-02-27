@@ -1,0 +1,51 @@
+<div class="modal fade in" id="sign_up">
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class='border-form-div'>
+
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">x</button>
+      <h2>Sign up</h2>
+    </div>
+
+
+    <%= form_for(User.new, url: registration_path(:user), html: {id: 'sign_up_user'},format: :js) do |f| %>
+
+
+        <div class="field">
+          <%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="modal-body">
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br/>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br/>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up", id: 'sign_up', class: 'btn btn-primary' %>
+          </div>
+    <% end %>
+    </div>
+
+        <%= link_to "Log in",  "#sign_in", "data-toggle" => "modal", :class => 'btn btn-small close', 'data-dismiss'=>"modal" %><br />
+    <%= render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User %>
+
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>

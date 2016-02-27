@@ -48,9 +48,13 @@ html lang="en"
                 = current_user.email
                 br
                 = link_to 'edit profile', edit_user_registration_path
-                li= link_to "log out", destroy_user_session_path, method: :delete
+                li= link_to "log out", destroy_user_session_path, method: :delete,  "data-toggle" => "modal"
               - else
-                li= link_to "log in", new_user_session_path
+                li= link_to "log in",  "#sign_in", "data-toggle" => "modal", class:'btn btn-small', id: 'sign_in_user'
+                /link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small'btn-small
+              == render 'shared/sign_in'
+              == render 'shared/sign_up'
+
       /li= link_to "Link 2", "/path2"
       /li= link_to "Link 3", "/path3"
 
