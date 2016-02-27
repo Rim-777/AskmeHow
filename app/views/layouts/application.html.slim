@@ -33,24 +33,29 @@ html lang="en"
 
     .container
       .row
-        .col-lg-10.col-md-10.col-sm-10
-          /p id="notice" class="notice" = notice
-          /p class="alert" = alert
-          = bootstrap_flash
-          = yield
-        .col-lg-2.col-md-2.col-sm-2
-          .well.sidebar-nav
-            ul.nav.nav-list
-              li.nav-header
-              - if user_signed_in?
-                li
-                  h3 You are:
-                = current_user.email
-                br
-                = link_to 'edit profile', edit_user_registration_path
-                li= link_to "log out", destroy_user_session_path, method: :delete
-              - else
-                li= link_to "log in", new_user_session_path
+        = bootstrap_flash
+        - if controller_name == 'sessions' || controller_name == 'registrations'
+          .col-lg-12.col-md-12.col-sm-12
+            = yield
+        - else
+          .col-lg-10.col-md-10.col-sm-10
+            = yield
+
+          .col-lg-2.col-md-2.col-sm-2
+            .well.sidebar-nav
+              ul.nav.nav-list
+                li.nav-header
+                - if user_signed_in?
+                  li
+                    h3 You are:
+                  = current_user.email
+                  br
+                  = link_to 'edit profile', edit_user_registration_path
+                  li= link_to "log out", destroy_user_session_path, method: :delete
+                - else
+                  li= link_to "log in", "#sign_in", "data-toggle" => "modal", class: 'btn btn-small', id: 'sign_in_user'
+          == render 'shared/sign_in'
+          == render 'shared/sign_up'
       /li= link_to "Link 2", "/path2"
       /li= link_to "Link 3", "/path3"
 

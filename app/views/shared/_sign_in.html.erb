@@ -1,0 +1,46 @@
+<div class="modal fade in .sign_in" id="sign_in">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class='border-form-div'>
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">x</button>
+      <h3>Log in</h3>
+    </div>
+
+    <div class="modal-body">
+      <%= form_for(User.new, url: session_path(:user), html:{id: 'sign_in_user'}, format: :js) do |f| %>
+
+          <div class="field">
+            <%= f.label :email %><br/>
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %><br/>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+          </div>
+
+          <% if Devise.mappings[:user].rememberable? -%>
+              <div class="field">
+                <%= f.check_box :remember_me,  class: 'form-control'  %>
+                <%= f.label :remember_me%>
+              </div>
+          <% end -%>
+
+          <div class="actions">
+            <%= f.submit "Log in", id: 'sign_in', class: 'btn btn-primary' %>
+          </div>
+      <% end %>
+
+      <%= link_to "Sign up",  "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small close', 'data-dismiss'=>"modal" %><br />
+
+      <%= render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User %>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>

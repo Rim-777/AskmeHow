@@ -18,6 +18,7 @@ I wont to be able to sign up} do
   given(:user) { create(:user) }
   scenario 'Un-Registered user is trying to sign up' do
     sign_in(user)
+
     visit new_user_registration_path
     expect(page).to have_content 'You are already signed in.'
   end

@@ -2,8 +2,6 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
   before_action :set_question, only: [:create]
   before_action :set_answer, except: [:create]
-  after_action :publish_answer, only: [:create]
-
 
   authorize_resource
 
@@ -25,7 +23,7 @@ class AnswersController < ApplicationController
   end
 
   def select_best
-      respond_with(@answer.set_is_best) if current_user.author_of?(@answer.question)
+    respond_with(@answer.set_is_best) if current_user.author_of?(@answer.question)
   end
 
   private
@@ -39,10 +37,6 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = Answer.find(params[:id])
-  end
-
-  def publish_answer
-    PrivatePub.publish_to "/question/#{@question.id}/answers", answer: render_to_string(partial: 'answer_data.json.jbuilder')
   end
 
   def interpolation_options
