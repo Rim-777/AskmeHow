@@ -17,12 +17,12 @@ Doorkeeper.configure do
   end
 
   # Authorization Code expiration time (default 10 minutes).
-  # authorization_code_expires_in 10.minutes
-  authorization_code_expires_in 2.hours
+  authorization_code_expires_in 10.minutes
+  # authorization_code_expires_in 2.hours
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
-  access_token_expires_in 48.hours
+  access_token_expires_in 2.hours
 
   # Assign a custom TTL for implicit grants.
   # custom_access_token_expires_in do |oauth_client|
