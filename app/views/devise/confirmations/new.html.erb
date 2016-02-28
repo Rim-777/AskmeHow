@@ -1,7 +1,7 @@
 <h2>Resend confirmation instructions</h2>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-    <div class="alert alert-danger"> <%= devise_error_messages! %></div>
+    <div class="alert alert-danger notise"> <%= devise_error_messages! %></div>
 
   <div class="field">
     <%= f.label :email %><br />
