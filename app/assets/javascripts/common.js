@@ -21,17 +21,31 @@ function setActionToCommentField(entity) {
     $('#' + entity + '_' + entity_id + '_comment_add_area').hide()
 }
 
-function sendCommentToUsers (data) {
+function sendCommentToUsers(data) {
     comment = $.parseJSON(data['comment']);
     entity = comment.commentable_type.toLowerCase();
     author_of_comment = $.parseJSON(data['author_of_comment']);
     entity_id = comment.commentable_id;
-    if ($('#comment_'+ comment.id)[0] == undefined){
-        $('#' + entity + '_' + entity_id + '_comments').append(JST["templates/comment"]({object: comment , author_of_comment: author_of_comment}));
+    if ($('#comment_' + comment.id)[0] == undefined) {
+        $('#' + entity + '_' + entity_id + '_comments').append(JST["templates/comment"]({
+            object: comment,
+            author_of_comment: author_of_comment
+        }));
         $('#' + entity + '_' + entity_id + '_comment_body_area').val('');
         $('#' + entity + '_' + entity_id + '_comment_form_new').hide();
         $('input[type="text"].' + entity + '_comment_add_area').show();
 
+    }
+
+}
+function checkPasswordConfirmation() {
+    var password_field = $('input[type="password"].sign_up_password_field').first().val();
+    var password_confirmation = $('input[type="password"].sign_up_password_confitmation_field').first().val();
+
+    if (password_field != password_confirmation){
+        $('input[type="password"].sign_up_password_confitmation_field').get(0).setCustomValidity('Passwords is not match');
+    } else{
+        $('input[type="password"].sign_up_password_confitmation_field').get(0).setCustomValidity('');
     }
 
 

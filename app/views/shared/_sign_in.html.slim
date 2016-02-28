@@ -20,16 +20,11 @@
       = form_for(User.new, url: session_path(:user), html: {id: 'sign_in_user'}) do |f|
 
         .field
-
           = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
         .field
-
           = f.password_field :password, autocomplete: "off", class: 'form-control', required: "required", placeholder: 'Enter password'
-
-
         - if Devise.mappings[:user].rememberable?
           .row.field
-
             .col-lg-3.actions
               = f.submit "Log in", id: 'sign_in', class: 'btn btn-primary'
             .col-lg-8
@@ -38,7 +33,7 @@
               = f.label :remember_me
 
         br
-      = link_to "Forgot password?", "#password_reset", "data-toggle" => "modal", :class => 'close'
+      = link_to "Forgot password?", "#password_reset", "data-toggle" => "modal", 'data-dismiss' => "modal"
 
     .modal-footer
       .row.oauth_notes
