@@ -1,0 +1,48 @@
+.modal.fade.in.sign_in id="sign_in"
+  br
+  br
+  br
+  br
+  br
+  br
+  .border-form-div
+    .modal-header
+      button.close data-dismiss="modal"
+        |x
+      .row
+        .col-lg-5
+          h3.text-info
+            |Log in
+        .col-lg-6.pull-2
+          = link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small close', 'data-dismiss' => "modal"
+
+    .modal-body
+      = form_for(User.new, url: session_path(:user), html: {id: 'sign_in_user'}) do |f|
+
+        .field
+
+          = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
+        .field
+
+          = f.password_field :password, autocomplete: "off", class: 'form-control', required: "required", placeholder: 'Enter password'
+
+
+        - if Devise.mappings[:user].rememberable?
+          .row.field
+
+            .col-lg-3.actions
+              = f.submit "Log in", id: 'sign_in', class: 'btn btn-primary'
+            .col-lg-8
+              = f.check_box :remember_me
+              span>
+              = f.label :remember_me
+
+        br
+      = link_to "Forgot password?", "#password_reset", "data-toggle" => "modal", :class => 'close'
+
+    .modal-footer
+      .row.oauth_notes
+        .col-lg-5.muted
+          |Enter by:
+      == render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User
+

@@ -50,7 +50,7 @@ I want to be able to vote for question} do
     visit question_path(question)
 
     expect(page).to have_selector '.answer_rating'
-    # sleep(1)
+    sleep(1)
     within "#answer_#{answer.id}_rating" do
       expect(page).to have_button "positive_opinion_answer_#{answer.id}_button"
       expect(page).to have_button "negative_opinion_answer_#{answer.id}_button"
