@@ -1,0 +1,5 @@
+.modal-footer
+  .row.oauth_notes
+    .col-lg-5.muted
+      |Enter by:
+  == render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User
