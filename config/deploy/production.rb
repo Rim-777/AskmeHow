@@ -48,6 +48,6 @@ server '37.139.19.217', user: 'deployer', roles: %w{web app db}, primary: true
  set :ssh_options, {
    keys: %w(/Users/timur/.ssh/id_rsa),
    forward_agent: true,
-   auth_methods: %w(publickey, password),
+   auth_methods: %w(publickey password),
    port: 4321
  }
