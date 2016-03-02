@@ -4,8 +4,6 @@ lock '3.4.0'
 set :application, 'chewing-rails'
 set :repo_url, 'git@github.com:Rim-777/Chewing-Rails.git'
 
-
-
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deployer/chewing-rails'
 set :deploy_user, 'deployer'
