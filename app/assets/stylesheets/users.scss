@@ -2,9 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-img.thumb {
+.thumb {
   height: 30px;
   width: auto;
+  min-width: 30px;
   border-radius: 20%;
   border: solid 2px #31b0d5;
   //margin-left: -30%;
