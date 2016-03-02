@@ -13,31 +13,13 @@
         .col-lg-5
           h3.text-info
             |Log in
-        .col-lg-6.pull-2
-          = link_to "Sign up", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small close', 'data-dismiss' => "modal"
+    == render 'common/sign_in_form'
 
-    .modal-body
-      = form_for(User.new, url: session_path(:user), html: {id: 'sign_in_user'}) do |f|
+    .row.auth_sign_in_links
+      .col-lg-6
+        = link_to "I want new account", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small', 'data-dismiss' => "modal"
+      .col-lg-6
+        = link_to "I forgot password", "#password_reset", "data-toggle" => "modal", 'data-dismiss' => "modal", class: 'btn btn-small'
 
-        .field
-          = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
-        .field
-          = f.password_field :password, autocomplete: "off", class: 'form-control', required: "required", placeholder: 'Enter password'
-        - if Devise.mappings[:user].rememberable?
-          .row.field
-            .col-lg-3.actions
-              = f.submit "Log in", id: 'sign_in', class: 'btn btn-primary'
-            .col-lg-8
-              = f.check_box :remember_me
-              span>
-              = f.label :remember_me
-
-        br
-      = link_to "Forgot password?", "#password_reset", "data-toggle" => "modal", 'data-dismiss' => "modal"
-
-    .modal-footer
-      .row.oauth_notes
-        .col-lg-5.muted
-          |Enter by:
-      == render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User
+    == render 'common/authenticate_footer'
 

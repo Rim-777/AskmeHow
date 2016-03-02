@@ -6,14 +6,14 @@ feature 'OAuth' do
   describe 'user try sign_in ' do
     scenario 'successfully' do
       mock_auth_hash(:twitter)
-      click_on 'twitter_main_oauth_link'
+      click_on 'twitter_oauth_social_button'
       expect(page).to have_content "Successfully authenticated from Twitter account."
-      expect(page).to have_content "log out"
+      page_behaves_like_authenticated
     end
 
     scenario 'Un-successfully' do
       mock_auth_invalid_hash(:twitter)
-      click_on 'twitter_main_oauth_link'
+      click_on 'twitter_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Twitter because \"Invalid credentials\"."
       expect(page).to have_content "Log in"
     end
@@ -24,14 +24,14 @@ feature 'OAuth' do
 
     scenario 'successfully' do
       mock_auth_hash(:facebook)
-      click_on 'facebook_main_oauth_link'
+      click_on 'facebook_oauth_social_button'
       expect(page).to have_content "Successfully authenticated from Facebook account."
-      expect(page).to have_content "log out"
+      page_behaves_like_authenticated
     end
 
     scenario 'Un-successfully' do
       mock_auth_invalid_hash(:facebook)
-      click_on 'facebook_main_oauth_link'
+      click_on 'facebook_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Facebook because \"Invalid credentials\"."
       expect(page).to have_content "Log in"
     end
@@ -43,14 +43,14 @@ feature 'OAuth' do
 
     scenario 'successfully' do
       mock_auth_hash(:vkontakte)
-      click_on 'vkontakte_main_oauth_link'
+      click_on 'vkontakte_oauth_social_button'
       expect(page).to have_content "Successfully authenticated from Vkontakte account."
-      expect(page).to have_content "log out"
+      page_behaves_like_authenticated
     end
 
     scenario 'Un-successfully' do
       mock_auth_invalid_hash(:vkontakte)
-      click_on 'vkontakte_main_oauth_link'
+      click_on 'vkontakte_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Vkontakte because \"Invalid credentials\"."
       # save_and_open_page
 

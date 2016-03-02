@@ -10,7 +10,8 @@ feature 'User sign out', %q{As authenticate  User, I want be able to sign out} d
 
    sign_in(user)
     # save_and_open_page
-   click_on 'log out'
+   page_behaves_like_authenticated
+   click_on 'Log out'
 
     expect(page).to have_content 'Signed out successfully.'
     expect(current_path).to eq root_path

@@ -1,0 +1,15 @@
+.modal-body
+  = form_for(User.new, url: registration_path(:user), html: {id: 'sign_up_user'}) do |f|
+
+    .field
+      = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
+    .field
+      = f.password_field :password, autocomplete: "off", class: 'form-control sign_up_password_field', required: "required",
+                         id: 'sign_up_password_field', pattern: "[A-Za-z0-9]{8,}$",
+                         title: 'at least 8 characters', placeholder: 'Enter password'
+    .field
+      = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control sign_up_password_confitmation_field', required: "required",
+                         id: 'sign_up_password_confitmation_field', pattern: "[A-Za-z0-9]{8,}$",
+                         placeholder: 'Confirm password'
+    .actions.sign_up_sign_in_button
+      = f.submit "Sign up", id: 'sign_up', class: 'btn btn-primary'

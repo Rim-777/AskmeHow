@@ -13,27 +13,12 @@
         .col-lg-5
           h3.text-info
             |Sign up
-        .col-lg-3.log_in_window_link
-          = link_to "Log in", "#sign_in", "data-toggle" => "modal", :class => 'btn btn-small close', 'data-dismiss' => "modal"
+    == render 'common/sign_up_form'
 
-    .modal-body
-      = form_for(User.new, url: registration_path(:user), html: {id: 'sign_up_user'}) do |f|
+    .row
+      .col-lg-4
+        = link_to "I have account", "#sign_in", "data-toggle" => "modal", :class => 'btn btn-small', 'data-dismiss' => "modal"
+      .col-lg-6.col-lg-push-1
+        = link_to "but forgot password",  "#password_reset", "data-toggle" => "modal", 'data-dismiss' => "modal", class: 'btn btn-small'
 
-        .field
-          = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
-        .field
-          = f.password_field :password, autocomplete: "off", class: 'form-control sign_up_password_field', required: "required",
-                             id: 'sign_up_password_field', pattern: "[A-Za-z0-9]{8,}$",
-                             title: 'at least 8 characters', placeholder: 'Enter password'
-        .field
-          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control sign_up_password_confitmation_field', required: "required",
-                             id: 'sign_up_password_confitmation_field', pattern: "[A-Za-z0-9]{8,}$",
-                             placeholder: 'Confirm password'
-        .actions.sign_up_sign_in_button
-          = f.submit "Sign up", id: 'sign_up', class: 'btn btn-primary'
-
-    .modal-footer
-      .row.oauth_notes
-        .col-lg-5
-          |Enter by:
-      == render "shared/links", resource_name: :user, devise_mapping: Devise.mappings[:user], resource_class: User
+    == render 'common/authenticate_footer'

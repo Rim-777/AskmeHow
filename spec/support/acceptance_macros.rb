@@ -2,9 +2,9 @@ module AcceptanceMacros
 
   def sign_in(user)
     visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
+    fill_in 'user_email', with: user.email
+    fill_in 'user_password', with: user.password
+    click_on 'sign_in'
   end
 
 
@@ -32,6 +32,13 @@ def add_inputs_type_files
   all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
   all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
 end
+
+  def page_behaves_like_authenticated
+    expect(page).to have_link "user_menu_link"
+    click_on "user_menu_link"
+    expect(page).to have_content "Log out"
+    expect(page).to have_content "profile"
+  end
 
 
   def page_has_search_area

@@ -146,6 +146,7 @@ GEM
       multi_json (~> 1.2)
     joiner (0.3.4)
       activerecord (>= 4.1.0)
+    jquery-cropper (2.2.5)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -177,6 +178,7 @@ GEM
       mime-types (>= 1.16, < 3)
     middleware (0.1.0)
     mime-types (2.99)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -391,11 +393,13 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   jbuilder (~> 2.0)
+  jquery-cropper
   jquery-rails
   json_matchers
   json_spec
   launchy
   letter_opener
+  mini_magick
   mysql2
   oj
   oj_mimic_json

@@ -1,0 +1,22 @@
+.fade.in.sign_in id="sign_in"
+  br
+  br
+  br
+
+  .border-form-div
+    .modal-header
+      button.close
+        = link_to 'x', questions_path
+      .row
+        .col-lg-5
+          h3.text-info
+            |Log in
+    == render 'common/sign_in_form'
+    .row.auth_sign_in_links
+      .col-lg-6
+        = link_to "I want new account", new_registration_path(:user), class: 'btn btn-small'
+      .col-lg-6
+        = link_to "I forgot password",  new_password_path(:user), class: 'btn btn-small'
+
+    == render 'common/authenticate_footer'
+

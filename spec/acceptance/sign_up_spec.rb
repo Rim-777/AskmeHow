@@ -7,9 +7,9 @@ I wont to be able to sign up} do
   scenario 'Un-Registered user is trying to sign up' do
     visit new_user_registration_path
 
-    fill_in 'Email', with: 'new_user@test.com'
-    fill_in 'Password', with: '12345678'
-    fill_in 'Password confirmation', with: '12345678'
+    fill_in 'user_email', with: 'new_user@test.com'
+    fill_in 'sign_up_password_field', with: '12345678'
+    fill_in 'sign_up_password_confitmation_field', with: '12345678'
 
     click_on 'Sign up'
     expect(page).to have_content 'You have signed up successfully.'

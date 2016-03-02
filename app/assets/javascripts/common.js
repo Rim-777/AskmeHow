@@ -51,6 +51,8 @@ function checkPasswordConfirmation() {
 
 }
 
+$('#image').cropper('crop');
+
 
 
 

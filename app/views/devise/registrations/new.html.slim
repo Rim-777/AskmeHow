@@ -1,0 +1,21 @@
+.fade.in.sign_up id="sign_up"
+  br
+  br
+  br
+  .border-form-div
+    .modal-header
+      button.close
+        = link_to 'x', questions_path
+      .row
+        .col-lg-5
+          h3.text-info
+            |Sign up
+
+    == render 'common/sign_up_form'
+    .row
+      .col-lg-4
+        = link_to "I have account", new_session_path(resource_name), class: 'btn btn-small'
+      .col-lg-6.col-lg-push-1
+        = link_to "but forgot password", new_password_path(resource_name), class: 'btn btn-small'
+
+    == render 'common/authenticate_footer'
