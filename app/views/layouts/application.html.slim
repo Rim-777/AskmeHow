@@ -28,7 +28,7 @@ html lang="en"
                 ul.nav.navbar-nav
                   - if user_signed_in?
                     li.dropdown.nav.nav-tabs
-                      = link_to "#{current_user.email}", '', 'data-toggle' => "dropdown", class: "dropdown-toggle", id: 'user_menu_link'
+                      = image_tag current_user.avatar.url, 'data-toggle' => "dropdown", class: "dropdown-toggle  thumb ", id: 'user_menu_link'
                       ul class="dropdown-menu table-bordered" role="menu" aria-labelledby="dLabel"
                         li = link_to 'profile', current_user
                         li = link_to 'Log out', destroy_user_session_path, method: :delete

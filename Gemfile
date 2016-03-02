@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave'
+gem 'jquery-cropper'
 gem 'devise'
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -48,6 +49,7 @@ gem 'sidekiq'
 gem 'sinatra', '>=1.3.0' , require: nil
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug'
