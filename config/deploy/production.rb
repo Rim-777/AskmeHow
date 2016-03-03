@@ -4,6 +4,7 @@ role :web, %w{deployer@37.139.19.217}
 role :db,  %w{deployer@37.139.19.217}
 
 set :rails_env, :production
+set :stage, :production
 
 server '37.139.19.217', user: 'deployer', roles: %w{web app db}, primary: true
 
