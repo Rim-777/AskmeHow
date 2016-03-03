@@ -69,3 +69,24 @@ namespace :private_pub do
     end
   end
 end
+
+namespace :ts do
+  task :conf do
+    thinking_sphinx.configure
+  end
+  task :in do
+    thinking_sphinx.index
+  end
+  task :start do
+    thinking_sphinx.start
+  end
+  task :stop do
+    thinking_sphinx.stop
+  end
+  task :restart do
+    thinking_sphinx.restart
+  end
+  task :rebuild do
+    thinking_sphinx.rebuild
+  end
+end
