@@ -70,6 +70,8 @@ namespace :private_pub do
   end
 end
 
+after 'deploy:restart', 'private_pub:restart'
+
 namespace :ts do
   task :conf do
     thinking_sphinx.configure
