@@ -38,7 +38,6 @@ class Ability
     cannot :say_opinion_for, [Question, Answer], user: user
     can :me, User, id: user.id
 
-
   end
 
 
