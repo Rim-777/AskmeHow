@@ -18,7 +18,7 @@ I want to be able to attach some files to my answer} do
       attach_file 'answer_attachments_attributes_0_file', "#{Rails.root}/spec/rails_helper.rb"
       click_on 'Create'
       within '.answers' do
-        expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
+        expect(page).to have_link 'rails_helper.rb', href: '/uploads/test/attachment/file/1/rails_helper.rb'
 
       end
     end
