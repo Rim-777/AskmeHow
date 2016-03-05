@@ -20,7 +20,8 @@ html lang="en"
     .navbar.navbar-default.navbar-static-top
       .container
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-        a.navbar-brand href="#"Chewing-Rails
+        a.navbar-brand
+          = link_to href "Chewing-Rails" , questions_path
         .navbar-collapse.collapse.navbar-responsive-collapse
           .row
             .col-lg-1.col-lg-push-9
