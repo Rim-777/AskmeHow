@@ -11,9 +11,10 @@
  * file per style scope.
  *
  *= require cropper
+ *= require font-awesome
+ *= require croppie
  *= require_tree .
  *= require_self
- *= require font-awesome
  */
 
 

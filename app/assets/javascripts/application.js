@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require cropper
+//= require jquery-fileupload/basic
+//= require exif-js
+//= require croppie
 //= require twitter/bootstrap
 //= require jquery.remotipart
 //= require private_pub

@@ -1,0 +1,13 @@
+.avatar.croppie-container id='avatar'
+
+
+  = form_for @user do |f|
+    = f.file_field :avatar, multiple: true
+    = f.hidden_field :avatar_cache
+    = f.submit 'Load'
+
+      /= @user.avatar.current_path
+      /br
+      /= @user.avatar_identifier
+      /br
+      /= @user.avatar.url

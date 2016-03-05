@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.2.5.1)
       actionpack (= 4.2.5.1)
@@ -150,6 +151,10 @@ GEM
     joiner (0.3.4)
       activerecord (>= 4.1.0)
     jquery-cropper (2.2.5)
+    jquery-fileupload-rails (0.4.6)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -240,6 +245,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5.1)
       sprockets-rails
+    rails-assets-croppie (2.0.0)
+    rails-assets-exif-js (2.1.1)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -398,6 +405,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-cropper
+  jquery-fileupload-rails
   jquery-rails
   json_matchers
   json_spec
@@ -414,6 +422,8 @@ DEPENDENCIES
   pg (~> 0.15)
   private_pub
   rails (= 4.2.5.1)
+  rails-assets-croppie!
+  rails-assets-exif-js!
   remotipart
   responders (~> 2.0)
   rspec-rails

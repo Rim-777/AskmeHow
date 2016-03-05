@@ -51,7 +51,44 @@ function checkPasswordConfirmation() {
 
 }
 
-$('#image').cropper('crop');
+
+$(document).ready(function() {
+
+//    var basic = $('#avatar').croppie({
+//        viewport: {
+//            width: 180,
+//            height: 180,
+//            type: 'circle'
+//        },
+//        boundary: { width: 195, height: 195 }
+//
+//    });
+//    basic.croppie('bind', {
+//        url: '/uploads/development/user/avatar/1/DSC_0341__1_.JPG',
+//        points: [10,469,280,739]
+//    });
+////on button click
+//    basic.croppie('result', 'html');
+
+    //
+    $uploadCrop = $('#avatar').croppie({
+        exif: true,
+        viewport: {
+            width: 250,
+            height: 250,
+            type: 'circle'
+        },
+        boundary: {
+            width: 300,
+            height: 300
+        }
+    });
+
+
+});
+
+
+
 
 
 

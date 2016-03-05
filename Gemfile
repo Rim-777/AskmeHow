@@ -46,7 +46,7 @@ gem "font-awesome-rails"
 gem 'whenever'
 gem 'sidekiq'
 # gem 'sidetiq'
-gem 'sinatra', '>=1.3.0' , require: nil
+gem 'sinatra', '>=1.3.0', require: nil
 gem 'mysql2'
 gem 'thinking-sphinx'
 
@@ -55,6 +55,12 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 gem 'mini_magick'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-croppie'
+  gem 'rails-assets-exif-js'
+end
+
+gem "jquery-fileupload-rails"
 
 group :development, :test do
   gem 'byebug'
