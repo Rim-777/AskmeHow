@@ -4,10 +4,6 @@ class OpinionsController < ApplicationController
   before_action :if_user_not_signed_in
   before_action :check_authorship
 
-
-
-  # skip_authorization_check
-
   respond_to do |format|
     format.json
     format.js
@@ -23,7 +19,6 @@ class OpinionsController < ApplicationController
     authorize! :negative, @opinionable
     set_user_opinion(-1)
   end
-
 
   private
 
@@ -46,5 +41,4 @@ class OpinionsController < ApplicationController
     current_user.say_оpinion(@opinionable, value)
     render :opinion
   end
-
 end

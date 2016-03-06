@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :update, :destroy]
   before_action :set_answer, only: :show
 
-
   respond_to :json, only: :create
   respond_to :js, except: :destroy
 
@@ -21,7 +20,6 @@ class QuestionsController < ApplicationController
     respond_with(@question = Question.new)
   end
 
-
   def create
     respond_with(@question = Question.create(questions_params.merge!(user_id: current_user.id)))
   end
@@ -38,8 +36,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-
-
   private
   def set_question
     @question = Question.find(params[:id])
@@ -55,6 +51,5 @@ class QuestionsController < ApplicationController
 
   def interpolation_options
     {resource_name: 'New Question', time: @question.created_at}
-
   end
 end

@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
 
   def interpolation_options
     {resource_name: 'New Comment', time: @comment.created_at}
-
   end
 end
 

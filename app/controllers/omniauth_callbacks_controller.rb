@@ -21,7 +21,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         set_flash_message(:notice, :success, kind: "#{social_net_data.provider.to_s.capitalize}") if is_navigational_format?
       end
     end
-
-
   end
 end

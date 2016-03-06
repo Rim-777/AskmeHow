@@ -6,12 +6,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   storage :file
 
-  process resize_to_fit: [200, 300]
+  process resize_to_fit: [400, 400]
 
   version :thumb do
     process resize_to_fill: [200,200]
   end
-
 
   def store_dir
     "uploads/#{Rails.env}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -28,8 +27,5 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def content_type_blacklist
     ['application/text', 'application/json']
   end
-
-
-
 
 end

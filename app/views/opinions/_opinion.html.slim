@@ -6,11 +6,8 @@ div class="col-lg-12 col-md-12 col-sm-12 col-lg-offset-1 #{opinionable.class.to_
     div id="rating_#{opinionable.type_and_id}_result" class="rating_result text-center text-success"
       = opinionable.opinions.rating
 
-
   = button_to negative_opinion_path(opinionable), class: 'opinion_button btn-link', id: "negative_opinion_#{opinionable.type_and_id}_button", method: :patch, remote: true, data: {type: :json}
     span.glyphicon.glyphicon-chevron-down
 
-
-      /div id="#{opinionable.type_and_id}_errors" class="#{opinionable.class.to_s.downcase}_errors"
 
 

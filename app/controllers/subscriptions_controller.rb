@@ -14,7 +14,6 @@ class SubscriptionsController < ApplicationController
     respond_with(@subscription.destroy) if @question.is_subscribed_with?(current_user)
   end
 
-
   private
   def set_question
     @question = Question.find(params[:question_id])

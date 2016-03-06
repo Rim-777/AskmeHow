@@ -8,7 +8,6 @@ class AnswersController < ApplicationController
   respond_to :js
   respond_to :json, only: :create
 
-
   def create
     respond_with(@answer = @question.answers.create(answers_params.merge!(user_id: current_user.id)))
   end
@@ -41,6 +40,5 @@ class AnswersController < ApplicationController
 
   def interpolation_options
     {resource_name: 'New Answer', time: @answer.created_at}
-
   end
 end

@@ -1,4 +1,3 @@
-
 role :app, %w{deployer@37.139.19.217}
 role :web, %w{deployer@37.139.19.217}
 role :db,  %w{deployer@37.139.19.217}

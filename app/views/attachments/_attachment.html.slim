@@ -4,11 +4,4 @@ span id="attachment_#{attachment.id}" class="#{attachable.type_and_id}_attachmen
     span class="#{attachable.class.to_s.downcase}_attachment_links"
       = link_to 'x', attachment, id: "attachment_remove_link_#{attachment.id}", class: "btn attachment_remove_link", remote: true, method: :delete
 
-
   = link_to attachment.file_name, attachment.file_url, class: "btn"
-
-/div id="attachment_#{attachment.id}_errors"
-
-
-  /li= image_tag(attachment.file)
-  /li= image_tag(attachment.file_url)

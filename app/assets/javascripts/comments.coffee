@@ -8,7 +8,6 @@ ready = ->
   PrivatePub.subscribe "/question/" + question_id + "/comments", (data, channel) ->
     sendCommentToUsers(data)
 
-
 $(document).ready(ready)
 $(document).on('page:load', ready)
 $(document).on('page:update', ready)

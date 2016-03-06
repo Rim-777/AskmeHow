@@ -12,8 +12,8 @@ class AttachmentsController < ApplicationController
 
 
   private
+
   def set_attachment
     @attachment = Attachment.find(params[:id])
   end
-
 end

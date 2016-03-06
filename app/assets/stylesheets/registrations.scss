@@ -13,10 +13,6 @@
   opacity: 0.9;
 }
 
-//.border-form-div .form-signin-heading,
-//.border-form-div .checkbox {
-//  margin-bottom: 10px;
-//}
 .border-form-div input[type="text"],
 .border-form-div input[type="email"],
 .border-form-div input[type="password"] {
@@ -28,7 +24,6 @@
 .oauth_social_button {
   width: 95px;
   height: 30%;
-  //border-radius: 50%;
   border-color: rgba(179, 179, 179, 0.3);
 }
 
@@ -44,6 +39,7 @@
   color: #a9a9a9;
   margin-left: -29%;
 }
+
 .field, .sign_up_sign_in_button, .oauth_notes{
   color: darkgrey;
 }

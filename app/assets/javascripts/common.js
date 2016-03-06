@@ -47,8 +47,6 @@ function checkPasswordConfirmation() {
     } else{
         $('input[type="password"].sign_up_password_confitmation_field').get(0).setCustomValidity('');
     }
-
-
 }
 
 $('#image').cropper('crop');

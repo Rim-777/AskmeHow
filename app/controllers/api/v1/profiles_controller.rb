@@ -15,5 +15,4 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     @other_users = User.where.not(id:current_resource_owner)
     respond_with(@other_users)
   end
-
 end
