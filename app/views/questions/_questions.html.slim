@@ -5,42 +5,41 @@
         table.table.table-hover
           tbody id="question_list"
             - @questions.each do |question|
-              - cache question
-                tr.question_title id="question_#{question.id}"
-                  td.col-lg-1
+              tr.question_title id="question_#{question.id}"
+              td.col-lg-1
+                .row
+                  .col-lg-1.col-lg-push-2
+                    = question.opinions.rating
+                .row
+                  .col-lg-1
+                    br
+                    |rating
+              td.col-lg-1
+                .row
+                  .col-lg-1.col-lg-push-3
+                    = question.answers.count
+                .row
+                  .col-lg-1
+                    br
+                    |answers
+              td.col-lg-9
+                .row
+                  .col-lg-8.col-lg-push-2
+                    = link_to "#{question.title}", question
+              td.col-lg-1
+                .row
+                  .col-lg-1.col-lg-push-2
+                /= question.user.email
+                .row
+                  .col-lg-12.col-lg-push-2
+                    = question.user.email
                     .row
-                      .col-lg-1.col-lg-push-2
-                        = question.opinions.rating
-                    .row
-                      .col-lg-1
-                        br
-                        |rating
-                  td.col-lg-1
-                    .row
-                      .col-lg-1.col-lg-push-3
-                        = question.answers.count
-                    .row
-                      .col-lg-1
-                        br
-                        |answers
-                  td.col-lg-9
-                    .row
-                      .col-lg-8.col-lg-push-2
-                        = link_to "#{question.title}", question
-                  td.col-lg-1
-                    .row
-                      .col-lg-1.col-lg-push-2
-                        /= question.user.email
-                    .row
-                      .col-lg-12.col-lg-push-2
-                        = question.user.email
-                        .row
-                        = question.created_at.to_date
+                    = question.created_at.to_date
 
 
-                        - if can?(:destroy, question)
-                          .row
-                            .col-lg-10.col-lg-push-0
-                              span>
-                                = link_to  question, class: 'remove_link', method: :delete, data: {confirm: 'Удалить вопрос?'}
-                                  span.glyphicon.glyphicon-trash
+                    - if can?(:destroy, question)
+                      .row
+                        .col-lg-10.col-lg-push-0
+                          span>
+                            = link_to question, class: 'remove_link', method: :delete, data: {confirm: 'Удалить вопрос?'}
+                              span.glyphicon.glyphicon-trash

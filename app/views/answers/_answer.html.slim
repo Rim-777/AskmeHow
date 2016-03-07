@@ -1,4 +1,4 @@
-- cache answer
+- cache "#{answer}/#{current_user}" do
   .row.answer id="answer_#{answer.id}" data-answer-id="#{ answer.id}"
     = render 'common/errors', resource: answer
     hr
