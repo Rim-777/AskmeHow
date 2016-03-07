@@ -1,6 +1,6 @@
 shared_examples_for "Api questions GET request" do
 
-  %w(id title body created_at updated_at).each do |attr|
+  %w(id title body created_at ).each do |attr|
     it "question object contains #{attr}" do
       expect(response.body).to be_json_eql(question.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/#{attr}")
     end

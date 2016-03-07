@@ -23,10 +23,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave'
-gem 'jquery-cropper'
 gem 'devise'
-# Use Unicorn as the app server
-# gem 'unicorn'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'omniauth'
@@ -52,8 +49,8 @@ gem 'thinking-sphinx'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'mini_magick'
-
 gem 'unicorn'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'byebug'

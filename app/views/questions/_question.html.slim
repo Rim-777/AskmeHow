@@ -1,39 +1,40 @@
-.container-fluid
-  = render 'common/errors', resource: question
-  .row
-    .col-lg-12.col-md-12.col-sm-12.bg-success.question_user_existed
-      | author:
-      br
-      = question.user.email
-      br
-      = question.created_at.to_date
-    .col-lg-10.col-md-10.col-sm-10.question_existed_area data={question_id: question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
-      .row
-        .col-lg-11.col-md-11.col-sm-11.question_title_existed
-          = question.title.upcase
-          hr
-      .row
-        == render 'opinions/opinion', opinionable: question
-        .col-lg-10.col-md-10.col-sm-10.question_body_existed.bg-warning
-          = question.body
-      .row
-        .col-lg-11.col-lg-offset-1.question_edit_form_box
-          = form_for question, remote: true do |f|
-            == render 'questions/question_form', question: question, f: f
+- cache question
+  .container-fluid
+    = render 'common/errors', resource: question
+    .row
+      .col-lg-12.col-md-12.col-sm-12.bg-success.question_user_existed
+        | author:
+        br
+        = question.user.email
+        br
+        = question.created_at.to_date
+      .col-lg-10.col-md-10.col-sm-10.question_existed_area data={question_id: question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
+        .row
+          .col-lg-11.col-md-11.col-sm-11.question_title_existed
+            = question.title
+        hr
+        .row
+          == render 'opinions/opinion', opinionable: question
+          .col-lg-10.col-md-10.col-sm-10.question_body_existed.bg-warning
+            = question.body
+        .row
+          .col-lg-11.col-lg-offset-1.question_edit_form_box
+            = form_for question, remote: true do |f|
+              == render 'questions/question_form', question: question, f: f
 
-      - if can?(:update, question)
-        .row
-          .col-lg-1.col-lg-push-11.question_crud_link
-            = link_to nil, class: 'question_edit_link btn-link', id:"question_edit_link", type: 'button'
-              span.glyphicon.glyphicon-pencil
-      - if question.attachments.any?
-        br
-        .row
-          .col-lg-10.col-lg-push-1.question_attachments.well id="question_#{question.id}_attachments"
-            |Files:
-            br
-              - question.attachments.each do |a|
-                == render 'attachments/attachment', attachment: a, attachable: question
-        br
-      == render 'comments/comments', commentable: question
+        - if can?(:update, question)
+          .row
+            .col-lg-1.col-lg-push-11.question_crud_link
+              = link_to nil, class: 'question_edit_link btn-link', id:"question_edit_link", type: 'button'
+                span.glyphicon.glyphicon-pencil
+        - if question.attachments.any?
+          br
+          .row
+            .col-lg-10.col-lg-push-1.question_attachments.well id="question_#{question.id}_attachments"
+              |Files:
+              br
+                - question.attachments.each do |a|
+                  == render 'attachments/attachment', attachment: a, attachable: question
+          br
+        == render 'comments/comments', commentable: question
 

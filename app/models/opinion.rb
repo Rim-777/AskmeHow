@@ -1,7 +1,7 @@
 class Opinion < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :opinionable, polymorphic: true
+  belongs_to :opinionable, polymorphic: true, touch: true
   validates :value, presence: true
   validates :opinionable, presence: true
   validates :user, presence: true

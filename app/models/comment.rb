@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   after_create :publish_comment
   belongs_to :user
 
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, polymorphic: true, touch: true
   validates :body, :commentable_id, :commentable_type, :user_id, presence: true
 
   default_scope { order(created_at: :desc)}

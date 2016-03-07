@@ -1,13 +1,14 @@
-== render @question
-br
-hr
+-cache @question
+  == render @question
+  br
+  hr
 
-== render 'answers/answers'
-br
-hr
-.row
-  .col-lg-12.col-lg-push-9.question_subscribe_links
-    == render 'questions/subscribe_links'
+  == render 'answers/answers'
+  br
+  hr
+  .row
+    .col-lg-12.col-lg-push-9.question_subscribe_links
+      == render 'questions/subscribe_links'
 br
 hr
 = subscribe_to "/question/#{@question.id}/answers"
