@@ -17,7 +17,7 @@ I want to be able to edit my question} do
 
     scenario 'Author of Question is trying edit his Question', js: true do
       within '.question_existed_area'  do
-        expect(page).to have_content question.title.upcase
+        expect(page).to have_content question.title
         expect(page).to have_link "question_edit_link"
         click_on "question_edit_link"
         expect(page).to have_selector 'textarea'

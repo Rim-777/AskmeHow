@@ -1,41 +1,42 @@
-.row.answer id="answer_#{answer.id}" data-answer-id="#{ answer.id}"
-  = render 'common/errors', resource: answer
-  hr
-  .col-lg-12.col-md-12.col-sm-12.bg-success.answer_user_existed
-    | author:
-    br
-    = answer.user.email
-
-  .col-lg-10.col-md-10.col-sm-10.answer_existed_area data={answer_id: answer.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
-    .row
-      == render 'opinions/opinion', opinionable: answer
-      .col-lg-10.col-md-10.col-sm-10.answer_body_existed.bg-warning id="answer_body_existed_#{ answer.id}"
-        = answer.body
-
-      == render 'answers/edit_form', answer: answer
-
-    .row
-      .col-lg-2.col-lg-push-11.answer_crud_link id="answer_crud_link_#{answer.id}"
-        - if can?(:manage, answer)
-          = link_to '', class: 'answer_edit_link', data: {answer_id: answer.id}, id: "answer_edit_link_#{answer.id}"
-            span.glyphicon.glyphicon-edit
-          span>
-          = link_to answer, class: 'remove_link', id: "answer_#{answer.id}_remove_link", remote: true, method: :delete, data: {confirm: 'Do you want to remove the answer'}
-            span.glyphicon.glyphicon-trash
-        - if can?(:select_best, answer)
-          span>
-          = button_to select_best_answer_path(answer), class: 'answer_best_link btn-link', id: "answer_best_link_#{answer.id}", remote: true, method: :patch
-            span.glyphicon.glyphicon-star-empty
-    - if answer.attachments.any?
+- cache "#{answer}/#{current_user}" do
+  .row.answer id="answer_#{answer.id}" data-answer-id="#{ answer.id}"
+    = render 'common/errors', resource: answer
+    hr
+    .col-lg-12.col-md-12.col-sm-12.bg-success.answer_user_existed
+      | author:
       br
-      .row
-        .col-lg-10.col-lg-push-1.answer_attachments.well id="question_#{answer.id}_attachments"
-          |Files:
-          br
-            - answer.attachments.each do |a|
-              = render 'attachments/attachment', attachment: a, attachable: answer
+      = answer.user.email
 
-    == render 'comments/comments', commentable: answer
+    .col-lg-10.col-md-10.col-sm-10.answer_existed_area data={answer_id: answer.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
+      .row
+        == render 'opinions/opinion', opinionable: answer
+        .col-lg-10.col-md-10.col-sm-10.answer_body_existed.bg-warning id="answer_body_existed_#{ answer.id}"
+          = answer.body
+
+        == render 'answers/edit_form', answer: answer
+
+      .row
+        .col-lg-2.col-lg-push-11.answer_crud_link id="answer_crud_link_#{answer.id}"
+          - if can?(:manage, answer)
+            = link_to '', class: 'answer_edit_link', data: {answer_id: answer.id}, id: "answer_edit_link_#{answer.id}"
+              span.glyphicon.glyphicon-edit
+            span>
+            = link_to answer, class: 'remove_link', id: "answer_#{answer.id}_remove_link", remote: true, method: :delete, data: {confirm: 'Do you want to remove the answer'}
+              span.glyphicon.glyphicon-trash
+          - if can?(:select_best, answer)
+            span>
+            = button_to select_best_answer_path(answer), class: 'answer_best_link btn-link', id: "answer_best_link_#{answer.id}", remote: true, method: :patch
+              span.glyphicon.glyphicon-star-empty
+      - if answer.attachments.any?
+        br
+        .row
+          .col-lg-10.col-lg-push-1.answer_attachments.well id="question_#{answer.id}_attachments"
+            |Files:
+            br
+              - answer.attachments.each do |a|
+                = render 'attachments/attachment', attachment: a, attachable: answer
+
+      == render 'comments/comments', commentable: answer
 
 
 

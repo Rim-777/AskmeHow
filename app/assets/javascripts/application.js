@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require cropper
 //= require twitter/bootstrap
 //= require jquery.remotipart
 //= require private_pub

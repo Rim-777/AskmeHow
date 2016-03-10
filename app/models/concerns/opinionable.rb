@@ -3,8 +3,5 @@ module Opinionable
   include Definable
   included do
     has_many :opinions, as: :opinionable, dependent: :destroy
-
-
-
   end
 end

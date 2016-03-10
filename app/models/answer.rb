@@ -1,7 +1,7 @@
 class Answer < ActiveRecord::Base
   include Opinionable, Attachable, Commentable, Reputationable
 
-  belongs_to :question
+  belongs_to :question, touch: true
   belongs_to :user
 
   after_create :notify_question_subscribers, :publish_answer
