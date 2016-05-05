@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 This is my own open-source-project. Articles, Questions, Answers, Comments, Files exchange, for Ruby on Rails
 developers. I do it in my free time, and I has completed it on 70%. Project contains a lot of technologies: Authentication
 by Devise. Authentication with social networks with Oauth protocol. Comet - technology implemented by Private-pub library
 and Thin. REST Api. Searching with Sphinx. Background Jobs with Sidekiq and Redis. Redis for caching. Testing BDD/TDD
 with RSpec and Capybara. HAML, SLIM, JST(SKIM) etc. DBMS: PostgreSQL.
+=======
+== README
+
+
