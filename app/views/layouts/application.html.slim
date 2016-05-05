@@ -35,11 +35,6 @@ html lang="en"
                       ul class="dropdown-menu table-bordered" role="menu" aria-labelledby="dLabel"
                         li = link_to 'profile', current_user
                         li = link_to 'Log out', destroy_user_session_path, method: :delete
-
-
-
-
-
                   - else
                     li= link_to "log in", "#sign_in", "data-toggle" => "modal", class: 'btn btn-small', id: 'sign_in_user'
 

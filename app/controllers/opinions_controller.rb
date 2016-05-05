@@ -29,7 +29,6 @@ class OpinionsController < ApplicationController
 
   def if_user_not_signed_in
     render nothing: true unless user_signed_in?
-
   end
 
 

@@ -57,7 +57,7 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it 'render show view' do
+    it 'render new view' do
       expect(response).to render_template :new
     end
   end

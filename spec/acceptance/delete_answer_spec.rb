@@ -10,14 +10,12 @@ I want to be able to delete my answers} do
   given(:question) { create(:question, user: author_of_question) }
   given!(:answer) { create(:answer, question: question, user: author_of_answer) }
 
-
   describe 'Authenticate User and his answer' do
 
     before do
       sign_in(author_of_answer)
       visit question_path(question)
     end
-
 
     scenario 'Author of Answer is trying tp remove his Answer', js: true do
       within '.answers' do
