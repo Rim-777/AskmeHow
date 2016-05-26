@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :subscriptions, dependent: :destroy
   has_many :authorizations, dependent: :destroy
-
   mount_uploader :avatar, AvatarUploader
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -33,20 +31,17 @@ class User < ActiveRecord::Base
 
 
   def say_оpinion(opinionable, value)
-
     opinion = opinions.where(opinionable: opinionable).first
     if opinion.present?
       opinion.delete if opinion.is_changed?(value)
     else
       opinions.create(value: value, opinionable: opinionable)
     end
-
   end
 
   def self.find_by_oauth(oauth)
     authorization = Authorization.where(provider: oauth.provider, uid: oauth.uid.to_s).first
     return authorization.user if authorization
-
     tmp_email = oauth.info.email || "#{oauth.uid.to_s}@#{oauth.provider}.tmp"
     user = User.where(email: tmp_email).first
     if user
@@ -59,6 +54,4 @@ class User < ActiveRecord::Base
     end
     user
   end
-
-
 end

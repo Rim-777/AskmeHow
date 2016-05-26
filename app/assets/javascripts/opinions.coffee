@@ -10,6 +10,3 @@ $(document).on 'click', '.opinion_button',  (e) ->
     message_box.html(errors.error_message)
     message_box.fadeOut(2000).delay(2000)
   $(this).parent('form').submit()
-
-
-

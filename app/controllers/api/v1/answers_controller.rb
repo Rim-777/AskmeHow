@@ -15,9 +15,7 @@ class Api::V1:: AnswersController < Api::V1::BaseController
     respond_with current_resource_owner.answers.create(answer_params.merge(question_id: @question.id))
   end
 
-
   private
-
   def set_question
     @question = Question.find(params[:question_id])
   end

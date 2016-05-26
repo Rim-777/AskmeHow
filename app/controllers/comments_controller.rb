@@ -1,9 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: :create
   before_action :set_commentable, only: :create
-
   authorize_resource
-
   respond_to :js
   respond_to :json
 
@@ -12,7 +10,6 @@ class CommentsController < ApplicationController
   end
 
   private
-
   def set_commentable
     commentable_class = params[:commentable].capitalize.constantize
     commentable_object = "#{params[:commentable].singularize}_id".to_sym
@@ -28,5 +25,3 @@ class CommentsController < ApplicationController
     {resource_name: 'New Comment', time: @comment.created_at}
   end
 end
-
-

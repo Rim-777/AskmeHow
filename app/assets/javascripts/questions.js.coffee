@@ -6,10 +6,8 @@ $ ->
     console.log(current_usser_id)
     $('#question_list').prepend(JST["templates/question_data"]({question:question, current_user_id:current_usser_id }))
 
-
 $(document).on 'click', 'a.question_edit_link', (e) ->
   e.preventDefault()
   height = $('.question_body_existed').height()
   $('.question_body_edit').height(height + 20 + 'px')
   toggleEditQuestion()
-

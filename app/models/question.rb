@@ -1,14 +1,12 @@
 class Question < ActiveRecord::Base
   include Opinionable, Attachable, Commentable, Reputationable
-
   has_many :answers, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
   belongs_to :user
-
+  validates :title, :body, :user_id, presence: true
   after_create :subscribe_with_author, :publish_question
   scope :asked_one_day_ago, -> { where(created_at: Date.yesterday) }
   default_scope { order(created_at: :desc) }
-  validates :title, :body, :user_id, presence: true
 
   def best_answer
     answers.where(is_best: true).first
@@ -38,5 +36,4 @@ class Question < ActiveRecord::Base
         answers_number: self.answers.count}
     PrivatePub.publish_to "/questions", question: question_data.to_json if self.errors.empty?
   end
-
 end

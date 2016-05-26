@@ -1,5 +1,5 @@
 class Search
-  CATEGORIES = %w(All\ categories Question Answer Comment User )
+  CATEGORIES = %w(All\ categories Question Answer Comment User)
 
   def self.search(category, query)
     unless Search.is_wrong?(category, query)
@@ -15,19 +15,11 @@ class Search
 
 
   private
-
   def self.is_not_valid?(category)
     !CATEGORIES.include?(category)
   end
 
-
   def self.is_blank?(category, query)
     !!(category == 'All categories' && query == '')
   end
-
-
 end
-
-
-
-

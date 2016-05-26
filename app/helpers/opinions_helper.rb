@@ -8,5 +8,4 @@ module OpinionsHelper
     {controller: "opinions", action: "negative",
      opinionable_id: opinionable.id, opinionable_type: opinionable.class}
   end
-
 end

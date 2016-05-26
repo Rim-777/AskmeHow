@@ -34,9 +34,7 @@ function sendCommentToUsers(data) {
         $('#' + entity + '_' + entity_id + '_comment_body_area').val('');
         $('#' + entity + '_' + entity_id + '_comment_form_new').hide();
         $('input[type="text"].' + entity + '_comment_add_area').show();
-
     }
-
 }
 function checkPasswordConfirmation() {
     var password_field = $('input[type="password"].sign_up_password_field').first().val();
@@ -48,9 +46,3 @@ function checkPasswordConfirmation() {
         $('input[type="password"].sign_up_password_confitmation_field').get(0).setCustomValidity('');
     }
 }
-
-
-
-
-
-

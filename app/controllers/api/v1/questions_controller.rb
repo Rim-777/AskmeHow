@@ -15,7 +15,6 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     respond_with current_resource_owner.questions.create(questions_params)
   end
 
-
   private
   def questions_params
     params.require(:question).permit(:title, :body)

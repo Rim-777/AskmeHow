@@ -13,4 +13,3 @@ $ ->
       $('.others_answers').prepend(JST["templates/answer"]({answer: answer, current_user_id: current_user_id, token: token }))
       $('.answers_count').html(answer.answers_count)
       $('#answer_body_new').val('') if answer.answer_author_id == current_user_id
-
