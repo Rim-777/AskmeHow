@@ -8,27 +8,31 @@ RSpec.describe AttachmentsController, type: :controller do
   let!(:another_user) { create(:user) }
 
   describe 'DELETE #destroy' do
+    let(:request) do
+      delete :destroy,
+             question_id: question,
+             id: question_attachment,
+             format: :js
+    end
 
     before { sign_in(user) }
 
     context 'User is trying to remove his own attachment ' do
       it "remove an user's answer" do
-
-        expect { delete :destroy, question_id: question, id: question_attachment, format: :js }.to change(question.attachments, :count).by(-1)
+        expect { request }.to change(question.attachments, :count).by(-1)
       end
     end
 
-    context "User is trying to remove his not answer" do
+    context 'User is trying to remove his not answer' do
       it 'does not remove a question' do
         sign_in(another_user)
-        expect { delete :destroy, question_id: question, id: question_attachment, format: :js }.to_not change(Attachment, :count)
+        expect { request }.to_not change(Attachment, :count)
       end
     end
 
     it 'render to  destroy view' do
-      delete :destroy, question_id: question, id: question_attachment, format: :js
+      request
       expect(response).to render_template :destroy
     end
-
   end
 end
