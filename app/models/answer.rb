@@ -1,8 +1,8 @@
 class Answer < ActiveRecord::Base
   include Opinionable, Attachable, Commentable, Reputationable
+  after_create :notify_question_subscribers, :publish_answer
   belongs_to :question, touch: true
   belongs_to :user
-  after_create :notify_question_subscribers, :publish_answer
   validates :user_id, :body, :question_id, presence: true
   default_scope { order(created_at: :desc) }
 
