@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   sequence :title do |n|
     "questionTitle#{n}"
   end
@@ -24,8 +23,5 @@ FactoryGirl.define do
     after(:create) do |question|
       create_list(:answer, 2, question: question, user_id: create(:user).id)
     end
-
   end
-
-
 end

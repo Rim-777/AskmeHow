@@ -14,17 +14,13 @@ search it} do
 
   scenario 'user can search question', js: true do
     page_has_search_area
-
     select('Question', from: 'category')
     click_on 'search_button'
-
     expect(current_path).to eq questions_path
-
     within '.found_list' do
       expect(page).to have_content question.title
       expect(page).to have_content question.body
     end
-
   end
 
   scenario 'user can search answer', js: true do
@@ -32,7 +28,6 @@ search it} do
     select('Answer', from: 'category')
     click_on 'search_button'
     expect(current_path).to eq questions_path
-
     within '.found_list' do
       expect(page).to have_content question.title
       expect(page).to have_content answer.body
@@ -55,7 +50,6 @@ search it} do
     page_has_search_area
     select('User', from: 'category')
     click_on 'search_button'
-
     expect(current_path).to eq questions_path
     within '.found_list' do
       expect(page).to have_content user.email
@@ -63,19 +57,15 @@ search it} do
       expect(page).to have_content answer.user.email
       expect(page).to have_content question_comment.user.email
       expect(page).to have_content answer_comment.user.email
-
     end
   end
 
   scenario 'user can search by entered string', js: true do
     page_has_search_area
     select('All categories', from: 'category')
-
     fill_in 'query', with: query
     click_on 'search_button'
-
     expect(current_path).to eq questions_path
-
     within '.found_list' do
       expect(page).to have_content question.title
       expect(page).to have_content answer.body
@@ -83,6 +73,4 @@ search it} do
       expect(page).to have_content answer_comment.body
     end
   end
-
-
 end

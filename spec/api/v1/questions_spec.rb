@@ -43,12 +43,10 @@ describe 'questions API' do
       end
 
       it_behaves_like "Api questions GET request"
-
     end
   end
 
   describe 'POST /create' do
-
     let(:api_path) { "/api/v1/questions" }
     let(:object_for_json_path) { "question" }
     let!(:object_attributes) { attributes_for(:question) }
@@ -73,7 +71,4 @@ describe 'questions API' do
 
     end
   end
-
-
-
 end

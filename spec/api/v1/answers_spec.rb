@@ -2,12 +2,10 @@ require 'rails_helper'
 
 include ApiMacros
 describe 'answers API' do
-
   let_answers_spec_objects
   let(:http_method) { :get }
 
   describe 'GET /answers/index' do
-
     let(:api_path) { "/api/v1/questions/#{question.id}/answers" }
     let(:request) { get api_path, format: :json, access_token: access_token.token }
     let(:object_for_json_path) { "answers/2" }
@@ -25,15 +23,12 @@ describe 'answers API' do
 
       it_behaves_like 'Api answers GET request'
     end
-
   end
-
 
   describe 'GET /answers/show' do
     let(:api_path) { "/api/v1/answers/#{answer.id}/" }
     let(:request) { get api_path, format: :json, access_token: access_token.token }
     let(:object_for_json_path) { "answer" }
-
 
     it_behaves_like 'Invalid Api Authorization'
 
@@ -45,12 +40,9 @@ describe 'answers API' do
       end
       it_behaves_like 'Api answers GET request'
     end
-
-
   end
 
   describe 'POST /create' do
-
     let(:api_path) { "/api/v1/questions/#{question.id}/answers" }
     let!(:object_attributes) { attributes_for(:answer) }
     let(:object_for_json_path) { "answer" }
@@ -64,9 +56,7 @@ describe 'answers API' do
       let(:http_method) { :post }
     end
 
-
     context 'authorized' do
-
       it 'creates a new answer for user' do
         expect { post_request }.to change(user.answers, :count).by(1)
       end
@@ -76,11 +66,6 @@ describe 'answers API' do
       end
 
       it_behaves_like 'Api Create'
-
-
     end
   end
-
-
 end
-

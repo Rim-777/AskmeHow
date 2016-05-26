@@ -1,11 +1,8 @@
 shared_examples_for 'Comment' do
   describe 'POST #create' do
     describe 'Commentable comment' do
-
-
       describe 'Athenticate user' do
         before { sign_in(user) }
-
 
         context 'with valid attributes' do
           let(:request) { post :create, comment_params, format: :js }
@@ -26,19 +23,8 @@ shared_examples_for 'Comment' do
           it_behaves_like 'Publishable' do
             let(:message) { :publish_comment }
           end
-
         end
-
-        # context 'with invalid attributes' do
-        #   it 'do not save new comment in database depending with commentable_object' do
-        #     expect { post :create, invalid_params, format: :js }.to_not change(Comment, :count)
-        #   end
-        #
-        #
-        # end
       end
-
     end
   end
-
 end

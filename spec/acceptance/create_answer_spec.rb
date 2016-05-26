@@ -7,10 +7,7 @@ I want to be able to create answers } do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
 
-
   scenario 'Authenticate User is trying write Answer', js: true  do
-
-
     sign_in(user)
     visit question_path(question)
     fill_in 'You Answer:', with: 'Test answer body'
@@ -18,7 +15,6 @@ I want to be able to create answers } do
     within '.answers' do
       expect(page).to have_content 'Test answer body'
     end
-
   end
 
   scenario 'Un-authenticate User is trying write Answer' do
@@ -27,11 +23,9 @@ I want to be able to create answers } do
   end
 
   scenario 'User  is trying create invalid Answer', js: true do
-
     sign_in(user)
     visit question_path(question)
     click_on 'Create'
     expect(page).to have_content "Body can't be blank"
   end
-
 end

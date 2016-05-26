@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-
   it { should validate_presence_of :body }
   it { should validate_presence_of :user_id }
   it { should validate_presence_of :question_id }
@@ -18,12 +17,9 @@ RSpec.describe Answer, type: :model do
     it_behaves_like 'Reputationable'
   end
 
-
   given_user_with_question_and_answers_from_model_macros
 
   describe '#method set_is_best' do
-
-
     it "put fields' value 'is_best' as true for selected answer,
         and false for all others answers concerning theirs' question" do
       answer.set_is_best
@@ -36,7 +32,6 @@ RSpec.describe Answer, type: :model do
         end
       end
     end
-
   end
 
   describe '#type_and_id' do
@@ -50,12 +45,9 @@ RSpec.describe Answer, type: :model do
     let(:question) { create(:question, user: user) }
     subject { build(:answer, question: question, user: user) }
 
-
     it 'should calculate user reputation after create' do
       expect(QuestionSubscribersNotificationJob).to receive(:perform_later).with(subject)
       subject.save!
     end
   end
-
-
 end

@@ -1,7 +1,5 @@
 require_relative 'acceptance_helper'
 
-
-
 feature 'Create Question', %q{
 In order to get answer as an authenticate user
 I want to be able to ask questions } do
@@ -24,5 +22,4 @@ I want to be able to ask questions } do
     expect(page).to_not have_link 'Ask question'
     # save_and_open_page
   end
-
 end

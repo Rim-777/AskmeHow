@@ -39,6 +39,4 @@ RSpec.describe UserNotificationMailer, type: :mailer do
       expect(mail.body.encoded).to match(answer.body)
     end
   end
-
-
 end

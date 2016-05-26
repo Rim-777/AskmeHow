@@ -7,7 +7,6 @@ I want to be able to vote for question} do
   given(:some_authenticated_user) { create(:user) }
   given!(:question) { create(:question, user: author_of_question) }
 
-
   scenario 'Some authenticated user is trying vote for his not Question', js: true do
     sign_in(some_authenticated_user)
     visit question_path(question)
@@ -20,7 +19,6 @@ I want to be able to vote for question} do
     end
 
     click_on "positive_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to_not have_content '0'
       expect(page).to have_content '1'
@@ -34,16 +32,13 @@ I want to be able to vote for question} do
     end
 
     click_on "negative_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to_not have_content '0'
       expect(page).to have_content '-1'
     end
-
   end
 
   scenario 'author of question is trying vote for his Question', js: true do
-
     sign_in(author_of_question)
     visit question_path(question)
 
@@ -55,19 +50,16 @@ I want to be able to vote for question} do
     end
 
     click_on "positive_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to have_content '0'
       expect(page).to_not have_content '1'
     end
 
     click_on "negative_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to have_content '0'
       expect(page).to_not have_content '-1'
     end
-
   end
 
   scenario 'some Un-autenticane user  is trying vote for some Question', js: true do
@@ -81,20 +73,15 @@ I want to be able to vote for question} do
     end
 
     click_on "positive_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to have_content '0'
       expect(page).to_not have_content '1'
     end
 
     click_on "negative_opinion_question_#{question.id}_button"
-
     within '.question_rating' do
       expect(page).to have_content '0'
       expect(page).to_not have_content '-1'
     end
-
   end
-
 end
-

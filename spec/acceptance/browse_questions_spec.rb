@@ -17,5 +17,4 @@ to find similar questions } do
   scenario 'Authenticate User is trying to  browse the questions' do
     can_see_full_question_list
   end
-
 end

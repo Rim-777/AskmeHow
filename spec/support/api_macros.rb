@@ -1,5 +1,4 @@
 module ApiMacros
-
   def let_questions_spec_objects
     set_user_and_token
     let!(:questions_list) { create_list(:question, 2, user: user) }
@@ -11,7 +10,6 @@ module ApiMacros
                                       commentable_type: question.class.to_s, user: create(:user)) }
     let!(:comment) { comment_list.first }
   end
-
 
   def let_answers_spec_objects
     set_user_and_token
@@ -25,24 +23,19 @@ module ApiMacros
     let!(:comment) { comment_list.first }
   end
 
-
   def it_return_200_status
     it 'return 200 status' do
       expect(response).to be_success
     end
-
   end
-
 
   def do_request(method, path, options = {})
     send method, path, {format: :json}.merge(options)
   end
 
   private
-
   def set_user_and_token
     let(:user) { create (:user) }
     let(:access_token) { create(:access_token, resource_owner_id: user.id) }
   end
-
 end

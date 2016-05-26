@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SubscriptionsController, type: :controller do
-
   let!(:question) { create(:question, user: create(:user)) }
   let!(:subscriber) { create(:user) }
 
@@ -25,18 +24,17 @@ RSpec.describe SubscriptionsController, type: :controller do
       it 'add one subscription to question' do
         expect { subscribe_request }.to change(question.subscriptions, :count).by(1)
       end
-      #
+
       it 'add one subscription to subscriber' do
         expect { subscribe_request }.to change(subscriber.subscriptions, :count).by(1)
       end
-      #
+
       it 'render create template' do
         subscribe_request
         expect(response).to render_template :create
       end
     end
   end
-
 
   describe 'DELETE #destroy' do
     let(:unsubscribe_request) { delete :destroy, question_id: question.id, format: :js }
@@ -68,9 +66,6 @@ RSpec.describe SubscriptionsController, type: :controller do
         unsubscribe_request
         expect(response).to render_template :destroy
       end
-
     end
-  #
   end
-
 end

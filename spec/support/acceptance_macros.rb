@@ -1,12 +1,10 @@
 module AcceptanceMacros
-
   def sign_in(user)
     visit new_user_session_path
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
     click_on 'sign_in'
   end
-
 
   def can_see_question(with_answers: false)
     visit questions_path
@@ -26,12 +24,11 @@ module AcceptanceMacros
     end
   end
 
-
-def add_inputs_type_files
-  all_inputs_type_file = all('input[type="file"]')
-  all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
-  all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
-end
+  def add_inputs_type_files
+    all_inputs_type_file = all('input[type="file"]')
+    all_inputs_type_file.first.set("#{Rails.root}/spec/spec_helper.rb")
+    all_inputs_type_file.last.set("#{Rails.root}/spec/rails_helper.rb")
+  end
 
   def page_behaves_like_authenticated
     expect(page).to have_link "user_menu_link"
@@ -40,12 +37,9 @@ end
     expect(page).to have_content "profile"
   end
 
-
   def page_has_search_area
     expect(page).to have_selector 'select#category'
     expect(page).to have_selector 'input[type="search"]#query'
     expect(page).to have_button 'search_button'
   end
-
 end
-

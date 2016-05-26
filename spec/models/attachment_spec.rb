@@ -6,7 +6,6 @@ RSpec.describe Attachment, type: :model do
 
   let!(:attachment_with_file) { create(:attachment, file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/spec_helper.rb")) }
 
-
   describe 'method  file_name' do
     it "return name of attachments' file" do
       expect(attachment_with_file.file_name).to eq "spec_helper.rb"

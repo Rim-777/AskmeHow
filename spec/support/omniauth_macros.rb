@@ -5,11 +5,7 @@ module OmniauthMacros
                                info: {mail: provider == :twitter ? nil : 'new@user.ml'})
   end
 
-
   def mock_auth_invalid_hash(provider)
     OmniAuth.config.mock_auth[provider.to_sym] = :invalid_credentials
-
   end
-
-
 end

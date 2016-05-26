@@ -2,11 +2,9 @@ require 'rails_helper'
 include ApiMacros
 
 describe 'Profile API' do
-
   let(:http_method) { :get }
 
   describe 'GET /me' do
-
     let(:api_path) { '/api/v1/profiles/me' }
 
     it_behaves_like 'Invalid Api Authorization'
@@ -34,7 +32,6 @@ describe 'Profile API' do
   end
 
   describe 'GET /index' do
-
     let(:api_path) { '/api/v1/profiles' }
 
     it_behaves_like 'Invalid Api Authorization'
@@ -82,9 +79,6 @@ describe 'Profile API' do
       it "not contain me" do
         expect(response.body).to_not include_json(me.to_json)
       end
-
     end
-
   end
-
 end

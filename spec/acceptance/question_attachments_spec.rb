@@ -3,7 +3,6 @@ require_relative 'acceptance_helper'
 feature 'Add files to Question', %q{
 In order to illustrate some details  of my question
 I want to be able to attach some files to my question} do
-
   given(:author_of_question) { create(:user) }
   before do
     sign_in(author_of_question)
@@ -31,8 +30,8 @@ I want to be able to attach some files to my question} do
       add_inputs_type_files
 
     end
-        click_on 'question_create_button'
 
+    click_on 'question_create_button'
       within '.question_existed_area' do
         expect(page).to have_link 'spec_helper.rb'
         expect(page).to have_link 'rails_helper.rb'
@@ -40,7 +39,6 @@ I want to be able to attach some files to my question} do
   end
 
   scenario 'user is trying remove one of few added file_fields from question', js: true do
-
     within '#question_form_new' do
       fill_in 'question_title', with: 'Question Title Test'
       fill_in 'question_body', with: 'Question Body Test'
@@ -49,17 +47,14 @@ I want to be able to attach some files to my question} do
     within '.new_question' do
       click_on '[+]'
       add_inputs_type_files
-
       expect(page).to have_link '[-]'
       click_on '[-]',  match: :first
-
     end
-    click_on 'question_create_button'
 
+    click_on 'question_create_button'
     within '.question_existed_area' do
       expect(page).to_not have_link 'spec_helper.rb'
       expect(page).to have_link 'rails_helper.rb'
     end
   end
-
 end

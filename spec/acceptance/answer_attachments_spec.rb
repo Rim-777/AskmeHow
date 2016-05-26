@@ -19,7 +19,6 @@ I want to be able to attach some files to my answer} do
       click_on 'Create'
       within '.answers' do
         expect(page).to have_link 'rails_helper.rb', href: '/uploads/test/attachment/file/1/rails_helper.rb'
-
       end
     end
 
@@ -43,7 +42,6 @@ I want to be able to attach some files to my answer} do
     end
 
     scenario 'user is trying remove one of few added file_fields from answer', js: true do
-
       within '#answer_form_new' do
         fill_in 'answer_body_new', with: 'Test answer body'
 
@@ -62,5 +60,4 @@ I want to be able to attach some files to my answer} do
       end
     end
   end
-
 end

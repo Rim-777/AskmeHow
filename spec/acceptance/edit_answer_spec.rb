@@ -6,7 +6,6 @@ I want to be able to edit my answers} do
   given(:author_of_question) { create(:user) }
   given(:author_of_answer) { create(:user) }
   given(:another_authenticated_user) { create(:user) }
-
   given(:question) { create(:question, user: author_of_question) }
   given!(:answer) { create(:answer, question: question, user: author_of_answer) }
 
@@ -16,12 +15,10 @@ I want to be able to edit my answers} do
   end
 
   describe 'Authenticate User and his answer' do
-
     before do
       sign_in(author_of_answer)
       visit question_path(question)
     end
-
 
     scenario 'Author of Answer is trying edit his Answer', js: true do
       within '.answers' do
@@ -36,9 +33,7 @@ I want to be able to edit my answers} do
         expect(page).to have_content 'edited answer'
         expect(page).to_not have_selector 'textarea'
       end
-
     end
-
   end
 
   scenario 'Authenticate User is trying edit his not Answer' do
@@ -48,6 +43,4 @@ I want to be able to edit my answers} do
       expect(page).to_not have_link 'edit'
     end
   end
-
-
 end

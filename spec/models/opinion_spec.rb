@@ -15,8 +15,6 @@ RSpec.describe Opinion, type: :model do
     it "check if  opinion changed  return  true otherwise return false" do
       expect(opinion.is_changed?(1)).to eq false
       expect(opinion.is_changed?(-1)).to eq true
-
     end
-
   end
 end

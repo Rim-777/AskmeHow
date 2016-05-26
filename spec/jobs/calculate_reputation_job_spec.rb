@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CalculateReputationJob, type: :job do
-
-
-
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user) }
 

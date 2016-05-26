@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Search, type: :model do
-
   CATEGORIES = ['Question', 'Answer', 'Comment', 'User']
 
   describe '.is_wrong' do
     it 'return true if search request is blank' do
       expect(Search.is_wrong?('All categories', '')).to eq true
     end
-
 
     it 'return true if search request contain non-existent category' do
       expect(Search.is_wrong?('un-existing', '123')).to eq true
@@ -25,9 +23,7 @@ RSpec.describe Search, type: :model do
         expect(Search.is_wrong?(category, '')).to eq false
       end
     end
-
   end
-
 
   describe '.search' do
     it 'should not receive search to ThinkingSphinx if search request is blank' do

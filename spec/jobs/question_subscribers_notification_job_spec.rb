@@ -8,7 +8,6 @@ RSpec.describe QuestionSubscribersNotificationJob, type: :job do
   let(:answer) { create(:answer, question: question, user: create(:user)) }
 
   it 'sends question subscribers notification' do
-
     question.subscriptions.find_each do |subscription|
       expect(UserNotificationMailer).to receive(:notify_question_subscribers).with(subscription, answer).and_call_original
     end

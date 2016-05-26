@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-
   it { should validate_presence_of :title }
   it { should validate_presence_of :body }
   it { should have_many(:answers).dependent(:destroy) }
@@ -33,7 +32,6 @@ RSpec.describe Question, type: :model do
     it 'return true if question is not subscribed with subscriber' do
       expect(question.is_subscribed_with?(subscriber)).to eq false
     end
-
   end
 
   describe '#is_not_subscribed_with?' do
@@ -48,9 +46,7 @@ RSpec.describe Question, type: :model do
     it 'return true if question is not subscribed with subscriber' do
       expect(question.is_not_subscribed_with?(subscriber)).to eq true
     end
-
   end
-
 
   describe 'PATH/#best_answer' do
     let!(:best_answer) { create(:answer, question: question, user: create(:user), is_best: true) }
@@ -60,6 +56,5 @@ RSpec.describe Question, type: :model do
       expect(question.best_answer).to eq best_answer
       expect(question.best_answer).to_not eq other_answer
     end
-
   end
 end

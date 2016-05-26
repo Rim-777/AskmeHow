@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
   let(:all_users) { create_list(:user, 3) }
   let(:user) { create(:user) }
 
@@ -31,13 +30,11 @@ RSpec.describe UsersController, type: :controller do
 
     it 'assign value for @user as required user' do
       expect(assigns(:user)).to eq user
-
     end
 
     it 'render show view' do
       expect(response).to render_template :show
     end
-
   end
 
   describe 'GET/#edit' do
@@ -56,11 +53,8 @@ RSpec.describe UsersController, type: :controller do
       it 'render edit view' do
         expect(response).to render_template :edit
       end
-
-
     end
     context 'un-authenticate user ' do
-
       it 'render edit view' do
         request
         expect(response).to_not render_template :edit
@@ -70,7 +64,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:request) { patch :update, id: user, user: {first_name: 'John', last_name: 'Smith'} }
+    let(:request) do
+      patch :update, id: user, user: { first_name: 'John', last_name: 'Smith' }
+    end
 
     context 'authenticate user and his data' do
       before do
@@ -95,18 +91,14 @@ RSpec.describe UsersController, type: :controller do
       it 'render show view' do
         expect(response).to redirect_to user_path(user)
       end
-
     end
 
-
     context 'authenticate user and his not data' do
-
       before do
         sign_in(create(:user))
         request
       end
 
-
       it "change not user's first_name" do
         user.reload
         expect(user.first_name).to_not eq 'John'
@@ -116,12 +108,9 @@ RSpec.describe UsersController, type: :controller do
         user.reload
         expect(user.last_name).to_not eq 'Smith'
       end
-
-
     end
 
     context 'un-authenticate user' do
-
       before do
         request
       end
@@ -136,7 +125,5 @@ RSpec.describe UsersController, type: :controller do
         expect(user.last_name).to_not eq 'Smith'
       end
     end
-
   end
-
 end

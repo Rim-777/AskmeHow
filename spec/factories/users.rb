@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   sequence :email do |n|
     "user#{n}@test.com"
   end
@@ -12,6 +11,4 @@ FactoryGirl.define do
     first_name nil
     last_name nil
   end
-
-
 end
