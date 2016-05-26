@@ -21,10 +21,8 @@ I want to be able to attach some files to my answer} do
   end
 
   scenario 'user is trying add few files to answer by few file_fields', js: true do
-
     within '#answer_form_new' do
       fill_in 'answer_body_new', with: 'Test answer body'
-
       expect(page).to have_link '[+]'
       click_on '[+]'
       add_inputs_type_files

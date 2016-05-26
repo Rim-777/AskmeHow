@@ -18,6 +18,5 @@ I want to be able to ask questions } do
   scenario 'Un-authenticate User is trying ask a question' do
     visit questions_path
     expect(page).to_not have_link 'Ask question'
-    # save_and_open_page
   end
 end
