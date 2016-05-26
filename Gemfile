@@ -21,7 +21,7 @@ gem 'cancancan'
 gem 'responders', '~> 2.0'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem 'rubocop', require: false
 gem 'carrierwave'
 gem 'devise'
 gem 'therubyracer'

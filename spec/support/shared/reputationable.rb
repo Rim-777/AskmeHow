@@ -1,4 +1,4 @@
-shared_examples_for 'Reputationable'  do
+shared_examples_for 'Reputationable' do
   it 'should calculate user reputation after create' do
     expect(CalculateReputationJob).to receive(:perform_later).with(subject)
     subject.save!
