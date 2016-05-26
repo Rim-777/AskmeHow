@@ -1,6 +1,5 @@
 require_relative 'acceptance_helper'
 
-
 feature 'Create Answer', %q{
 In order to help users to find correct answer as an authenticate user
 I want to be able to create answers } do

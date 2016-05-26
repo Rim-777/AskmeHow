@@ -1,9 +1,7 @@
 require_relative 'acceptance_helper'
 
-
 feature 'Sign_up', %q{ To ask question and write answers
 I wont to be able to sign up} do
-
   scenario 'Un-Registered user is trying to sign up' do
     visit new_user_registration_path
     fill_in 'user_email', with: 'new_user@test.com'

@@ -3,11 +3,9 @@ require_relative 'acceptance_helper'
 feature 'Create Question', %q{
 In order to get answer as an authenticate user
 I want to be able to ask questions } do
-  given(:user) {create(:user)}
+  given(:user) { create(:user) }
   scenario 'Authenticate User is trying ask a question' do
-
-   sign_in(user)
-
+    sign_in(user)
     visit questions_path
     click_on 'Ask question'
     fill_in 'question_title', with: 'Test question'

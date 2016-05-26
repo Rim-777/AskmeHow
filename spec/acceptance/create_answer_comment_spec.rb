@@ -1,6 +1,5 @@
 require_relative 'acceptance_helper'
 
-
 feature 'Create Comment', %q{
 In order to comment answers  as an authenticate user
 I want to be able to  create comment } do

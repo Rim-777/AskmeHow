@@ -1,7 +1,5 @@
 require_relative 'acceptance_helper'
 
-
-
 feature 'User sign out', %q{As authenticate  User, I want be able to sign out} do
   given(:user) {create(:user)}
 

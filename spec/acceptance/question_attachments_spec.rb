@@ -18,7 +18,6 @@ I want to be able to attach some files to my question} do
   end
 
   scenario 'user is trying add few files to question by few file_fields', js: true do
-
     within '#question_form_new' do
       fill_in 'question_title', with: 'Question Title Test'
       fill_in 'question_body', with: 'Question Body Test'
@@ -28,7 +27,6 @@ I want to be able to attach some files to my question} do
       expect(page).to have_link '[+]'
       click_on '[+]'
       add_inputs_type_files
-
     end
 
     click_on 'question_create_button'

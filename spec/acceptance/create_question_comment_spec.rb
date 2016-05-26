@@ -23,6 +23,7 @@ I want to be able to create  comment } do
       expect(page).to have_field "question_#{question.id}_comment_add_area"
     end
   end
+
   scenario 'Un-authenticate User is trying to add comment to question', js: true do
     visit question_path(question)
     within '.question_existed_area .question_comments' do
