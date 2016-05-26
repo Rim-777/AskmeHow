@@ -94,7 +94,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 're-render new view' do
-        post :create, question: attributes_for(:invalid_question)
+        invalid_request
         expect(response).to render_template :new
       end
     end
@@ -157,6 +157,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'DELETE # destroy' do
     let(:delete_request) { delete :destroy, id: question }
+
     before do
       sign_in(user)
       question
