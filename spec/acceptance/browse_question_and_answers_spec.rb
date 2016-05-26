@@ -15,8 +15,3 @@ I want to be able to  browse the question and it's answers
     can_see_question(with_answers: true)
   end
 end
-
-
-
-
-
