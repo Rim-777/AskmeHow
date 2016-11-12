@@ -2,13 +2,15 @@ hr
 br
 .col-lg-10.col-lg-push-2
   = form_for [question, answer], remote: true, html: {id: "answer_form_new"} do |f|
-
     div class="new_answer_errors"
-    /= render 'common/errors', resource: @answer
     div class="field"
       = f.label :body_new, 'You Answer:'
       br
-      = f.text_area :body, id: 'answer_body_new', class: 'form-control', placeholder: 'Add answer', data:{question_id: question.id}
+      = f.text_area :body,
+              id: 'answer_body_new',
+              class: 'form-control',
+              placeholder: 'Add answer',
+              data:{question_id: question.id}
 
     == render 'attachments/attachment_form', f: f, attachable: answer
 

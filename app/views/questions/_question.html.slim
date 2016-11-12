@@ -8,7 +8,8 @@
         = question.user.email
         br
         = question.created_at.to_date
-      .col-lg-10.col-md-10.col-sm-10.question_existed_area data={question_id: question.id} data={current_user_id: "#{current_user.id if user_signed_in?}" }
+      .col-lg-10.col-md-10.col-sm-10
+        .question_existed_area data={question_id: question.id} data={current_user_id: "#{current_user.id}"}
         .row
           .col-lg-11.col-md-11.col-sm-11.question_title_existed
             = question.title
@@ -37,4 +38,3 @@
                   == render 'attachments/attachment', attachment: a, attachable: question
           br
         == render 'comments/comments', commentable: question
-

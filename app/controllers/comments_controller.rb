@@ -6,7 +6,8 @@ class CommentsController < ApplicationController
   respond_to :json
 
   def create
-    respond_with( @comment = @commentable.comments.create(comment_params.merge!(user_id: current_user.id)), location: @commentable)
+    @comment = @commentable.comments.create(comment_params.merge!(user_id: current_user.id))
+    respond_with(@comment, location: @commentable)
   end
 
   private

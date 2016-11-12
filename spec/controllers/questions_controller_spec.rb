@@ -16,11 +16,11 @@ RSpec.describe QuestionsController, type: :controller do
       get :index
     end
 
-    it 'populates an array of all question' do
+    it 'populates an array of all questions' do
       expect(assigns(:questions)).to match_array(questions)
     end
 
-    it 'render index view' do
+    it 'renders the index view' do
       expect(response).to render_template :index
     end
   end
@@ -35,11 +35,11 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:question)).to eq question
     end
 
-    it 'assigns the new answer for question' do
+    it 'assigns the new answer for the question' do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
-    it 'render show view' do
+    it 'renders the show view' do
       expect(response).to render_template :show
     end
   end
@@ -54,7 +54,7 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it 'render new view' do
+    it 'renders the new view' do
       expect(response).to render_template :new
     end
   end
@@ -66,15 +66,15 @@ RSpec.describe QuestionsController, type: :controller do
       let(:request) { post :create, question: attributes_for(:question) }
       let(:channel) { '/questions' }
 
-      it 'save new question in database' do
+      it 'saves a new question in the database' do
         expect { request }.to change(Question, :count).by(1)
       end
 
-      it 'save new question in database depending with user' do
+      it 'saves a new question in the database for the user' do
         expect { request }.to change(user.questions, :count).by(1)
       end
 
-      it 'redirect_to show view' do
+      it 'redirects to the show view' do
         request
         expect(response).to redirect_to question_path(assigns(:question))
       end
@@ -93,7 +93,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect { invalid_request }.to_not change(Question, :count)
       end
 
-      it 're-render new view' do
+      it 're-renders the new view' do
         invalid_request
         expect(response).to render_template :new
       end
@@ -117,7 +117,7 @@ RSpec.describe QuestionsController, type: :controller do
             format: :js
     end
 
-    context 'User is trying update his question' do
+    context 'the user is trying to update his/her question' do
       before { patch_request }
 
       it 'assigns the requested question to @question' do
@@ -130,12 +130,12 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'new body'
       end
 
-      it 'render template update wiev' do
+      it 'renders the template update view' do
         expect(response).to render_template :update
       end
     end
 
-    context 'User is trying update his not question' do
+    context "the user is trying to update someone's else question" do
       it 'does not change question attributes' do
         sign_in(another_user)
         patch_request
@@ -145,7 +145,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
 
-    context 'User is trying update his question with invalid attributes' do
+    context 'the user is trying to update his/her question with invalid attributes' do
       it 'does not change question attributes' do
         invalid_patch_request
         question.reload
@@ -163,20 +163,20 @@ RSpec.describe QuestionsController, type: :controller do
       question
     end
 
-    context 'User is trying to delete his own question' do
-      it 'remove a question' do
+    context 'the user is trying to delete his/her question' do
+      it 'removes the question' do
         expect { delete_request }.to change(user.questions, :count).by(-1)
       end
     end
 
-    context 'User is trying to delete  his not question' do
-      it 'Does not remove a question' do
+    context "the ser is trying to delete someone's else question" do
+      it 'does not remove any question' do
         sign_in(another_user)
         expect { delete_request }.to_not change(Question, :count)
       end
     end
 
-    it 'redirect to  index view' do
+    it 'redirects to the index view' do
       delete_request
       expect(response).to redirect_to questions_path
     end

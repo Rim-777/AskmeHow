@@ -7,14 +7,18 @@ html lang="en"
     title= content_for?(:title) ? yield(:title) : "Chewing-Rails"
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
-    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
-    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
-    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png',
+            :rel => 'apple-touch-icon-precomposed',
+            :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png',
+            :rel => 'apple-touch-icon-precomposed',
+            :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png',
+            :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
-      /! Le HTML5 shim, for IE6-8 support of HTML elements
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
+
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
   body
     .navbar.navbar-default.navbar-static-top
@@ -24,19 +28,21 @@ html lang="en"
         .navbar-collapse.collapse.navbar-responsive-collapse
           .row
             .col-lg-1.col-lg-push-9
-              - unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'passwords'
-                ul.nav.navbar-nav
-                  - if user_signed_in?
-                    li.dropdown.nav.nav-tabs
-                      - if current_user.avatar?
-                        = image_tag current_user.avatar.url, 'data-toggle' => "dropdown", class: "dropdown-toggle  thumb ", id: 'user_menu_link'
-                      - else
-                        = link_to current_user.email, '', 'data-toggle' => "dropdown", class: "dropdown-toggle", id: 'user_menu_link'
-                      ul class="dropdown-menu table-bordered" role="menu" aria-labelledby="dLabel"
-                        li = link_to 'profile', current_user
-                        li = link_to 'Log out', destroy_user_session_path, method: :delete
-                  - else
-                    li= link_to "log in", "#sign_in", "data-toggle" => "modal", class: 'btn btn-small', id: 'sign_in_user'
+              ul.nav.navbar-nav
+                - if user_signed_in?
+                  li.dropdown.nav.nav-tabs
+                    - if current_user.avatar?
+                      = image_tag current_user.avatar.url, 'data-toggle' => "dropdown",
+                              class: "dropdown-toggle  thumb ", id: 'user_menu_link'
+                    - else
+                      = link_to current_user.email, '', 'data-toggle' => "dropdown",
+                              class: "dropdown-toggle", id: 'user_menu_link'
+                    ul class="dropdown-menu table-bordered" role="menu" aria-labelledby="dLabel"
+                      li = link_to 'profile', current_user
+                      li = link_to 'Log out', destroy_user_session_path, method: :delete
+                - else
+                  li= link_to "log in", "#sign_in", "data-toggle" => "modal",
+                          class: 'btn btn-small', id: 'sign_in_user'
 
     .container
       .row
@@ -48,10 +54,6 @@ html lang="en"
           .col-lg-10.col-md-10.col-sm-10
             = yield
           .col-lg-2.col-md-2.col-sm-2
-            br
-            br
-            br
-            br
             .sidebar-nav
               ul.nav.nav-list
 

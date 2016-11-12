@@ -11,76 +11,76 @@ RSpec.describe User do
   let!(:user_with_opinion) { create(:user) }
   let!(:question) { create(:question, user: author_of_question) }
 
-  describe '#method say_оpinion(оpinionable, value)' do
+  describe '#say_оpinion(оpinionable, value)' do
 
-    it "create new users' opinion for question " do
+    it "creates a new users' opinion for the question " do
       user_with_opinion.say_оpinion(question, 1)
       expect(question.opinions.first.value).to eq 1
     end
 
-    it "remove  old users' opinion if new opinion is different" do
+    it "removes the old users' opinion if a new opinion is different" do
       user_with_opinion.say_оpinion(question, 1)
       user_with_opinion.say_оpinion(question, -1)
       expect(question.opinions.first).to eq nil
     end
 
-    it "it again create new users' opinion for question " do
+    it "again creates a new users' opinion for the question " do
       user_with_opinion.say_оpinion(question, -1)
       expect(question.opinions.first.value).to eq -1
     end
   end
 
-  describe "#method author_of?(entity)" do
+  describe '#author_of?(entity)' do
     it "returne true if users is author of question" do
       expect(author_of_question).to be_author_of(question)
     end
 
-    it "returne false if users is not author of question" do
+    it 'returnes false if users is not author of question' do
       expect(not_author_of_question).to be_not_author_of(question)
     end
   end
 
-  describe "#method not_author_of?(entity)" do
-    it "returne false if users is author of question" do
+  describe "#not_author_of?(entity)" do
+    it "returnes false if the user is the author of the question" do
       expect(author_of_question.not_author_of?(question)).to eq false
     end
 
-    it "returne true if users is not author of question" do
+    it "returnes true if the users isn't the author of the question" do
       expect(not_author_of_question.not_author_of?(question)).to eq true
     end
   end
 
-  describe "#method is_author_of!(entity)" do
-    it "define for entity.user user" do
+  describe "#is_author_of!(entity)" do
+    it "defines for the entity's user" do
       not_author_of_question.is_author_of!(question)
       expect(question.user).to eq not_author_of_question
     end
   end
 
-  describe '.method find_by_oauth' do
+  describe '.find_by_oauth' do
     let!(:user) { create(:user) }
     let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123457') }
 
-    context 'user already has an social net authorization' do
+    context 'the user already has an social net authorization' do
       it 'returns the user' do
         user.authorizations.create(provider: 'facebook', uid: '123457')
         expect(User.find_by_oauth(auth)).to eq user
       end
     end
 
-    context 'user still has not an social net authorization' do
+    context 'the user still has not an social net authorization' do
       context 'user already exist but have registered without social net' do
         let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '123457', info: { email: user.email }) }
 
-        it 'does not create new user' do
+        it 'does not create a new user' do
           expect { User.find_by_oauth(auth) }.to_not change(User, :count)
         end
 
-        it 'create new authorization for user' do
+        it 'creates a new authorization for user' do
           expect { User.find_by_oauth(auth) }.to change(user.authorizations, :count).by(1)
         end
 
-        it 'create authorization with provider and uid' do
+        it 'creates an authorization with provider and uid' do
           user = User.find_by_oauth(auth)
           authorization = user.authorizations.first
           expect(authorization.provider).to eq auth.provider
@@ -94,7 +94,7 @@ RSpec.describe User do
     end
 
     context 'user does not exist' do
-      context 'provider  return email for user' do
+      context 'provider  returns an email for the user' do
         let(:auth) { OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345678', info: {email: 'new@user.ml'}) }
         it 'fills user emails' do
           user = User.find_by_oauth(auth)
@@ -103,7 +103,7 @@ RSpec.describe User do
         it_return_new_user_and_authorization_by_oauth
       end
 
-      context 'provider dont return email' do
+      context "provider doesn't return email" do
         let(:auth) { OmniAuth::AuthHash.new(provider: 'twitter', uid: '12345678', info: {email: nil}) }
         it 'fills tmp email for user' do
           user = User.find_by_oauth(auth)

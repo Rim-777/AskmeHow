@@ -36,4 +36,3 @@ class Ability
     can :me, User, id: user.id
   end
 end
-

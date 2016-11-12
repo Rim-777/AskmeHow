@@ -19,8 +19,8 @@ RSpec.describe Answer, type: :model do
 
   given_user_with_question_and_answers_from_model_macros
 
-  describe '#method set_is_best' do
-    it "put fields' value 'is_best' as true for selected answer,
+  describe '#set_is_best' do
+    it "puts the fields' value 'is_best' as true for the selected answer,
         and false for all others answers concerning theirs' question" do
       answer.set_is_best
       answer.question.answers.each do |the_answer|
@@ -35,12 +35,12 @@ RSpec.describe Answer, type: :model do
   end
 
   describe '#type_and_id' do
-    it "return string with class_name and id of opinmonable entity" do
+    it "returns the string with the class_name and an id of the opinmonable entity" do
       expect(answer.type_and_id).to eq "answer_#{answer.id}"
     end
   end
 
-  describe 'it put in cue sending notification after creation of new answer' do
+  describe 'it puts in cue the sending notification after the creation of a new answer' do
     let(:user) { create(:user) }
     let(:question) { create(:question, user: user) }
     subject { build(:answer, question: question, user: user) }

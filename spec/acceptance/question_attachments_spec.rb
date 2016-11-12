@@ -1,15 +1,15 @@
 require_relative 'acceptance_helper'
 
 feature 'Add files to Question', %q{
-In order to illustrate some details  of my question
-I want to be able to attach some files to my question} do
+In order to illustrate some details of my question
+I want to be able to attach some files to my questions} do
   given(:author_of_question) { create(:user) }
   before do
     sign_in(author_of_question)
     visit new_question_path
   end
 
-  scenario 'user can attach file when hi is asking question'  do
+  scenario 'the user can attach file when he/she is asking question'  do
     fill_in 'question_title', with: 'Test question'
     fill_in 'question_body', with: 'Test question body'
     attach_file "question_attachments_attributes_0_file", "#{Rails.root}/spec/spec_helper.rb"
@@ -17,7 +17,7 @@ I want to be able to attach some files to my question} do
     expect(page).to have_link 'spec_helper.rb', href: '/uploads/test/attachment/file/1/spec_helper.rb'
   end
 
-  scenario 'user is trying add few files to question by few file_fields', js: true do
+  scenario 'user is trying to add a few files to the question by a few file_fields', js: true do
     within '#question_form_new' do
       fill_in 'question_title', with: 'Question Title Test'
       fill_in 'question_body', with: 'Question Body Test'
@@ -36,7 +36,7 @@ I want to be able to attach some files to my question} do
       end
   end
 
-  scenario 'user is trying remove one of few added file_fields from question', js: true do
+  scenario 'the user is trying top remove one of a few added file_fields', js: true do
     within '#question_form_new' do
       fill_in 'question_title', with: 'Question Title Test'
       fill_in 'question_body', with: 'Question Body Test'

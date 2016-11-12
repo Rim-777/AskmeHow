@@ -10,7 +10,7 @@ describe 'Profile API' do
     it_behaves_like 'Invalid Api Authorization'
 
     context 'authorized' do
-      let(:me) { create (:user) }
+      let(:me) { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
       before { get api_path, format: :json, access_token: access_token.token }

@@ -2,9 +2,17 @@
   = form_for(User.new, url: session_path(:user), html: {id: 'sign_in_user'}) do |f|
 
     .field
-      = f.email_field :email, autofocus: true, class: 'form-control', required: "required", placeholder: 'Enter email'
+      = f.email_field :email,
+              autofocus: true,
+              class: 'form-control',
+              required: "required",
+              placeholder: 'Enter email'
     .field
-      = f.password_field :password, autocomplete: "off", class: 'form-control', required: "required", placeholder: 'Enter password'
+      = f.password_field :password,
+              autocomplete: "off",
+              class: 'form-control',
+              required: "required",
+              placeholder: 'Enter password'
     - if Devise.mappings[:user].rememberable?
       .row.field
         .col-lg-3.actions

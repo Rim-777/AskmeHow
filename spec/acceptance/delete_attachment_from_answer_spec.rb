@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 
 feature 'Delete attachment from Answer', %q{
-In order to remove  not actual my attachment
+In order to remove my attachment
 I want to be able to delete attachment from my Answer} do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
@@ -11,7 +11,7 @@ I want to be able to delete attachment from my Answer} do
                                       file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/rails_helper.rb")) }
   given(:another_authenticated_user) { create(:user) }
 
-  scenario 'Author of answer is trying delete his attachment', js: true do
+  scenario 'the author of the answer is trying to delete his/her attachment', js: true do
     sign_in(author_of_answer)
     visit question_path(question)
     within "#answer_#{answer.id}" do
@@ -29,7 +29,7 @@ I want to be able to delete attachment from my Answer} do
     expect(page).to_not have_link "attachment_remove_link_#{answer_attachment.id}"
   end
 
-  scenario 'Some other user is trying delete his not attachment' do
+  scenario "some other user is trying to delete someone's attachment" do
     sign_in(another_authenticated_user)
     visit question_path(question)
     within "#attachment_#{answer_attachment.id}" do
@@ -38,7 +38,7 @@ I want to be able to delete attachment from my Answer} do
     end
   end
 
-  scenario 'Un-authenticate user is trying delete any  attachment' do
+  scenario 'som unauthenticated user is trying delete any attachment' do
     visit question_path(question)
     within "#attachment_#{answer_attachment.id}" do
       expect(page).to have_link 'rails_helper.rb'

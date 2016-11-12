@@ -11,25 +11,25 @@ RSpec.describe Question, type: :model do
   let(:author_of_question) { create(:user) }
   let!(:question) { create(:question, user: author_of_question) }
 
-  describe 'reputation ' do
+  describe 'the reputation ' do
     subject { build(:question, user: author_of_question) }
     it_behaves_like 'Reputationable'
   end
 
-  describe '# is_subscribed_with?' do
+  describe '#is_subscribed_with?' do
     let(:subscriber) { create(:user) }
     let(:subscription) { create(:subscription, user: subscriber, question: question) }
 
-    it 'return true if question is subscribed with author of question' do
+    it 'returns true if the question is subscribed with the author of question' do
       expect(question.is_subscribed_with?(author_of_question)).to eq true
     end
 
-    it 'return true if question is subscribed with subscriber' do
+    it 'returns true if the question is subscribed by the subscriber' do
       subscription
       expect(question.is_subscribed_with?(subscriber)).to eq true
     end
 
-    it 'return true if question is not subscribed with subscriber' do
+    it 'returns true if the question is not subscribed by subscriber' do
       expect(question.is_subscribed_with?(subscriber)).to eq false
     end
   end
@@ -38,12 +38,12 @@ RSpec.describe Question, type: :model do
     let(:subscriber) { create(:user) }
     let(:subscription) { create(:subscription, user: subscriber, question: question) }
 
-    it 'return false if question is subscribed with subscriber' do
+    it 'returns false if the question is subscribed by the subscriber' do
       subscription
       expect(question.is_not_subscribed_with?(subscriber)).to eq false
     end
 
-    it 'return true if question is not subscribed with subscriber' do
+    it 'return true if the question is not subscribed by the subscriber' do
       expect(question.is_not_subscribed_with?(subscriber)).to eq true
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe Question, type: :model do
     let!(:best_answer) { create(:answer, question: question, user: create(:user), is_best: true) }
     let!(:other_answer) { create(:answer, question: question, user: create(:user), is_best: false) }
 
-    it 'return one answer from his answers, that has value of field "is_best" - true' do
+    it 'returns an answer from answers, which has the value of the field "is_best" - true' do
       expect(question.best_answer).to eq best_answer
       expect(question.best_answer).to_not eq other_answer
     end

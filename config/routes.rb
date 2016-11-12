@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   concern :commentable do
     resources :comments, only: :create
   end
-
-
+  
   resources :questions, concerns: :commentable, defaults: {commentable: 'question'}, shallow: true do
     resources :answers, concerns: :commentable, defaults: {commentable: 'answer'} do
       patch :select_best, on: :member
@@ -20,7 +19,6 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: :destroy
-
   resource :opinion, only: [:positive, :negative] do
     patch :positive, on: :member
     patch :negative, on: :member
@@ -44,7 +42,5 @@ Rails.application.routes.draw do
   end
 
   resources :users
-
   root to: "questions#index"
-
 end

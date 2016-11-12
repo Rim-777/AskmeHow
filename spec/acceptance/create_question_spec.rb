@@ -1,10 +1,10 @@
 require_relative 'acceptance_helper'
 
 feature 'Create Question', %q{
-In order to get answer as an authenticate user
+In order to get answer as an authenticated user
 I want to be able to ask questions } do
   given(:user) { create(:user) }
-  scenario 'Authenticate User is trying ask a question' do
+  scenario 'the uthenticated user is trying to ask a question' do
     sign_in(user)
     visit questions_path
     click_on 'Ask question'
@@ -15,7 +15,7 @@ I want to be able to ask questions } do
     expect(page).to have_content 'Test question body'
   end
 
-  scenario 'Un-authenticate User is trying ask a question' do
+  scenario 'some unauthenticated user is trying to ask a question' do
     visit questions_path
     expect(page).to_not have_link 'Ask question'
   end

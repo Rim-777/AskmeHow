@@ -22,6 +22,7 @@ class Answer < ActiveRecord::Base
   end
 
   def publish_answer
+   return if errors.any?
     answer_data = {
         answer_id: self.id,
         answer_rating: self.opinions.rating,
@@ -33,6 +34,6 @@ class Answer < ActiveRecord::Base
         answers_count: self.question.answers.count
     }
 
-    PrivatePub.publish_to "/question/#{self.question_id}/answers", answer: answer_data.to_json if self.errors.empty?
+    PrivatePub.publish_to "/question/#{self.question_id}/answers", answer: answer_data
   end
 end

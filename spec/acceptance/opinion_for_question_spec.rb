@@ -2,12 +2,12 @@
 
 feature 'Vote for Question', %q{
 In order to show my opinion about some question
-I want to be able to vote for question} do
+I want to be able to vote for questions} do
   given(:author_of_question) { create(:user) }
   given(:some_authenticated_user) { create(:user) }
   given!(:question) { create(:question, user: author_of_question) }
 
-  scenario 'Some authenticated user is trying vote for his not Question', js: true do
+  scenario "some authenticated user is trying to vote for someone's question", js: true do
     sign_in(some_authenticated_user)
     visit question_path(question)
 
@@ -38,7 +38,7 @@ I want to be able to vote for question} do
     end
   end
 
-  scenario 'author of question is trying vote for his Question', js: true do
+  scenario 'the author of the question is trying to vote for his/her question', js: true do
     sign_in(author_of_question)
     visit question_path(question)
 
@@ -62,7 +62,7 @@ I want to be able to vote for question} do
     end
   end
 
-  scenario 'some Un-autenticane user  is trying vote for some Question', js: true do
+  scenario 'some unautenticated user is trying to vote for some question', js: true do
     visit question_path(question)
 
     expect(page).to have_selector '.question_rating'

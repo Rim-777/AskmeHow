@@ -12,9 +12,4 @@ en:
         alert: '%{resource_name} could not be destroyed.'
     questions:
       create:
-#        notice: '%{resource_name} was successfully created.'
         alert: 'Question could not be created.'
-#    answers:
-#          create:
-#            notice: '%{resource_name} was successfully created at %{time}.'
-#            alert: 'Answer could not be created.'

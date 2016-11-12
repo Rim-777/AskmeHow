@@ -8,11 +8,11 @@ RSpec.describe Opinion, type: :model do
   it { should belong_to(:user) }
   it { should validate_uniqueness_of(:user_id).scoped_to([:opinionable_type, :opinionable_id]) }
 
-  describe 'method is_changed?' do
+  describe 'is_changed?' do
     let!(:user) {create(:user)}
     let!(:question) {create(:question, user:user)}
     let!(:opinion) { create(:opinion, value: 1, user:user, opinionable: question) }
-    it "check if  opinion changed  return  true otherwise return false" do
+    it "checks if the opinion changed  returns  true otherwise returns false" do
       expect(opinion.is_changed?(1)).to eq false
       expect(opinion.is_changed?(-1)).to eq true
     end

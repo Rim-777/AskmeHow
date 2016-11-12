@@ -1,9 +1,9 @@
 require_relative 'acceptance_helper'
 
-feature 'User sign out', %q{As authenticate  User, I want be able to sign out} do
+feature 'User sign out', %q{As authenticated user, I want to be able to sign out} do
   given(:user) {create(:user)}
 
-  scenario 'Registered user is trying to sign out' do
+  scenario 'the registered user is trying to sign out' do
    sign_in(user)
    page_behaves_like_authenticated
    click_on 'Log out'

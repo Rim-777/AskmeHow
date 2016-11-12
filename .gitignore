@@ -17,5 +17,6 @@ config/private_pub.yml
 .idea
 /notes
 dump.rdb
+Gemfile.lock
 config/*.sphinx.conf
 db/sphinx

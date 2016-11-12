@@ -5,7 +5,9 @@ class SubscriptionsController < ApplicationController
   authorize_resource
 
   def create
-    respond_with(@question.subscriptions.create(user: current_user)) if @question.is_not_subscribed_with?(current_user)
+    return  unless @question.is_not_subscribed_with?(current_user)
+    @subscriptions =  @question.subscriptions.create(user: current_user)
+    respond_with(@subscriptions)
   end
 
   def destroy

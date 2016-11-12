@@ -12,11 +12,11 @@ shared_examples_for 'Comment' do
             expect(assigns(:commentable)).to eq commentable_object
           end
 
-          it 'save new comment in database depending with commentable_object' do
+          it 'saves a new comment in the database' do
             expect { request }.to change(commentable_object.comments, :count).by(1)
           end
 
-          it 'save new comment in database depending with user' do
+          it 'saves a new comment in the database for the user' do
             expect { request }.to change(user.comments, :count).by(1)
           end
 

@@ -4,22 +4,22 @@ RSpec.describe Search, type: :model do
   CATEGORIES = ['Question', 'Answer', 'Comment', 'User']
 
   describe '.is_wrong' do
-    it 'return true if search request is blank' do
+    it 'returns true if the search request is blank' do
       expect(Search.is_wrong?('All categories', '')).to eq true
     end
 
-    it 'return true if search request contain non-existent category' do
+    it 'returns true if the search request contains "nonexistent" category' do
       expect(Search.is_wrong?('un-existing', '123')).to eq true
     end
 
     CATEGORIES.each do |category|
-      it 'return false if search has existent category end query' do
+      it 'returns false if the search has existent category end query' do
         expect(Search.is_wrong?(category, '123')).to eq false
       end
     end
 
     CATEGORIES.each do |category|
-      it 'return false if search has existent category without query' do
+      it 'returns false if the search has an existent category without query' do
         expect(Search.is_wrong?(category, '')).to eq false
       end
     end

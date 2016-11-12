@@ -2,14 +2,14 @@ require_relative 'acceptance_helper'
 
 feature 'Vote for Answer', %q{
 In order to show my opinion about some question
-I want to be able to vote for question} do
+I want to be able to vote for questions} do
   given(:author_of_question) { create(:user) }
   given(:author_of_answer) { create(:user) }
   given(:some_authenticated_user) { create(:user) }
   given!(:question) { create(:question, user: author_of_question) }
   given!(:answer) { create(:answer, user: author_of_answer, question: question) }
 
-  scenario 'Some authenticated user is trying vote for his not Answer', js: true do
+  scenario "some authenticated user is trying to vote for someone's answer", js: true do
     sign_in(some_authenticated_user)
     visit question_path(question)
     expect(page).to have_selector '.answer_rating'
@@ -41,7 +41,7 @@ I want to be able to vote for question} do
     end
   end
 
-  scenario 'author of question is trying vote for his Answer', js: true do
+  scenario 'the author of the question is trying to vote for his/her Answer', js: true do
     sign_in(author_of_answer)
     visit question_path(question)
 
@@ -67,10 +67,9 @@ I want to be able to vote for question} do
     end
   end
 
-  scenario 'some Un-autenticane user  is trying vote for some Answer', js: true do
+  scenario 'some unautenticated user is trying to vote for some answer', js: true do
     visit question_path(question)
     expect(page).to have_selector '.answer_rating'
-    # sleep(1)
     within "#answer_#{answer.id}_rating" do
       expect(page).to have_button "positive_opinion_answer_#{answer.id}_button"
       expect(page).to have_button "negative_opinion_answer_#{answer.id}_button"

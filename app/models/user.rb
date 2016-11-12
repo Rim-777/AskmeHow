@@ -6,10 +6,19 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :authorizations, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter, :vkontakte]
+ 
+  devise :database_authenticatable, 
+         :registerable,
+         :recoverable, 
+         :rememberable,
+         :trackable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: [
+             :facebook, 
+             :twitter, 
+             :vkontakte
+         ]
 
   def self.send_daily_digest
     find_each.each do |user|
@@ -28,8 +37,7 @@ class User < ActiveRecord::Base
   def is_author_of!(entity)
     entity.user_id = self.id
   end
-
-
+  
   def say_оpinion(opinionable, value)
     opinion = opinions.where(opinionable: opinionable).first
     if opinion.present?
@@ -48,7 +56,6 @@ class User < ActiveRecord::Base
       user.authorizations.create(provider: oauth.provider, uid: oauth.uid.to_s)
     else
       tmp_password = "#{oauth.uid}"
-      # Devise.friendly_token[0, 20]
       user = User.create!(email: tmp_email, password: tmp_password, password_confirmation: tmp_password)
       user.authorizations.create(provider: oauth.provider, uid: oauth.uid.to_s)
     end

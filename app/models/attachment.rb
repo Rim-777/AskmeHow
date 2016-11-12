@@ -1,9 +1,8 @@
 class Attachment < ActiveRecord::Base
+  validates :file, presence: true
   belongs_to :attachable, polymorphic: true, touch: true
   mount_uploader :file, FileUploader
 
-  validates :file, presence: true
-  # scope :ordered, -> { order('created_at') }
   default_scope { order(:created_at) }
 
   def file_name

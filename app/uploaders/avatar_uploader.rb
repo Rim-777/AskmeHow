@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 class AvatarUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
@@ -27,5 +26,4 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def content_type_blacklist
     ['application/text', 'application/json']
   end
-
 end

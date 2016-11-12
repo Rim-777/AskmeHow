@@ -28,15 +28,15 @@ RSpec.describe AnswersController, type: :controller do
 
       let(:channel) { "/question/#{question.id}/answers" }
 
-      it 'save new answer in database depending with question' do
+      it 'saves a new answer in the database for the question' do
         expect { request }.to change(question.answers, :count).by(1)
       end
 
-      it 'save new answer in database depending with user' do
+      it 'saves a new answer in database for the user' do
         expect { request }.to change(user.answers, :count).by(1)
       end
 
-      it 'render template Answers/create.js view' do
+      it 'renders template answers/create' do
         request
         expect(response).to render_template :create
       end
@@ -58,7 +58,7 @@ RSpec.describe AnswersController, type: :controller do
         expect { invalid_request }.to_not change(Answer, :count)
       end
 
-      it 'render template Answers/create.js view' do
+      it 'renders template answers/create' do
         invalid_request
         expect(response).to render_template :create
       end
@@ -74,25 +74,25 @@ RSpec.describe AnswersController, type: :controller do
             format: :js
     end
 
-    context 'User is trying to update his own Answer' do
+    context 'the user is trying to update his own answer' do
       it 'assigns the requested answer to @answer' do
         update_request
         expect(assigns(:answer)).to eq answer
       end
 
-      it 'change answer body' do
+      it 'changes the answer body' do
         update_request
         answer.reload
         expect(answer.body).to eq 'new body'
       end
 
-      it 'render template Answers/update.js view' do
+      it 'renders the template Answers/update' do
         update_request
         expect(response).to render_template :update
       end
     end
 
-    context 'User is trying to update his not Answer' do
+    context "the user is trying to update someone's else answer" do
       let(:anothers_request) do
         patch :update,
               question_id: question,
@@ -129,26 +129,26 @@ RSpec.describe AnswersController, type: :controller do
             format: :js
     end
 
-    context 'Question author is trying to mark best his question-answer' do
+    context 'the question author is trying to mark as best his/her question-answer' do
       it 'assigns the requested answer to @answer' do
         request_with_old_attr
         expect(assigns(:answer)).to eq one_more_answer
       end
 
-      it "change answer's field 'is_best' " do
+      it "changes an answer's field 'is_best' " do
         request_with_new_attr
         one_more_answer.reload
         expect(one_more_answer.is_best?).to eq true
       end
 
-      it 'render template Answers/select_best.js view' do
+      it 'renders template answers/select_best' do
         request_with_old_attr
         expect(response).to render_template :select_best
       end
     end
 
-    context 'Other user is trying to mark best an answer on his not question' do
-      it "do not change answer's field 'is_best' " do
+    context 'some other user is trying to mark as the best an answer of someone else question' do
+      it "do not change the answer's field 'is_best' " do
         sign_in(another_user)
         request_with_new_attr
         one_more_answer.reload
@@ -161,20 +161,20 @@ RSpec.describe AnswersController, type: :controller do
     let(:destroy_request) do
       delete :destroy, question_id: question, id: answer, format: :js
     end
-    context 'User is trying to remove his own answer ' do
+    context 'the user is trying to remove his/her answer ' do
       it "remove an user's answer" do
         expect { destroy_request }.to change(user.answers, :count).by(-1)
       end
     end
 
-    context 'User is trying to remove his not answer' do
+    context 'the user is trying to remove someone else answer' do
       it 'does not remove a question' do
         sign_in(another_user)
         expect { destroy_request }.to_not change(Answer, :count)
       end
     end
 
-    it 'redirect to  index view' do
+    it 'redirects to the index view' do
       destroy_request
       expect(response).to render_template :destroy
     end

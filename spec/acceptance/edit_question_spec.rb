@@ -1,19 +1,19 @@
 require_relative 'acceptance_helper'
 
 feature 'Edit Question', %q{
-In order to correct mistakes in my question
-I want to be able to edit my question} do
+In order to correct my question
+I want to be able to edit my questions} do
   given(:author_of_question) { create(:user) }
   given(:another_authenticated_user) { create(:user) }
   given!(:question) { create(:question, user: author_of_question) }
 
-  describe 'Authenticate User and his Question' do
+  describe 'the authenticated user and his/her question' do
     before do
       sign_in(author_of_question)
       visit question_path(question)
     end
 
-    scenario 'Author of Question is trying edit his Question', js: true do
+    scenario 'the author of the question is trying to edit his/her question', js: true do
       within '.question_existed_area'  do
         expect(page).to have_content question.title
         expect(page).to have_link "question_edit_link"
@@ -29,7 +29,7 @@ I want to be able to edit my question} do
     end
   end
 
-  scenario 'Authenticate User is trying edit his not Question' do
+  scenario "the authenticated user is trying to edit someone's question" do
     sign_in(another_authenticated_user)
     visit question_path(question)
     within '.question_existed_area' do
@@ -37,7 +37,7 @@ I want to be able to edit my question} do
     end
   end
 
-  scenario 'Un-Authenticate User is trying edit an Question' do
+  scenario 'some unauthenticated user is trying to edit some question' do
     visit questions_path
     expect(page).to_not have_link 'Edit'
   end

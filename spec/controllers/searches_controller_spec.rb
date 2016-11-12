@@ -15,43 +15,43 @@ RSpec.describe SearchesController, type: :controller do
         wrong_request
       end
 
-      it 'render nothing' do
+      it 'renders nothing' do
         wrong_request
         expect(response).to render_template nil
       end
     end
 
-    context 'valid request with query without category' do
+    context 'the valid request with a query without category' do
       let(:request_without_category) do
         get :search, category: 'All categories', query: query, format: :js
       end
 
-      it 'should  receive search to Search' do
+      it 'should receive search to Search' do
         expect(Search).to receive(:search).with('All categories', query)
         request_without_category
       end
 
-      it 'render search template' do
+      it 'renders the search template' do
         request_without_category
         expect(response).to render_template :search
       end
     end
 
-    context 'valid request with category and query' do
+    context 'the valid request with category and query' do
       CATEGORIES.each do |category|
         it "should receive search to #{category}" do
           expect(Search).to receive(:search).with(category, query)
           get :search, category: category, query: query, format: :js
         end
 
-        it 'render search template' do
+        it 'renders search template' do
           get :search, category: category, query: query, format: :js
           expect(response).to render_template :search
         end
       end
     end
 
-    context 'valid request with category without query' do
+    context 'the valid request with a category without query' do
       CATEGORIES.each do |category|
         it "should receive search to #{category}" do
           expect(Search).to receive(:search).with(category, '')

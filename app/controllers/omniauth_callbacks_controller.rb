@@ -18,7 +18,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user = User.find_by_oauth(social_net_data)
       if @user.persisted?
         sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: "#{social_net_data.provider.to_s.capitalize}") if is_navigational_format?
+        set_flash_message(
+            :notice, :success,
+            kind: "#{social_net_data.provider.to_s.capitalize}"
+        ) if is_navigational_format?
       end
     end
   end

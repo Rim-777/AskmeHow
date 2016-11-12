@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 
 feature 'Browse questions', %q{
-Before ask my question
+Before to ask my question
 I want to be able to  browse the questions
 to find similar questions } do
   given(:user) { create(:user) }
@@ -9,12 +9,12 @@ to find similar questions } do
   given(:questions) { create_list(:question, 3, user: another_user) }
 
   before { questions }
-  scenario 'Authenticate User is trying to  browse the questions' do
+  scenario 'the authenticated user is trying to browse questions' do
     sign_in(user)
     can_see_full_question_list
   end
 
-  scenario 'Authenticate User is trying to  browse the questions' do
+  scenario 'some unauthenticated user is trying to browse questions' do
     can_see_full_question_list
   end
 end

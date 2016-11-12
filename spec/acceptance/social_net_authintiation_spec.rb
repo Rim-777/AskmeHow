@@ -3,7 +3,7 @@ OmniAuth.config.test_mode = true
 feature 'OAuth' do
   before { visit new_user_session_path }
 
-  describe 'user try sign_in ' do
+  describe 'the user trys sign_in ' do
     scenario 'successfully' do
       mock_auth_hash(:twitter)
       click_on 'twitter_oauth_social_button'
@@ -11,7 +11,7 @@ feature 'OAuth' do
       page_behaves_like_authenticated
     end
 
-    scenario 'Un-successfully' do
+    scenario 'unsuccessfully' do
       mock_auth_invalid_hash(:twitter)
       click_on 'twitter_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Twitter because \"Invalid credentials\"."
@@ -19,7 +19,7 @@ feature 'OAuth' do
     end
   end
 
-  describe 'user try sign_in Facebook' do
+  describe 'the user trys sign_in with facebook' do
     scenario 'successfully' do
       mock_auth_hash(:facebook)
       click_on 'facebook_oauth_social_button'
@@ -27,7 +27,7 @@ feature 'OAuth' do
       page_behaves_like_authenticated
     end
 
-    scenario 'Un-successfully' do
+    scenario 'unsuccessfully' do
       mock_auth_invalid_hash(:facebook)
       click_on 'facebook_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Facebook because \"Invalid credentials\"."
@@ -35,14 +35,14 @@ feature 'OAuth' do
     end
   end
 
-  describe 'Sign_in VK' do
+  describe 'sign_in with VK' do
     scenario 'successfully' do
       mock_auth_hash(:vkontakte)
       click_on 'vkontakte_oauth_social_button'
       expect(page).to have_content "Successfully authenticated from Vkontakte account."
       page_behaves_like_authenticated
     end
-    scenario 'Un-successfully' do
+    scenario 'unsuccessfully' do
       mock_auth_invalid_hash(:vkontakte)
       click_on 'vkontakte_oauth_social_button'
       expect(page).to have_content "Could not authenticate you from Vkontakte because \"Invalid credentials\"."

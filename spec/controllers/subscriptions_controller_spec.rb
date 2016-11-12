@@ -13,7 +13,7 @@ RSpec.describe SubscriptionsController, type: :controller do
       end
     end
 
-    context 'Authenticated User is trying subscribe for question ' do
+    context 'the authenticated user is trying to subscribe the question ' do
       before { sign_in(subscriber) }
 
       it 'assigns the requested question to @question' do
@@ -21,15 +21,15 @@ RSpec.describe SubscriptionsController, type: :controller do
         expect(assigns(:question)).to eq question
       end
 
-      it 'add one subscription to question' do
+      it 'adds a new subscription for the question' do
         expect { subscribe_request }.to change(question.subscriptions, :count).by(1)
       end
 
-      it 'add one subscription to subscriber' do
+      it 'adds a new subscription for the subscriber' do
         expect { subscribe_request }.to change(subscriber.subscriptions, :count).by(1)
       end
 
-      it 'render create template' do
+      it 'renders the create template' do
         subscribe_request
         expect(response).to render_template :create
       end
@@ -39,13 +39,13 @@ RSpec.describe SubscriptionsController, type: :controller do
   describe 'DELETE #destroy' do
     let(:unsubscribe_request) { delete :destroy, question_id: question.id, format: :js }
 
-    context 'Un-Authenticated User is trying unsubscribe from a question' do
+    context 'some unauthenticated User is trying unsubscribe from a question' do
       it 'do not delete a subscription to question' do
         expect { unsubscribe_request }.to_not change(Subscription, :count)
       end
     end
 
-    context 'Authenticated User is trying subscribe for question ' do
+    context 'the authenticated user is trying to subscribe the question' do
       before { sign_in(subscriber) }
       let!(:subscription) { create(:subscription, user: subscriber, question: question) }
 
@@ -54,15 +54,15 @@ RSpec.describe SubscriptionsController, type: :controller do
         expect(assigns(:question)).to eq question
       end
 
-      it 'delete one subscription from question' do
+      it 'deletes the subscription from the question' do
         expect { unsubscribe_request }.to change(question.subscriptions, :count).by(-1)
       end
 
-      it 'delete one subscription from subscriber' do
+      it 'deletes the subscription from the subscriber' do
         expect { unsubscribe_request }.to change(subscriber.subscriptions, :count).by(-1)
       end
 
-      it 'render unsubscribe template' do
+      it 'renders the unsubscribe template' do
         unsubscribe_request
         expect(response).to render_template :destroy
       end

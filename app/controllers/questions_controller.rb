@@ -20,7 +20,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    respond_with(@question = Question.create(questions_params.merge!(user_id: current_user.id)))
+    questions_params = questions_params.merge!(user_id: current_user.id)
+    @question = Question.create(questions_params)
+    respond_with(@question)
   end
 
   def update
@@ -30,8 +32,8 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy if current_user.author_of?(@question)
-    respond_with (@question) do |format|
-      format.html { redirect_to questions_path }
+    respond_with(@question) do |format|
+      format.html {redirect_to questions_path}
     end
   end
 
@@ -41,14 +43,14 @@ class QuestionsController < ApplicationController
   end
 
   def questions_params
-    params.require(:question).permit(:title, :body, attachments_attributes: [:file, :id, :_destroy])
+    params.require(:question).permit(
+        :title,
+        :body,
+        attachments_attributes: [:file, :id, :_destroy]
+    )
   end
 
   def set_answer
     @answer = @question.answers.new if @question
-  end
-
-  def interpolation_options
-    {resource_name: 'New Question', time: @question.created_at}
   end
 end

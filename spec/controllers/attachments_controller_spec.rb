@@ -16,18 +16,18 @@ RSpec.describe AttachmentsController, type: :controller do
 
     before { sign_in(user) }
 
-    context 'User is trying to remove his attachment' do
-      it "remove an user's attachment" do
+    context 'the user is trying to remove his/her attachment' do
+      it "removes the user's attachment" do
         expect { request }.to change(question.attachments, :count).by(-1)
       end
 
-      it 'render to  destroy view' do
+      it 'renders the destroy view' do
         request
         expect(response).to render_template :destroy
       end
     end
 
-    context 'User is trying to remove his not attachment' do
+    context "the user is trying to remove someone's else attachment" do
       it 'does not remove an attachment' do
         sign_in(another_user)
         expect { request }.to_not change(Attachment, :count)

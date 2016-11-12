@@ -1,12 +1,12 @@
 require_relative 'acceptance_helper'
 
 feature 'Create Comment', %q{
-In order to comment  questions  as an authenticate user
-I want to be able to create  comment } do
+In order to comment  questions as an authenticated user
+I want to be able to create comments } do
   given!(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
 
-  scenario 'Authenticate User is trying to add comment to question', js: true do
+  scenario 'the authenticated user is trying to add a comment to the question', js: true do
     sign_in(user)
     visit question_path(question)
     within '.question_existed_area .question_comments' do
@@ -24,7 +24,7 @@ I want to be able to create  comment } do
     end
   end
 
-  scenario 'Un-authenticate User is trying to add comment to question', js: true do
+  scenario 'some unauthenticate user is trying to add a comment to the question', js: true do
     visit question_path(question)
     within '.question_existed_area .question_comments' do
       fill_in "question_#{question.id}_comment_add_area", with: ''
@@ -37,7 +37,7 @@ I want to be able to create  comment } do
     end
   end
 
-  scenario 'User  is trying create invalid comment', js: true do
+  scenario 'the user is trying create an invalid comment', js: true do
     sign_in(user)
     visit question_path(question)
     within '.question_existed_area .question_comments' do

@@ -6,13 +6,13 @@ shared_examples_for "Api questions GET request" do
     end
   end
 
-  it "question object contains short_title" do
+  it "contains a short title" do
     expect(response.body).to be_json_eql(question.title.truncate(10).to_json).at_path("#{object_for_json_path}/short_title")
   end
 
   context 'answers' do
 
-    it "included in question" do
+    it 'is included in the question' do
       expect(response.body).to have_json_size(1).at_path("#{object_for_json_path}/answers")
     end
 
@@ -34,21 +34,19 @@ shared_examples_for "Api questions GET request" do
       end
     end
 
-    it "attachment object contains file with url" do
+    it 'contains file with url' do
       expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("#{object_for_json_path}/attachments/0/file/file/url")
     end
-
-
   end
 
   context 'comments' do
 
-    it "included in question" do
+    it 'is included in the question' do
       expect(response.body).to have_json_size(2).at_path("#{object_for_json_path}/comments")
     end
 
     %w(id body commentable_id commentable_type created_at updated_at ).each do |attr|
-      it "comment object contains #{attr}" do
+      it "contains the comment's attribute #{attr}" do
         expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("#{object_for_json_path}/comments/1/#{attr}")
       end
     end

@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 
 feature 'Delete Answer', %q{
-In order to remove  not actual my answer
+In order to remove my answer
 I want to be able to delete my answers} do
   given(:author_of_question) { create(:user) }
   given(:author_of_answer) { create(:user) }
@@ -9,13 +9,13 @@ I want to be able to delete my answers} do
   given(:question) { create(:question, user: author_of_question) }
   given!(:answer) { create(:answer, question: question, user: author_of_answer) }
 
-  describe 'Authenticate User and his answer' do
+  describe 'the authenticated user and his/her answer' do
     before do
       sign_in(author_of_answer)
       visit question_path(question)
     end
 
-    scenario 'Author of Answer is trying tp remove his Answer', js: true do
+    scenario 'the author of the answer is trying to remove his/her answer', js: true do
       within '.answers' do
         expect(page).to have_content answer.body
         expect(page).to have_link "answer_#{answer.id}_remove_link"
@@ -25,7 +25,7 @@ I want to be able to delete my answers} do
     end
   end
 
-  scenario 'Authenticate User is trying delete his not Answer' do
+  scenario "the authenticated user is trying to delete someone's answer" do
     sign_in(another_authenticated_user)
     visit question_path(question)
     within '.answers' do
@@ -33,7 +33,7 @@ I want to be able to delete my answers} do
     end
   end
 
-  scenario 'Un-Authenticate User is trying edit an Answer' do
+  scenario 'some unauthenticated user is trying to delete some answer' do
     visit question_path(question)
     expect(page).to_not have_link 'delete'
   end

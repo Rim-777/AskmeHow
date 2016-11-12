@@ -26,7 +26,13 @@ class AnswersController < ApplicationController
 
   private
   def answers_params
-    params.require(:answer).permit(:body, :question_id, attachments_attributes: [:file, :id, :_destroy])
+    params.require(:answer).permit(
+        :body,
+        :question_id,
+        attachments_attributes: [
+            :file, :id, :_destroy
+        ]
+    )
   end
 
   def set_question
@@ -35,9 +41,5 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = Answer.find(params[:id])
-  end
-
-  def interpolation_options
-    {resource_name: 'New Answer', time: @answer.created_at}
   end
 end
